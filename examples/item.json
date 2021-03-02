@@ -40,7 +40,8 @@
   },
   "properties": {
     "datetime": "2020-12-11T22:38:32Z",
-    "new_field": {
+    "new_field": "test",
+    "xyz": {
       "x": 1,
       "y": 2,
       "z": 3
@@ -59,7 +60,8 @@
   ],
   "assets": {
     "data": {
-      "href": "https://example.com/examples/file.xyz"
+      "href": "https://example.com/examples/file.xyz",
+      "new_field": "test"
     }
   }
 }

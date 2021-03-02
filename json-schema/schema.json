@@ -5,35 +5,46 @@
   "description": "STAC Template Extension for STAC Items and STAC Collections.",
   "oneOf": [
     {
+      "$comment": "This is the schema for STAC Items.",
       "allOf": [
         {
           "type": "object",
           "required": [
-            "type"
+            "type",
+            "properties",
+            "assets"
           ],
           "properties": {
             "type": {
               "const": "Feature"
+            },
+            "properties": {
+              "allOf": [
+                {
+                  "required": [
+                    "new_field"
+                  ]
+                },
+                {
+                  "$ref": "#/definitions/fields"
+                }
+              ]
+            },
+            "assets": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/fields"
+              }
             }
           }
         },
         {
           "$ref": "#/definitions/stac_extensions"
-        },
-        {
-          "type": "object",
-          "required": [
-            "properties"
-          ],
-          "properties": {
-            "properties": {
-              "$ref": "#/definitions/template"
-            }
-          }
         }
       ]
     },
     {
+      "$comment": "This is the schema for STAC Collections.",
       "allOf": [
         {
           "type": "object",
@@ -43,6 +54,18 @@
           "properties": {
             "type": {
               "const": "Collection"
+            },
+            "assets": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/fields"
+              }
+            },
+            "item_assets": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/fields"
+              }
             }
           }
         },
@@ -50,7 +73,7 @@
           "$ref": "#/definitions/stac_extensions"
         },
         {
-          "$ref": "#/definitions/template"
+          "$ref": "#/definitions/fields"
         }
       ]
     }
@@ -70,39 +93,37 @@
         }
       }
     },
-    "template": {
+    "fields": {
+      "$comment": "Add your new fields here. Don't require them here, do that above in the item schema.",
       "type": "object",
-      "required": [
-        "new_field"
-      ],
       "properties": {
         "new_field": {
-          "$ref": "#/definitions/xyz_object"
+          "type": "string"
+        },
+        "xyz": {
+          "type": "object",
+          "required": [
+            "x",
+            "y",
+            "z"
+          ],
+          "properties": {
+            "x": {
+              "type": "number"
+            },
+            "y": {
+              "type": "number"
+            },
+            "z": {
+              "type": "number"
+            }
+          }
         }, 
         "another_one": {
           "type": "array", 
           "items": {
             "type": "number"
           }
-        }
-      }
-    },
-    "xyz_object": {
-      "type": "object",
-      "required": [
-        "x",
-        "y",
-        "z"
-      ],
-      "properties": {
-        "x": {
-          "type": "number"
-        },
-        "y": {
-          "type": "number"
-        },
-        "z": {
-          "type": "number"
         }
       }
     }

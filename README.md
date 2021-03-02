@@ -7,6 +7,7 @@
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
 - **Owner**: @your-gh-handles @person2
 
+This document explains the Template Extension to the [SpatioTemporal Asset Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification.
 This is the place to add a short introduction.
 
 - Examples:
@@ -18,7 +19,8 @@ This is the place to add a short introduction.
 
 | Field Name  | Type                      | Description |
 | ----------- | ------------------------- | ----------- |
-| new_field   | [XYZ Object](#xyz-object) | **REQUIRED**. Describe the required field... |
+| new_field   | string                    | **REQUIRED**. Describe the required field... |
+| xyz         | [XYZ Object](#xyz-object) | Describe the field... |
 | another_one | \[number]                 | Describe the field... |
 
 ### Additional Field Information

@@ -30,13 +30,13 @@
       ]
     }
   },
-  "new_field": "test",
-  "xyz": {
+  "template:new_field": "test",
+  "template:xyz": {
     "x": 1,
     "y": 2,
     "z": 3
   },
-  "another_one": [
+  "template:another_one": [
     1,
     2,
     3
@@ -44,12 +44,12 @@
   "assets": {
     "example": {
       "href": "https://example.com/examples/file.xyz",
-      "new_field": "test"
+      "template:new_field": "test"
     }
   },
   "item_assets": {
     "data": {
-      "new_field": "test"
+      "template:new_field": "test"
     }
   },
   "summaries": {

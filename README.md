@@ -18,17 +18,17 @@ This is the place to add a short introduction.
 
 ## Item Properties and Collection Fields
 
-| Field Name  | Type                      | Description |
-| ----------- | ------------------------- | ----------- |
-| new_field   | string                    | **REQUIRED**. Describe the required field... |
-| xyz         | [XYZ Object](#xyz-object) | Describe the field... |
-| another_one | \[number]                 | Describe the field... |
+| Field Name           | Type                      | Description |
+| -------------------- | ------------------------- | ----------- |
+| template:new_field   | string                    | **REQUIRED**. Describe the required field... |
+| template:xyz         | [XYZ Object](#xyz-object) | Describe the field... |
+| template:another_one | \[number]                 | Describe the field... |
 
 ### Additional Field Information
 
-#### new_field
+#### template:new_field
 
-This is a much more detailed description of the field `new_field`...
+This is a much more detailed description of the field `template:new_field`...
 
 ### XYZ Object
 

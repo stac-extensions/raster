@@ -71,6 +71,7 @@
           }
         },
         {
+          "$comment": "Remove this and the following object if this is not an extension to a Collection.",
           "$ref": "#/definitions/stac_extensions"
         },
         {
@@ -129,7 +130,7 @@
       },
       "patternProperties": {
         "^(?!template:)": {
-          "$comment": "Above, change `template` to the prefix of this extension",
+          "$comment": "Above, change `template` to the prefix of this extension"
         }
       },
       "additionalProperties": false

@@ -52,11 +52,11 @@ In remote sensing, many imagery raster corresponds to raw data without any radio
 
 ##### Digital Numbers to Radiance (optical sensor)
 
-A conventional way of deriving Top Of Atmosphere (TOA) Radiance in ![formula](https://render.githubusercontent.com/render/math?math=Wsr-1m-3) from DN values using `scale` and `offset` in the following formula:
+A conventional way of deriving Top Of Atmosphere (TOA) Radiance in ![formula](https://render.githubusercontent.com/render/math?math=Wsr^1m^3) from DN values using `scale` and `offset` in the following formula:
 
 ![formula](https://render.githubusercontent.com/render/math?math=L_\lambda%20=%20scale%20\times%20DN%20%2B%20offset)
 
-where ![formula](https://render.githubusercontent.com/render/math?math=L_\lambda) is TOA Radiance in ![formula](https://render.githubusercontent.com/render/math?math=Wsr-1m-3).
+where ![formula](https://render.githubusercontent.com/render/math?math=L_\lambda) is TOA Radiance in ![formula](https://render.githubusercontent.com/render/math?math=Wsr^1m^3).
 
 #### Color interpretation
 

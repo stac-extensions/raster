@@ -23,10 +23,9 @@ An item can describe assets as an assembly of related raster bands and some info
 |--------------|----------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
 | raster:bands | \[[Raster band Object](#raster-band-object)] | An array of available bands where each object is a \[[Band Object](#band-object)]. If given, requires at least one band. |
 
-
 ## Raster Band Object
 
-When specifying a raster band object at asset level. It is recommended to also use the [file](https://github.com/stac-extensions/file) extension to specify the `file:data_type` to indicate the encoding type of each pixel.
+When specifying a raster band object at asset level. It is recommended to also use the [file](https://github.com/stac-extensions/file) extension to specify the `file:data_type` and `file:unit` to indicate both the encoding type and unit of each pixel.
 
 | Field Name       | Type   | Description                                                                                                                                                                      |
 |------------------|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

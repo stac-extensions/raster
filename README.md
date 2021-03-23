@@ -25,12 +25,13 @@ An item can describe assets as an assembly of related raster bands and some info
 
 ## Raster Band Object
 
-When specifying a raster band object at asset level. It is recommended to also use the [file](https://github.com/stac-extensions/file) extension to specify the `file:data_type` and `file:unit` to indicate both the encoding type and unit of each pixel.
+When specifying a raster band object at asset level. It is recommended to use 
+
+- the [file](https://github.com/stac-extensions/file) extension to specify the `file:data_type` and `file:unit` to indicate both the encoding type nd unit of each pixel and.
+- the [proj](https://github.com/radiantearth/stac-spec/tree/master/extensions/projection) extension to specify information about the raster projection
 
 | Field Name          | Type   | Description                                                                                                                                                                      |
 |---------------------|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| width               | number | Number of pixels in a line of the raster.                                                                                                                                        |
-| height              | number | Number of lines of pixels in the                                                                                                                                                 |
 | nodata              | number | Pixel values used to identify pixels that are nodata in the assets .                                                                                                             |
 | sampling            | string | One of `area` or `point`. Indicates whether a pixel value should be assumed to represent a sampling over the region of the pixel or a point sample at the center of the pixel.   |
 | nbits               | number | The actual number of bits used for this band. Normally only present when the number of bits is non-standard for the `datatype`, such as when a 1 bit TIFF is represented as byte |
@@ -39,10 +40,12 @@ When specifying a raster band object at asset level. It is recommended to also u
 | stats_max           | number | maximum value of the pixels in the band                                                                                                                                          |
 | stats_stdev         | number | standard deviation value of the pixels in the band                                                                                                                               |
 | stats_valid_percent | number | percentage of valid (not `nodata`) pixel                                                                                                                                         |
+| scale | number | multiplicator factor of the pixel value to transform into meaningful values (i.e. translate digital number to reflectance). |
+| offset | number | number to be added to the pixel value to transform into meaningful values (i.e. translate digital number to reflectance). |
 
 ### Additional Field Information
 
-#### template:new_field
+#### Scale and offset as calibration parameters
 
 TBD
 

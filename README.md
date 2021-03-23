@@ -19,26 +19,26 @@ An item can describe assets as an assembly of related raster bands and some info
 
 ## Item Properties or Item Asset fields
 
-| Field Name    | Type                                         | Description                                                                                                              |
-| ------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| raster:bands  | \[[Raster band Object](#raster-band-object)] | An array of available bands where each object is a \[[Band Object](#band-object)]. If given, requires at least one band. |
-| raster:height | number                                       | Number of lines of pixels in the raster                                                                                  |
+| Field Name   | Type                                         | Description                                                                                                              |
+|--------------|----------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
+| raster:bands | \[[Raster band Object](#raster-band-object)] | An array of available bands where each object is a \[[Band Object](#band-object)]. If given, requires at least one band. |
 
 
 ## Raster Band Object
 
-| Field Name      | Type   | Description                                                                                                                                                                      |
-| --------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| width           | number | Number of pixels in a line of the raster.                                                                                                                                        |
-| height          | number | Number of lines of pixels in the raster.                                                                                                                                         |
-| datatype        | string | One of Byte, UInt16, Int16, UInt32, Int32, Float32, Float64, and the complex types CInt16, CInt32, CFloat32, and CFloat64                                                        |
-| nodata          | number | Pixel values used to identify pixels that are nodata in the assets .                                                                                                             |
-| sampling        | string | One of `area` or `point`. Indicates whether a pixel value should be assumed to represent a sampling over the region of the pixel or a point sample at the center of the pixel.   |
-| nbits           | number | The actual number of bits used for this band. Normally only present when the number of bits is non-standard for the `datatype`, such as when a 1 bit TIFF is represented as byte |
-| statistics_mean | number | mean value of all the pixels in the band                                                                                                                                         |
-| statistics_min | number | minimum value of the pixels in the band |
-| statistics_miax | number | maximum value of the pixels in the band |
-| statistics_stdev | number |  standard deviation value of the pixels in the band |
+When specifying a raster band object at asset level. It is recommended to also use the [file](https://github.com/stac-extensions/file) extension to specify the `file:data_type` to indicate the encoding type of each pixel.
+
+| Field Name       | Type   | Description                                                                                                                                                                      |
+|------------------|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| width            | number | Number of pixels in a line of the raster.                                                                                                                                        |
+| height           | number | Number of lines of pixels in the                                                                                                                                                 |
+| nodata           | number | Pixel values used to identify pixels that are nodata in the assets .                                                                                                             |
+| sampling         | string | One of `area` or `point`. Indicates whether a pixel value should be assumed to represent a sampling over the region of the pixel or a point sample at the center of the pixel.   |
+| nbits            | number | The actual number of bits used for this band. Normally only present when the number of bits is non-standard for the `datatype`, such as when a 1 bit TIFF is represented as byte |
+| statistics_mean  | number | mean value of all the pixels in the band                                                                                                                                         |
+| statistics_min   | number | minimum value of the pixels in the band                                                                                                                                          |
+| statistics_max   | number | maximum value of the pixels in the band                                                                                                                                          |
+| statistics_stdev | number | standard deviation value of the pixels in the band                                                                                                                               |
 
 ### Additional Field Information
 
@@ -53,6 +53,6 @@ TBD
 <!-- The following types should be used as applicable `rel` types in the
 [Link Object](https://github.com/radiantearth/stac-spec/tree/master/item-spec/item-spec.md#link-object).
 
-| Type           | Description                           |
-| -------------- | ------------------------------------- |
-| fancy-rel-type | This link points to a fancy resource. | -->
+| Type           | Description                           |     |
+|----------------|---------------------------------------|-----|
+| fancy-rel-type | This link points to a fancy resource. | --> |

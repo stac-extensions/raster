@@ -54,7 +54,7 @@ In remote sensing, many imagery raster corresponds to raw data without any radio
 
 Top Of Atmosphere (TOA) Radiance in Wμm-1 m-2 sr-1 is derived from DN values using the following formula:
 
-![formula](https://render.githubusercontent.com/render/math?math=L_\lambda =  scale \times DN %2B offset)
+![formula](https://render.githubusercontent.com/render/math?math=L_\lambda%20=%20scale%20\times%20DN%20%2B%20offset)
 
 where:
 

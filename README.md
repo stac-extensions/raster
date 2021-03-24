@@ -141,6 +141,10 @@ From the Sentinel-2 example:
 | bidx      | Band indices defined in the `bands` objects with field `band_index` | `1,1,1`                                                                                    |
 | rescale   | Delimited Min,Max bounds defined in field `range`                   | `0,10000`                                                                                  |
 
+URL:
+
+`https://api.cogeo.xyz/stac/tiles/WebMercatorQuad/10/554/395@1x.png?url=https%3A%2F%2Fsentinel-cogs.s3.us-west-2.amazonaws.com%2Fsentinel-s2-l2a-cogs%2F33%2FS%2FVB%2F2021%2F2%2FS2B_33SVB_20210221_0_L2A%2FS2B_33SVB_20210221_0_L2A.json&assets=B12%2CB8A%2CB04&resampling_method=average&rescale=0%2C10000&return_mask=true`
+
 Result: Lava thermal signature of Mount Etna eruption (February 2021)
 
 ![etna](https://api.cogeo.xyz/stac/tiles/WebMercatorQuad/10/554/395@1x.png?url=https%3A%2F%2Fsentinel-cogs.s3.us-west-2.amazonaws.com%2Fsentinel-s2-l2a-cogs%2F33%2FS%2FVB%2F2021%2F2%2FS2B_33SVB_20210221_0_L2A%2FS2B_33SVB_20210221_0_L2A.json&assets=B12%2CB8A%2CB04&resampling_method=average&rescale=0%2C10000&return_mask=true)

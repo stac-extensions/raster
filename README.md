@@ -76,6 +76,7 @@ For example, the above value conversion is described in the values dictionary as
       "offset": 3.48
   }
 }
+```
 
 
 #### Color interpretation

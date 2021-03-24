@@ -64,13 +64,17 @@ It is generally used in conjunction with gsd
 and then the maximum zoom level is calculated from the gsd - the resolution of the image.
 The former is based on the highest level of overview (also known as a pyramid) contained in the asset.
 
-![overviews](https://user-images.githubusercontent.com/407017/90821250-75ce5280-e2e7-11ea-9008-6c073e083be0.png =300x)
+![overviews](images/overviews.png)
 
 So in the above image it would be the ground sample distance of 'level 4', which will be a much higher gsd than the image,
-as each pixel is greatly down-sampled. Dynamic tile servers (like [titiler](https://github.com/developmentseed/titiler)) will
-generally convert the gsd to [zoom 
-levels](https://wiki.openstreetmap.org/wiki/Zoom_levels), [Web Mercator](https://en.wikipedia.org/wiki/Web_Mercator_projection) 
-or others, which is easily done (example python [to webmercator](https://github.com/cogeotiff/rio-cogeo/blob/b9b57301c2b7a4be560c887176c282e68ca63c27/rio_cogeo/utils.py#L62-L66) or arbitrary [TileMatrixSet](https://github.com/cogeotiff/rio-tiler-crs/blob/834bcf3d39cdc555b3ce930439ab186d00fd5fc5/rio_tiler_crs/cogeo.py#L98-L105))
+as each pixel is greatly down-sampled.
+Dynamic tile servers (like [titiler](https://github.com/developmentseed/titiler)) will
+generally convert the gsd to [zoom levels](https://wiki.openstreetmap.org/wiki/Zoom_levels),
+[Web Mercator](https://en.wikipedia.org/wiki/Web_Mercator_projection) or others,
+which is easily done
+(example python [to webmercator](https://github.com/cogeotiff/rio-cogeo/blob/b9b57301c2b7a4be560c887176c282e68ca63c27/rio_cogeo/utils.py#L62-L66)
+or arbitrary
+[TileMatrixSet](https://github.com/cogeotiff/rio-tiler-crs/blob/834bcf3d39cdc555b3ce930439ab186d00fd5fc5/rio_tiler_crs/cogeo.py#L98-L105))
 
 ## Value Object
 
@@ -83,21 +87,30 @@ Value object describes the raw pixel value in the band or any other derivable va
 | scale      | number | multiplicator factor of the pixel value to transform into the value (i.e. translate digital number to reflectance).                                                       |
 | offset     | number | number to be added to the pixel value to transform into the value (i.e. translate digital number to reflectance).                                                         |
 
-When only `unit` is defined, it describes the raw pixel value. `scale` and `offset` defines parameters to compute another value. Next paragraphs describe some use cases.
+When only `unit` is defined, it describes the raw pixel value. 
+`scale` and `offset` defines parameters to compute another value. Next paragraphs describe some use cases.
 
 ### Use Scale and offset as radiometric calibration parameters
 
-In remote sensing, many imagery raster corresponds to raw data without any radiometric processing. Each pixel is given in digital numbers (DN), i.e. native pixel values from the sensor acquisition. Those digital numbers quantify the energy recorded by the detector (optical or radar). The sensor radiometric calibration aims to turn back the DN value into a physical unit value (radiance, light power, backscatter). Hereafter, some examples of the usage of the `values` dictionary to perform radiometric correction.
+In remote sensing, many imagery raster corresponds to raw data without any radiometric processing.
+Each pixel is given in digital numbers (DN), i.e. native pixel values from the sensor acquisition.
+Those digital numbers quantify the energy recorded by the detector (optical or radar).
+The sensor radiometric calibration aims to turn back the DN value into a
+physical unit value (radiance, light power, backscatter).
+Hereafter, some examples of the usage of the `values` dictionary to perform radiometric correction.
 
 #### Digital Numbers to Radiance (optical sensor)
 
 <!-- https://labo.obs-mip.fr/multitemp/radiometric-quantities-irradiance-radiance-reflectance/ -->
 
-A conventional way of deriving Top Of Atmosphere (TOA) Radiance in ![formula](https://render.githubusercontent.com/render/math?math=W.sr^{-1}.m^{-3}) from DN values using `scale` and `offset` in the following formula:
+A conventional way of deriving Top Of Atmosphere (TOA) Radiance
+in ![formula](https://render.githubusercontent.com/render/math?math=W.sr^{-1}.m^{-3})
+from DN values using `scale` and `offset` in the following formula:
 
 ![formula](https://render.githubusercontent.com/render/math?math=L_\lambda%20=%20scale%20\times%20DN%20%2B%20offset)
 
-where ![formula](https://render.githubusercontent.com/render/math?math=L_\lambda) is TOA Radiance in ![formula](https://render.githubusercontent.com/render/math?math=W.sr^{-1}.m^{-3}).
+where ![formula](https://render.githubusercontent.com/render/math?math=L_\lambda) is TOA Radiance
+in ![formula](https://render.githubusercontent.com/render/math?math=W.sr^{-1}.m^{-3}).
 
 For example, the above value conversion is described in the values dictionary as
 
@@ -113,7 +126,10 @@ For example, the above value conversion is described in the values dictionary as
 
 ### Transform height measurement to water level
 
-In remote sensing, radar altimeter instruments measures an absolute height from an absolute georeference (e.g. WGS 84 geoid). In hydrology, you prefer having the water level relative to the "0 limnimetric scale". Therefore, a usage of the value object here would be to indicate the offset between the reference height 0 of the sensor and the 0 limnimetric scale to compute a water level.
+In remote sensing, radar altimeter instruments measures an absolute height from an absolute georeference (e.g. WGS 84 geoid).
+In hydrology, you prefer having the water level relative to the "0 limnimetric scale".
+Therefore, a usage of the value object here would be to indicate the offset between the reference height 0 of the sensor
+and the 0 limnimetric scale to compute a water level.
 
 In the following value definition example, 185 meters must be substracted from the pixel value to correspond to the water level.
 
@@ -128,8 +144,9 @@ In the following value definition example, 185 meters must be substracted from t
 
 ## Raster Composite Object
 
-Raster composites are intended to be used to specify some possible sensor band combination with generic parameters. It can be useful to propose visualization hints like spectral indices from electro-optical sensor (e.g. NDVI) or specific overviews (e.g. Thermal signatures).
-
+Raster composites are intended to be used to specify some possible sensor band combination with generic parameters.
+It can be useful to propose visualization hints like spectral indices from electro-optical sensor (e.g. NDVI)
+or specific overviews (e.g. Thermal signatures).
 
 | Field Name        | Type                        | Description                                                                                                                                                                                                                |
 | ----------------- | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -160,11 +177,14 @@ TBD
 
 ## Dynamic tile servers integration
 
-Dynamic tile servers could exploit the information in the raster extension to automatically produce RGB from raster bands or composition using their parameters.
+Dynamic tile servers could exploit the information in the raster extension to automatically produce RGB
+from raster bands or composition using their parameters.
 
 ### Titiler
 
-[titiler](https://github.com/developmentseed/titiler) offers a native [STAC reader](https://github.com/developmentseed/titiler/blob/master/docs/endpoints/stac.md). Some query parameters could be set with the information from raster extension.
+[titiler](https://github.com/developmentseed/titiler) offers a native
+[STAC reader](https://github.com/developmentseed/titiler/blob/master/docs/endpoints/stac.md).
+Some query parameters could be set with the information from raster extension.
 
 #### Shortwave Infra-red visual thermal signature example
 

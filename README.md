@@ -93,13 +93,15 @@ For example, the above value conversion is described in the values dictionary as
 Raster composites are intended to be used to specify some possible sensor band combination with generic parameters. It can be useful to propose visualization hints like spectral indices from electro-optical sensor (e.g. NDVI) or specific overviews (e.g. Thermal signatures).
 
 
-| Field Name        | Type                               | Description                                                                                                                             |
-| ----------------- | ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| name              | string                             | **REQUIRED**. Denomination of the band composition (e.g. `ndvi`, `Color Infrared (vegetation)`  )                                       |
-| nodata            | number                             | Pixel values used to identify pixels that are nodata in the composition .                                                               |
-| range             | \[number]                          | range of valid pixels values in the composition                                                                                         |
-| bands             | \[[Band Selector](#band-selector)] | **REQUIRED**. An array of bands selection where each object is a [Band Selector](#band-selector). If given, requires at least one band. |
-| band_math_formula | string                             | Band math expression (e.g `(b4-b1)/(b4+b1)`)                                                                                            |
+| Field Name        | Type                               | Description                                                                                                                                                                                                                |
+| ----------------- | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| name              | string                             | **REQUIRED**. Denomination of the band composition (e.g. `ndvi`, `Color Infrared (vegetation)`  )                                                                                                                          |
+| nodata            | number                             | Pixel values used to identify pixels that are nodata in the composition .                                                                                                                                                  |
+| range             | \[number]                          | range of valid pixels values in the composition                                                                                                                                                                            |
+| bands             | \[[Band Selector](#band-selector)] | **REQUIRED**. An array of bands selection where each object is a [Band Selector](#band-selector). If given, requires at least one band.                                                                                    |
+| band_math_formula | string                             | Band math expression (e.g `(b4-b1)/(b4+b1)`).                                                                                                                                                                              |
+| resampling_method | string                             | Resampling method, one of `nearest`, `average`, `bilinear` or `cubic`.                                                                                                                                                     |
+| color_map         | string                             | Identifier of a color mapping. Currently based on [rio-tiler color maps](https://cogeotiff.github.io/rio-tiler/colormap/) that includes some from Matplotlib and some custom ones that are commonly used with raster data. |
 
 ## Band Selector
 
@@ -116,7 +118,7 @@ Dynamic tile servers could exploit the information in the raster extension to au
 
 [titiler](https://github.com/developmentseed/titiler) offers a native [STAC reader](https://github.com/developmentseed/titiler/blob/master/docs/endpoints/stac.md). Some query parameters could be set with the information from raster extension.
 
-#### Shortwave Infra-red Thermal signature example
+#### Shortwave Infra-red visual thermal signature example
 
 From the Sentinel-2 example:
 
@@ -137,7 +139,7 @@ From the Sentinel-2 example:
 | Query key | value                                                               | Example value                                                                              |
 | --------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | url       | STAC Item URL                                                       | https://raw.githubusercontent.com/stac-extensions/raster/main/examples/item-sentinel2.json |
-| assets    | Assets keys defined in the `bands` objects with field `asset_key`   | `B12,B8A,B04`                                                                               |
+| assets    | Assets keys defined in the `bands` objects with field `asset_key`   | `B12,B8A,B04`                                                                              |
 | bidx      | Band indices defined in the `bands` objects with field `band_index` | `1,1,1`                                                                                    |
 | rescale   | Delimited Min,Max bounds defined in field `range`                   | `0,10000`                                                                                  |
 
@@ -148,3 +150,36 @@ URL:
 Result: Lava thermal signature of Mount Etna eruption (February 2021)
 
 ![etna](https://api.cogeo.xyz/stac/tiles/WebMercatorQuad/10/554/395@1x.png?url=https%3A%2F%2Fsentinel-cogs.s3.us-west-2.amazonaws.com%2Fsentinel-s2-l2a-cogs%2F33%2FS%2FVB%2F2021%2F2%2FS2B_33SVB_20210221_0_L2A%2FS2B_33SVB_20210221_0_L2A.json&assets=B12%2CB8A%2CB04&resampling_method=average&rescale=0%2C10000&return_mask=true)
+
+#### Normalized Difference Vegetation Index (NDVI) example
+
+From the Landsat-8 example \[[article](https://www.usgs.gov/core-science-systems/nli/landsat/landsat-normalized-difference-vegetation-index?qt-science_support_page_related_con=0#qt-science_support_page_related_con)]:
+
+```json
+"raster:composites":[ 
+  {
+    "name": "Normalized Difference Vegetation Index",
+    "range": [-1, 1],
+    "bands": [
+      { "asset_key": "B5", "band_index": 1 },
+      { "asset_key": "B4", "band_index": 1 },
+    ],
+    "band_math_formula": "(B5–B4)/(B5+B4)",
+  }
+]
+```
+
+| Query key  | value                                                             | Example value                                                                             |
+| ---------- | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| url        | STAC Item URL                                                     | https://raw.githubusercontent.com/stac-extensions/raster/main/examples/item-landsat8.json |
+| assets     | Assets keys defined in the `bands` objects with field `asset_key` | `B4,B5,`                                                                                  |
+| rescale    | Delimited Min,Max bounds defined in field `range`                 | `-1,1`                                                                            |
+| expression | Band math formula as defined in field `band_math_formula`         | (B5–B4)/(B5+B4) |
+
+URL:
+
+`https://api.cogeo.xyz/stac/preview.png?url=https%3A%2F%2Fearth-search.aws.element84.com%2Fv0%2Fcollections%2Flandsat-8-l1-c1%2Fitems%2FLC08_L1TP_044033_20210305_20210312_01_T1&assets=B4%2CB5&expression=%28B5%E2%80%93B4%29%2F%28B5%2BB4%29&max_size=512&width=512&resampling_method=average&rescale=-1%2C1&color_map=ylgn&return_mask=true`
+
+Result:  Landsat Surface Reflectance Normalized Difference Vegetation Index (NDVI) path 44 row 33.
+
+![sacramento](https://api.cogeo.xyz/stac/preview.png?url=https%3A%2F%2Fearth-search.aws.element84.com%2Fv0%2Fcollections%2Flandsat-8-l1-c1%2Fitems%2FLC08_L1TP_044033_20210305_20210312_01_T1&assets=B4%2CB5&expression=%28B5%E2%80%93B4%29%2F%28B5%2BB4%29&max_size=512&width=512&resampling_method=average&rescale=-1%2C1&color_map=ylgn&return_mask=true)

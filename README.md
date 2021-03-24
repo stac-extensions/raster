@@ -221,11 +221,7 @@ From the [Landsat-8 example](examples/item-landsat8.json) \[[article](https://ww
   {
     "name": "Normalized Difference Vegetation Index",
     "range": [-1, 1],
-    "bands": [
-      { "asset_key": "B5", "band_index": 1 },
-      { "asset_key": "B4", "band_index": 1 },
-    ],
-    "band_math_formula": "(B5–B4)/(B5+B4)",
+    "expression": "(B5–B4)/(B5+B4)",
     "color_map": "ylgn"
   }
 ]

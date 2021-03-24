@@ -102,7 +102,7 @@ For example, the above value conversion is described in the values dictionary as
 
 In remote sensing, radar altimeter instruments measures an absolute height from an absolute georeference (e.g. WGS 84 geoid). In hydrology, you prefer having the water level relative to the "0 limnimetric scale". Therefore, a usage of the value object here would be to indicate the offset between the reference height 0 of the sensor and the 0 limnimetric scale to compute a water level.
 
-In the following Water Level value definition example, 185 meters must be substracted from the pixel value to correspond to the water level.
+In the following value definition example, 185 meters must be substracted from the pixel value to correspond to the water level.
 
 ```json
 "values": {

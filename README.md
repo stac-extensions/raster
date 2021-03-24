@@ -28,7 +28,7 @@ An item can describe assets as an assembly of related raster bands and some info
 When specifying a raster band object at asset level. It is recommended to use 
 
 - the [file](https://github.com/stac-extensions/file) extension to specify the `file:data_type` and `file:unit` to indicate both the encoding type nd unit of each pixel and.
-- the [proj](https://github.com/radiantearth/stac-spec/tree/master/extensions/projection) extension to specify information about the raster projection, especially `proj:shape` to specify the height and width of the raster.
+- the [projection](https://github.com/radiantearth/stac-spec/tree/master/extensions/projection) extension to specify information about the raster projection, especially `proj:shape` to specify the height and width of the raster.
 
 | Field Name           | Type                                        | Description                                                                                                                                                                      |
 | -------------------- | ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -44,7 +44,7 @@ When specifying a raster band object at asset level. It is recommended to use
 | overview_max_gsd | number | The maximum Ground Sample Distance represented in an overview. This should be the GSD of the highest level overview, generally of a [Cloud Optimized GeoTIFF](http://cogeo.org/), but should work with any format.
 | color_interpretation | string                                      | the color interpretation of the pixels in the bands. One of the [color interpreation](#color-interpretation)) below.                                                             |
 
-*overview_max_gsd*: This field helps renderers of understand what zoom levels they can efficiently show. It is generally used in conjunction with gsd (from [common metadata](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#instrument)). overview_max_gsd enables the calculation of the 'minimum' zoom level that a renderer would want to show, and then the maximum zoom level is calculated from the gsd - the resolution of the image. The former is based on the highest level of overview (also known as a pyramid) contained in the asset.
+**overview_max_gsd**: This field helps renderers of understand what zoom levels they can efficiently show. It is generally used in conjunction with gsd (from [common metadata](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#instrument)). `overview_max_gsd` enables the calculation of the 'minimum' zoom level that a renderer would want to show, and then the maximum zoom level is calculated from the gsd - the resolution of the image. The former is based on the highest level of overview (also known as a pyramid) contained in the asset.
 
 <img src="https://user-images.githubusercontent.com/407017/90821250-75ce5280-e2e7-11ea-9008-6c073e083be0.png" alt="image pyramid" width="300">
 
@@ -63,15 +63,11 @@ or others, which is easily done (example python [to webmercator](https://github.
 | scale      | number | multiplicator factor of the pixel value to transform into the value (i.e. translate digital number to reflectance).                                                       |
 | offset     | number | number to be added to the pixel value to transform into the value (i.e. translate digital number to reflectance).                                                         |
 
-### Additional Field Information
-
-
-
-#### Scale and offset as radiometric calibration parameters
+### Use Scale and offset as radiometric calibration parameters
 
 In remote sensing, many imagery raster corresponds to raw data without any radiometric processing. Each pixel is given in digital numbers (DN), i.e. native pixel values from the sensor acquisition. Those digital numbers quantify the energy recorded by the detector (optical or radar). The sensor radiometric calibration aims to turn back the DN value into a physical unit value (radiance, light power, backscatter). Hereafter, some examples of the usage of the `values` dictionary to perform radiometric correction.
 
-##### Digital Numbers to Radiance (optical sensor)
+#### Digital Numbers to Radiance (optical sensor)
 
 <!-- https://labo.obs-mip.fr/multitemp/radiometric-quantities-irradiance-radiance-reflectance/ -->
 
@@ -92,19 +88,3 @@ For example, the above value conversion is described in the values dictionary as
   }
 }
 ```
-
-
-#### Color interpretation
-
-TBD
-
-## Relation types
-
-TBD
-
-<!-- The following types should be used as applicable `rel` types in the
-[Link Object](https://github.com/radiantearth/stac-spec/tree/master/item-spec/item-spec.md#link-object).
-
-| Type           | Description                           |     |
-| -------------- | ------------------------------------- | --- |
-| fancy-rel-type | This link points to a fancy resource. | --> |

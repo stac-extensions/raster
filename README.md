@@ -18,11 +18,16 @@ An item can describe assets that are rasters of one or multiple bands with some 
 - [JSON Schema](json-schema/schema.json)
 - [Changelog](./CHANGELOG.md)
 
-## Item Properties or Item Asset fields
+## Item Asset fields
 
 | Field Name        | Type                                                   | Description                                                                                                                                                                |
 | ----------------- | ------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | raster:bands      | \[[Raster band Object](#raster-band-object)]           | **Asset level**. An array of available bands where each object is a \[[Band Object](#band-object)]. If given, requires at least one band.                                  |
+
+## Item Properties
+
+| Field Name        | Type                                                   | Description                                                                                                                                                                |
+| ----------------- | ------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | raster:composites | \[[Raster Composite Object](#raster-composite-object)] | **Item level**. An array of possible band composition where each object is a \[[Composite Object](#raster-composite-object)]. If given, requires at least one composition. |
 
 ## Raster Band Object
@@ -112,8 +117,8 @@ The band selector is a string indicating the raster asset by its key and optiona
 
 with
 
-- asset_key (**REQUIRED**): Asset key to the raster asset in the item  )
-- band_index (OPTIONAL). Band position index in the raster asset
+- `asset_key` (**REQUIRED**): Asset key to the raster asset in the item 
+- `band_index` (OPTIONAL): Band position index in the raster asset
 
 examples: `B4`, `data{2}`
 

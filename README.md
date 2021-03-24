@@ -151,7 +151,7 @@ POLYGON(( ,14.869 37.862, 37.862,15.113 37.682,14.869 37.682))
 
 Result: Lava thermal signature of Mount Etna eruption (February 2021)
 
-![etna](https://api.cogeo.xyz/stac/crop/14.869,37.682,15.113,37.862/256x256.png?url=https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/33/S/VB/2021/2/S2B_33SVB_20210221_0_L2A/S2B_33SVB_20210221_0_L2A.json&assets=B12,B8A,B04&resampling_method=average&rescale=0,10000&return_mask=true)
+![etna](images/etna.png)
 
 #### Normalized Difference Vegetation Index (NDVI) example
 

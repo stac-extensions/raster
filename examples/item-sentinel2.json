@@ -69,18 +69,9 @@
                 10000
             ],
             "bands": [
-                {
-                    "asset_key": "B12",
-                    "band_index": 1
-                },
-                {
-                    "asset_key": "B8A",
-                    "band_index": 1
-                },
-                {
-                    "asset_key": "B04",
-                    "band_index": 1
-                }
+                "B12",
+                "B8A",
+                "B04"
             ]
         }
     ],
@@ -418,6 +409,22 @@
                 0.0,
                 0.0,
                 1.0
+            ],
+            "raster:bands": [
+                {
+                    "data_type": "unit16",
+                    "nodata": 0,
+                    "stats_min": 1,
+                    "stats_max": 16842,
+                    "stats_mean": 2634.1490243416,
+                    "stats_stddev": 2634.1490243416,
+                    "stats_valid_percent": 99.999,
+                    "values": {
+                        "BOA reflectance": {
+                            "unit": "W/m²/sr/μm"
+                        }
+                    }
+                }
             ]
         },
         "B06": {

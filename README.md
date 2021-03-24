@@ -94,22 +94,28 @@ For example, the above value conversion is described in the values dictionary as
 Raster composites are intended to be used to specify some possible sensor band combination with generic parameters. It can be useful to propose visualization hints like spectral indices from electro-optical sensor (e.g. NDVI) or specific overviews (e.g. Thermal signatures).
 
 
-| Field Name        | Type                               | Description                                                                                                                                                                                                                |
-| ----------------- | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| name              | string                             | **REQUIRED**. Denomination of the band composition (e.g. `ndvi`, `Color Infrared (vegetation)`  )                                                                                                                          |
-| nodata            | number                             | Pixel values used to identify pixels that are nodata in the composition .                                                                                                                                                  |
-| range             | \[number]                          | range of valid pixels values in the composition                                                                                                                                                                            |
-| bands             | \[[Band Selector](#band-selector)] | **REQUIRED**. An array of bands selection where each object is a [Band Selector](#band-selector). If given, requires at least one band.                                                                                    |
-| band_math_formula | string                             | Band math expression (e.g `(b4-b1)/(b4+b1)`).                                                                                                                                                                              |
-| resampling_method | string                             | Resampling method, one of `nearest`, `average`, `bilinear` or `cubic`.                                                                                                                                                     |
-| color_map         | string                             | Identifier of a color mapping. Currently based on [rio-tiler color maps](https://cogeotiff.github.io/rio-tiler/colormap/) that includes some from Matplotlib and some custom ones that are commonly used with raster data. |
+| Field Name        | Type                        | Description                                                                                                                                                                                                                |
+| ----------------- | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| name              | string                      | **REQUIRED**. Denomination of the band composition (e.g. `ndvi`, `Color Infrared (vegetation)`  )                                                                                                                          |
+| nodata            | number                      | Pixel values used to identify pixels that are nodata in the composition .                                                                                                                                                  |
+| range             | \[number]                   | range of valid pixels values in the composition                                                                                                                                                                            |
+| bands             | \[[string](#band-selector)] | An ordered array of string following [Band Selector](#band-selector) syntax. If given, requires at least one band. **REQUIRED** if no `band_expression` specified                                                                  |
+| band_expression   | string                      | Band math expression (e.g `(b4-b1)/(b4+b1)`). **REQUIRED** if no `bands` specified                                                                                                                                         |
+| resampling_method | string                      | Resampling method, one of `nearest`, `average`, `bilinear` or `cubic`.                                                                                                                                                     |
+| color_map         | string                      | Identifier of a color mapping. Currently based on [rio-tiler color maps](https://cogeotiff.github.io/rio-tiler/colormap/) that includes some from Matplotlib and some custom ones that are commonly used with raster data. |
 
 ## Band Selector
 
-| Field Name | Type   | Description                                    |
-| ---------- | ------ | ---------------------------------------------- |
-| asset_key  | string | **REQUIRED**. Asset key in the item  )         |
-| band_index | number | **REQUIRED**. Band position index in the asset |
+The band selector is a string indicating the raster asset by its key and optional band index if multi-band raster asset.
+
+`<asset_key>[{<band_index>}]`
+
+with
+
+- asset_key (**REQUIRED**): Asset key to the raster asset in the item  )
+- band_index (OPTIONAL). Band position index in the raster asset
+
+examples: `B4`, `data{2}`
 
 ## Dynamic tile servers integration
 
@@ -128,20 +134,16 @@ From the [Sentinel-2 example](examples/item-sentinel2.json):
   {
     "name": "Shortwave Infra-red",
     "range": [0, 10000],
-    "bands": [
-      { "asset_key": "B12", "band_index": 1 },
-      { "asset_key": "B8A", "band_index": 1 },
-      { "asset_key": "B04", "band_index": 1 }
-    ]
+    "bands": [ "B12", "B8A", "B04"]
   }
 ]
 ```
 
-| Query key | value                                                               | Example value                                                                              |
-| --------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| url       | STAC Item URL                                                       | `https://raw.githubusercontent.com/stac-extensions/raster/main/examples/item-sentinel2.json` |
-| assets    | Assets keys defined in the `bands` objects with field `asset_key`   | `B12,B8A,B04`                                                                              |                                                                                 |
-| rescale   | Delimited Min,Max bounds defined in field `range`                   | `0,10000`                                                                                  |
+| Query key | value                                                             | Example value                                                                                |
+| --------- | ----------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| url       | STAC Item URL                                                     | `https://raw.githubusercontent.com/stac-extensions/raster/main/examples/item-sentinel2.json` |
+| assets    | Assets keys defined in the `bands` objects with field `asset_key` | `B12,B8A,B04`                                                                                |  |
+| rescale   | Delimited Min,Max bounds defined in field `range`                 | `0,10000`                                                                                    |
 
 URL: `https://api.cogeo.xyz/stac/crop/14.869,37.682,15.113,37.862/256x256.png?url=https://raw.githubusercontent.com/stac-extensions/raster/main/examples/item-sentinel2.json&assets=B12,B8A,B04&resampling_method=average&rescale=0,10000&return_mask=true`
 
@@ -168,18 +170,17 @@ From the [Landsat-8 example](examples/item-landsat8.json) \[[article](https://ww
 ]
 ```
 
-| Query key  | value                                                             | Example value                                                                             |
-| ---------- | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| url        | STAC Item URL                                                     | `https://raw.githubusercontent.com/stac-extensions/raster/main/examples/item-landsat8.json` |
-| assets     | Assets keys defined in the `bands` objects with field `asset_key` | `B4,B5,`                                                                                  |
-| rescale    | Delimited Min,Max bounds defined in field `range`                 | `-1,1`                                                                            |
-| expression | Band math formula as defined in field `band_math_formula`         | `(B5–B4)/(B5+B4)`   |
-| color_map | Color map defined in field `color_map`  | `ylgn` |
+| Query key  | value                                                     | Example value                                                                               |
+| ---------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| url        | STAC Item URL                                             | `https://raw.githubusercontent.com/stac-extensions/raster/main/examples/item-landsat8.json` |  |
+| rescale    | Delimited Min,Max bounds defined in field `range`         | `-1,1`                                                                                      |
+| expression | Band math formula as defined in field `band_math_formula` | `(B5–B4)/(B5+B4)`                                                                           |
+| color_map  | Color map defined in field `color_map`                    | `ylgn`                                                                                      |
 
 URL:
 
-`https://api.cogeo.xyz/stac/preview.png?url=https://raw.githubusercontent.com/stac-extensions/raster/main/examples/item-landsat8.json&assets=B4,B5&expression=(B5–B4)/(B5+B4)&max_size=512&width=512&resampling_method=average&rescale=-1,1&color_map=ylgn&return_mask=true`
+`https://api.cogeo.xyz/stac/preview.png?url=https://raw.githubusercontent.com/stac-extensions/raster/main/examples/item-landsat8.json&expression=(B5–B4)/(B5+B4)&max_size=512&width=512&resampling_method=average&rescale=-1,1&color_map=ylgn&return_mask=true`
 
 Result:  Landsat Surface Reflectance Normalized Difference Vegetation Index (NDVI) path 44 row 33.
 
-![sacramento](https://api.cogeo.xyz/stac/preview.png?url=https://raw.githubusercontent.com/stac-extensions/raster/main/examples/item-landsat8.json&assets=B4,B5&expression=(B5–B4)/(B5+B4)&max_size=512&width=512&resampling_method=average&rescale=-1,1&color_map=ylgn&return_mask=true)
+![sacramento](https://api.cogeo.xyz/stac/preview.png?url=https://raw.githubusercontent.com/stac-extensions/raster/main/examples/item-landsat8.json&expression=(B5–B4)/(B5+B4)&max_size=512&width=512&resampling_method=average&rescale=-1,1&color_map=ylgn&return_mask=true)

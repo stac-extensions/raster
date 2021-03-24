@@ -323,6 +323,22 @@
                 0.0,
                 0.0,
                 1.0
+            ],
+            "raster:bands": [
+                {
+                    "data_type": "unit16",
+                    "nodata": 0,
+                    "stats_min": 1,
+                    "stats_max": 18064,
+                    "stats_mean": 2384.4680007438,
+                    "stats_stddev": 2675.410513295,
+                    "stats_valid_percent": 99.999,
+                    "values": {
+                        "BOA reflectance": {
+                            "unit": "W/m²/sr/μm"
+                        }
+                    }
+                }
             ]
         },
         "B04": {
@@ -355,6 +371,22 @@
                 0.0,
                 0.0,
                 1.0
+            ],
+            "raster:bands": [
+                {
+                    "data_type": "unit16",
+                    "nodata": 0,
+                    "stats_min": 1,
+                    "stats_max": 17200,
+                    "stats_mean": 2273.9667970732,
+                    "stats_stddev": 2618.272802792,
+                    "stats_valid_percent": 99.999,
+                    "values": {
+                        "BOA reflectance": {
+                            "unit": "W/m²/sr/μm"
+                        }
+                    }
+                }
             ]
         },
         "B05": {

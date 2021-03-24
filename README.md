@@ -9,10 +9,12 @@
 
 This document explains the Raster Extension to the [SpatioTemporal Asset Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification.
 
-An item can describe assets as an assembly of related raster bands and some information common to them all. An item can have the concept of the raster size (in pixels and lines) that applies to all the bands. The raster is strongly linked with the the georeferencing transform and coordinate system definition of all bands (using the [projection extension](https://github.com/radiantearth/stac-spec/tree/master/extensions/projection)). Some raster information are interesting for several applications such as rendering properly the bands as image with statistics about pixels values (histogram range) or nodata value.
+An item can describe assets that are rasters of one or multiple bands with some information common to them all (raster size, projection) and also specific to each of them (data type, unit, number of bits used, nodata). A raster is ofthen strongly linked with the the georeferencing transform and coordinate system definition of all bands (using the [projection extension](https://github.com/radiantearth/stac-spec/tree/master/extensions/projection)). In many applications, it is interesting to have some metadata about the raster in the asset (values statistics, value interpretation, transforms). Finally, it is helping the user to have some rendering hints of the item using one or more raster assets (RGB combination, simple band value processing) and to create on the fly visualisation with dynamic tilers.
 
 - Examples:
-  - [Item example](examples/item-planet.json): Shows the basic usage of the extension in a STAC Item
+  - [Planet Item example](examples/item-planet.json): Shows the basic usage of the extension in a STAC Item
+  - [Sentinel-2 Item example](examples/item-sentinel2.json): Shows the statistics about individual bands and some RGB composites example
+  - [Landsat-8 Item example](examples/item-landsat8.json): Shows the advanced composite example with band math processing
   - [Collection example](examples/collection.json): Shows the basic usage of the extension in a STAC Collection
 - [JSON Schema](json-schema/schema.json)
 - [Changelog](./CHANGELOG.md)
@@ -143,11 +145,9 @@ From the [Sentinel-2 example](examples/item-sentinel2.json):
 | bidx      | Band indices defined in the `bands` objects with field `band_index` | `1,1,1`                                                                                    |
 | rescale   | Delimited Min,Max bounds defined in field `range`                   | `0,10000`                                                                                  |
 
-URL:
+URL: `https://api.cogeo.xyz/stac/crop/14.869,37.682,15.113,37.862/256x256.png?url=https://raw.githubusercontent.com/stac-extensions/raster/main/examples/item-sentinel2.json&assets=B12,B8A,B04&resampling_method=average&rescale=0,10000&return_mask=true`
 
-`https://api.cogeo.xyz/stac/crop/14.869,37.682,15.113,37.862/256x256.png?url=https://raw.githubusercontent.com/stac-extensions/raster/main/examples/item-sentinel2.json&assets=B12,B8A,B04&resampling_method=average&rescale=0,10000&return_mask=true`
-
-Result: Lava thermal signature of Mount Etna eruption (February 2021)
+**Result**: Lava thermal signature of Mount Etna eruption (February 2021)
 
 ![etna](images/etna.png)
 

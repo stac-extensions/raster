@@ -456,6 +456,22 @@
                 0.0,
                 0.0,
                 1.0
+            ],
+            "raster:bands": [
+                {
+                    "data_type": "unit16",
+                    "nodata": 0,
+                    "stats_min": 1,
+                    "stats_max": 16502,
+                    "stats_mean": 3329.8844628619,
+                    "stats_stddev": 2303.0096294469,
+                    "stats_valid_percent": 99.999,
+                    "values": {
+                        "BOA reflectance": {
+                            "unit": "W/m²/sr/μm"
+                        }
+                    }
+                }
             ]
         },
         "B07": {

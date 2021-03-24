@@ -22,13 +22,13 @@ An item can describe assets that are rasters of one or multiple bands with some 
 
 | Field Name        | Type                                                   | Description                                                                                                                                                                |
 | ----------------- | ------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| raster:bands      | \[[Raster band Object](#raster-band-object)]           | **Asset level**. An array of available bands where each object is a \[[Band Object](#band-object)]. If given, requires at least one band.                                  |
+| raster:bands      | \[[Raster band Object](#raster-band-object)]           | An array of available bands where each object is a \[[Band Object](#band-object)]. If given, requires at least one band.                                  |
 
 ## Item Properties
 
 | Field Name        | Type                                                   | Description                                                                                                                                                                |
 | ----------------- | ------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| raster:composites | \[[Raster Composite Object](#raster-composite-object)] | **Item level**. An array of possible band composition where each object is a \[[Composite Object](#raster-composite-object)]. If given, requires at least one composition. |
+| raster:composites | \[[Raster Composite Object](#raster-composite-object)] | An array of possible band composition where each object is a \[[Composite Object](#raster-composite-object)]. If given, requires at least one composition. |
 
 ## Raster Band Object
 
@@ -45,7 +45,7 @@ When specifying a raster band object at asset level. It is recommended to use th
 | stats_max            | number                                      | maximum value of the pixels in the band                                                                                                                                                                            |
 | stats_stdev          | number                                      | standard deviation value of the pixels in the band                                                                                                                                                                 |
 | stats_valid_percent  | number                                      | percentage of valid (not `nodata`) pixel                                                                                                                                                                           |
-| values               | Map<string, [Value](#value-object) Object>] | Dictionary of value objects that can be computed, each with a unique key.                                                                                                                                          |
+| values               | Map<string, [Value](#value-object) Object>] | Dictionary of value objects that can be computed, each with a unique key describing the value.                                                                                                                                          |
 | overview_max_gsd     | number                                      | The maximum Ground Sample Distance represented in an overview. This should be the GSD of the highest level overview, generally of a [Cloud Optimized GeoTIFF](http://cogeo.org/), but should work with any format. |
 | color_interpretation | string                                      | the color interpretation of the pixels in the bands. One of the [color interpreation](#color-interpretation)) below.                                                                                               |
 
@@ -61,12 +61,16 @@ or others, which is easily done (example python [to webmercator](https://github.
 
 ## Value Object
 
+Value object describes the raw pixel value in the band or any other derivable values from that band.
+
 | Field Name | Type   | Description                                                                                                                                                               |
 | ---------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| unit       | string | unit denomination of the value                                                                                                                                            |
+| unit       | string | **REQUIRED**. unit denomination of the value                                                                                                                                            |
 | from       | string | key of another value in the [`values`](#raster-band-object) dictionary to be used as input to compute the value. If empty the value of the pixel in the band is the input |
 | scale      | number | multiplicator factor of the pixel value to transform into the value (i.e. translate digital number to reflectance).                                                       |
 | offset     | number | number to be added to the pixel value to transform into the value (i.e. translate digital number to reflectance).                                                         |
+
+When only `unit` is defined, it describes the raw pixel value. `scale` and `offset` defines parameters to compute another value. Next paragraphs describe some use cases.
 
 ### Use Scale and offset as radiometric calibration parameters
 
@@ -90,6 +94,21 @@ For example, the above value conversion is described in the values dictionary as
       "unit": "W⋅sr−1⋅m−3",
       "scale": 0.0145,
       "offset": 3.48
+  }
+}
+```
+
+### Transform height measurement to water level
+
+In remote sensing, radar altimeter instruments measures an absolute height from an absolute georeference (e.g. WGS 84 geoid). In hydrology, you prefer having the water level relative to the "0 limnimetric scale". Therefore, a usage of the value object here would be to indicate the offset between the reference height 0 of the sensor and the 0 limnimetric scale to compute a water level.
+
+In the following Water Level value definition example, 185 meters must be substracted from the pixel value to correspond to the water level.
+
+```json
+"values": {
+  "Water Level": {
+      "unit": "m",
+      "offset": -185
   }
 }
 ```

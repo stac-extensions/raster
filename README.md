@@ -25,10 +25,7 @@ An item can describe assets as an assembly of related raster bands and some info
 
 ## Raster Band Object
 
-When specifying a raster band object at asset level. It is recommended to use:
-
-- the [file](https://github.com/stac-extensions/file) extension to specify the `file:` and `file:unit` to indicate both the encoding type nd unit of each pixel.
-- the [projection](https://github.com/radiantearth/stac-spec/tree/master/extensions/projection) extension to specify information about the raster projection, especially `proj:shape` to specify the height and width of the raster.
+When specifying a raster band object at asset level. It is recommended to use the [projection](https://github.com/radiantearth/stac-spec/tree/master/extensions/projection) extension to specify information about the raster projection, especially `proj:shape` to specify the height and width of the raster.
 
 | Field Name          | Type                                        | Description                                                                                                                                                                      |
 |---------------------|---------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

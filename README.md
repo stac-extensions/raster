@@ -44,6 +44,16 @@ When specifying a raster band object at asset level. It is recommended to use
 | overview_max_gsd | number | The maximum Ground Sample Distance represented in an overview. This should be the GSD of the highest level overview, generally of a [Cloud Optimized GeoTIFF](http://cogeo.org/), but should work with any format.
 | color_interpretation | string                                      | the color interpretation of the pixels in the bands. One of the [color interpreation](#color-interpretation)) below.                                                             |
 
+*overview_max_gsd*: This field helps renderers of understand what zoom levels they can efficiently show. It is generally used in conjunction with gsd (from [common metadata](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#instrument)). overview_max_gsd enables the calculation of the 'minimum' zoom level that a renderer would want to show, and then the maximum zoom level is calculated from the gsd - the resolution of the image. The former is based on the highest level of overview (also known as a pyramid) contained in the asset.
+
+<img src="https://user-images.githubusercontent.com/407017/90821250-75ce5280-e2e7-11ea-9008-6c073e083be0.png" alt="image pyramid" width="300">
+
+So in the above image it would be the ground sample distance of 'level 4', which will be a much higher gsd than the image,
+as each pixel is greatly down-sampled. Dynamic tile servers (like [titiler](https://github.com/developmentseed/titiler)) will
+generally convert the gsd to [zoom 
+levels](https://wiki.openstreetmap.org/wiki/Zoom_levels), [Web Mercator](https://en.wikipedia.org/wiki/Web_Mercator_projection) 
+or others, which is easily done (example python [to webmercator](https://github.com/cogeotiff/rio-cogeo/blob/b9b57301c2b7a4be560c887176c282e68ca63c27/rio_cogeo/utils.py#L62-L66) or arbitrary [TileMatrixSet](https://github.com/cogeotiff/rio-tiler-crs/blob/834bcf3d39cdc555b3ce930439ab186d00fd5fc5/rio_tiler_crs/cogeo.py#L98-L105))
+
 ## Value Object
 
 | Field Name | Type   | Description                                                                                                                                                               |
@@ -54,6 +64,8 @@ When specifying a raster band object at asset level. It is recommended to use
 | offset     | number | number to be added to the pixel value to transform into the value (i.e. translate digital number to reflectance).                                                         |
 
 ### Additional Field Information
+
+
 
 #### Scale and offset as radiometric calibration parameters
 

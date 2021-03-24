@@ -120,7 +120,7 @@ Dynamic tile servers could exploit the information in the raster extension to au
 
 #### Shortwave Infra-red visual thermal signature example
 
-From the Sentinel-2 example:
+From the [Sentinel-2 example](examples/item-sentinel2.json):
 
 ```json
 "raster:composites":[ 
@@ -138,7 +138,7 @@ From the Sentinel-2 example:
 
 | Query key | value                                                               | Example value                                                                              |
 | --------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| url       | STAC Item URL                                                       | https://raw.githubusercontent.com/stac-extensions/raster/main/examples/item-sentinel2.json |
+| url       | STAC Item URL                                                       | `https://raw.githubusercontent.com/stac-extensions/raster/main/examples/item-sentinel2.json` |
 | assets    | Assets keys defined in the `bands` objects with field `asset_key`   | `B12,B8A,B04`                                                                              |
 | bidx      | Band indices defined in the `bands` objects with field `band_index` | `1,1,1`                                                                                    |
 | rescale   | Delimited Min,Max bounds defined in field `range`                   | `0,10000`                                                                                  |
@@ -147,7 +147,7 @@ URL:
 
 POLYGON(( ,14.869 37.862, 37.862,15.113 37.682,14.869 37.682))
 
-`https://api.cogeo.xyz/stac/crop/14.869,37.682,15.113,37.862/256x256.png?url=https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/33/S/VB/2021/2/S2B_33SVB_20210221_0_L2A/S2B_33SVB_20210221_0_L2A.json&assets=B12,B8A,B04&resampling_method=average&rescale=0,10000&return_mask=true`
+`https://api.cogeo.xyz/stac/crop/14.869,37.682,15.113,37.862/256x256.png?url=https://raw.githubusercontent.com/stac-extensions/raster/main/examples/item-sentinel2.json&assets=B12,B8A,B04&resampling_method=average&rescale=0,10000&return_mask=true`
 
 Result: Lava thermal signature of Mount Etna eruption (February 2021)
 
@@ -176,7 +176,7 @@ From the Landsat-8 example \[[article](https://www.usgs.gov/core-science-systems
 | url        | STAC Item URL                                                     | https://raw.githubusercontent.com/stac-extensions/raster/main/examples/item-landsat8.json |
 | assets     | Assets keys defined in the `bands` objects with field `asset_key` | `B4,B5,`                                                                                  |
 | rescale    | Delimited Min,Max bounds defined in field `range`                 | `-1,1`                                                                            |
-| expression | Band math formula as defined in field `band_math_formula`         | (B5–B4)/(B5+B4) |
+| expression | Band math formula as defined in field `band_math_formula`         | `(B5–B4)/(B5+B4)`   |
 
 URL:
 

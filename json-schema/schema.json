@@ -20,12 +20,6 @@
             },
             "properties": {
               "allOf": [
-                // {
-                //   "$comment": "Require fields here for item properties.",
-                //   "required": [
-                //     "template:new_field"
-                //   ]
-                // },
                 {
                   "$ref": "#/definitions/fields"
                 }
@@ -119,7 +113,7 @@
         "stac_extensions": {
           "type": "array",
           "contains": {
-            "const": "https://stac-extensions.github.io/template/v1.0.0/schema.json"
+            "const": "https://stac-extensions.github.io/raster/v1.0.0/schema.json"
           }
         }
       }
@@ -128,10 +122,10 @@
       "$comment": "Add your new fields here. Don't require them here, do that above in the item schema.",
       "type": "object",
       "properties": {
-        "template:new_field": {
+        "raster:new_field": {
           "type": "string"
         },
-        "template:xyz": {
+        "raster:xyz": {
           "type": "object",
           "required": [
             "x",
@@ -150,7 +144,7 @@
             }
           }
         },
-        "template:another_one": {
+        "raster:another_one": {
           "type": "array",
           "items": {
             "type": "number"
@@ -163,6 +157,112 @@
         }
       },
       "additionalProperties": false
+    },
+    "bands": {
+      "title": "Bands",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "title": "Band",
+        "type": "object",
+        "minProperties": 1,
+        "properties": {
+          "data_type": {
+            "title": "Data type of the band",
+            "type": "string",
+            "enum": [
+              "int8",
+              "int16",
+              "int32",
+              "int64",
+              "uint8",
+              "uint16",
+              "uint32",
+              "uint64",
+              "float16",
+              "float32",
+              "float64",
+              "cint16",
+              "cint32",
+              "cfloat32",
+              "cfloat64",
+              "other"
+            ]
+          },
+          "nbits": {
+            "title": "The actual number of bits used for this band",
+            "type": "integer"
+          },
+          "sampling": {
+            "title": "Pixel sampling in the band",
+            "type": "string",
+            "enum": [
+              "area",
+              "point"
+            ]
+          },
+          "nodata": {
+            "title": "No data pixel value",
+            "type": "number"
+          },
+          "stats_mean": {
+            "title": "Mean value of all the pixels in the band",
+            "type": "number"
+          },
+          "stats_min": {
+            "title": "Minimum value of all the pixels in the band",
+            "type": "number"
+          },
+          "stats_max": {
+            "title": "Maximum value of all the pixels in the band",
+            "type": "number"
+          },
+          "stats_stddev": {
+            "title": "Standard deviation value of all the pixels in the band",
+            "type": "number"
+          },
+          "stats_valid_percent": {
+            "title": "Percentage of valid (not nodata) pixel",
+            "type": "number"
+          },
+          "overview_max_gsd": {
+            "title": "The maximum Ground Sample Distance represented in an overview",
+            "type": "number"
+          },
+          "color_interpretation": {
+            "title": "The color interpretation of the pixels in the bands",
+            "type": "string"
+          },
+          "values": {
+            "title": "Dictionary of value objects that can be computed",
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "required": [
+                "unit"
+              ],
+              "properties": {
+                "unit": {
+                  "title": "Unit denomination of the value",
+                  "type": "string"
+                },
+                "from": {
+                  "title": "Key of another object value to be the source",
+                  "type": "string"
+                },
+                "scale": {
+                  "title": "Multiplicator factor of the pixel value",
+                  "type": "number"
+                },
+                "offset": {
+                  "title": "Number to be added to the pixel value",
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

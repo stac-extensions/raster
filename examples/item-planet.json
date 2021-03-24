@@ -1,214 +1,213 @@
 {
-    "stac_extensions": [
-        "disaster",
-        "sat",
-        "view",
-        "proj",
-        "processing",
-        "raster"
-    ],
-    "stac_version": "1.0.0-rc.1",
-    "links": [],
-    "assets": {
-        "data": {
-            "type": "image/tiff; application=geotiff;",
-            "roles": [
-                "data"
-            ],
-            "href": "PT01S00_842547E119_8697242018100100000000MS00_GG001002003/PT01S00_842547E119_8697242018100100000000MS00_GG001002003.tif",
-            "eo:bands": [
-                {
-                    "name": "band-1",
-                    "common_name": "red",
-                    "center_wavelength": 0.63
-                },
-                {
-                    "name": "band-2",
-                    "common_name": "green",
-                    "center_wavelength": 0.545
-                },
-                {
-                    "name": "band-3",
-                    "common_name": "blue",
-                    "center_wavelength": 0.485
-                },
-                {
-                    "name": "band-4",
-                    "common_name": "nir",
-                    "center_wavelength": 0.82
-                }
-            ],
-            "proj:shape": [
-                8966,
-                4411
-            ],
-            "raster:bands": [
-                {
-                    "sampling": "area",
-                    "values": {
-                        "TOA radiance": {
-                            "unit": "W⋅sr−1⋅m−2⋅nm−1",
-                            "scale": 0.01,
-                            "offset": 0
-                        },
-                        "TOA reflectance": {
-                            "unit": "W⋅sr−1⋅m−2⋅nm−1",
-                            "scale": 1.85074513929E-05,
-                            "offset": 0
-                        }
-                    },
-                    "nodata": 0,
-                    "stats_max": 32925,
-                    "stats_mean": 8498.9400644319,
-                    "stats_min": 1962,
-                    "stats_stddev": 5056.1292002722,
-                    "stats_valid_percent": 61.09
-                },
-                {
-                    "sampling": "area",
-                    "values": {
-                        "TOA radiance": {
-                            "unit": "W⋅sr−1⋅m−2⋅nm−1",
-                            "scale": 0.01,
-                            "offset": 0
-                        },
-                        "TOA reflectance": {
-                            "unit": "W⋅sr−1⋅m−2⋅nm−1",
-                            "scale": 1.96236732904E-05,
-                            "offset": 0
-                        }
-                    },
-                    "nodata": 0,
-                    "stats_max": 22063,
-                    "stats_mean": 7185.2123645206,
-                    "stats_min": 3884,
-                    "stats_stddev": 3799.4562788636,
-                    "stats_valid_percent": 61.09
-                },
-                {
-                    "sampling": "area",
-                    "values": {
-                        "TOA radiance": {
-                            "unit": "W⋅sr−1⋅m−2⋅nm−1",
-                            "scale": 0.01,
-                            "offset": 0
-                        },
-                        "TOA reflectance": {
-                            "unit": "W⋅sr−1⋅m−2⋅nm−1",
-                            "scale": 2.18499248607E-05,
-                            "offset": 0
-                        }
-                    },
-                    "nodata": 0,
-                    "stats_max": 29693,
-                    "stats_mean": 5829.583942362,
-                    "stats_min": 1061,
-                    "stats_stddev": 4683.0650025253,
-                    "stats_valid_percent": 61.09
-                },
-                {
-                    "sampling": "area",
-                    "values": {
-                        "TOA radiance": {
-                            "unit": "W⋅sr−1⋅m−2⋅nm−1",
-                            "scale": 0.01,
-                            "offset": 0
-                        },
-                        "TOA reflectance": {
-                            "unit": "W⋅sr−1⋅m−2⋅nm−1",
-                            "scale": 3.30920389986E-05,
-                            "offset": 0
-                        }
-                    },
-                    "nodata": 0,
-                    "stats_max": 31836,
-                    "stats_mean": 6785.2511255265,
-                    "stats_min": 1685,
-                    "stats_stddev": 3842.4324936707,
-                    "stats_valid_percent": 61.09
-                }
-            ],
-            "size": 180076568
+  "stac_extensions": [
+    "https://stac-extensions.github.io/sat/v1.0.0/schema.json",
+    "view",
+    "projection",
+    "https://stac-extensions.github.io/processing/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/raster/v1.0.0/schema.json"
+  ],
+  "stac_version": "1.0.0-rc.1",
+  "links": [],
+  "assets": {
+    "data": {
+      "type": "image/tiff; application=geotiff;",
+      "roles": [
+        "data"
+      ],
+      "href": "PT01S00_842547E119_8697242018100100000000MS00_GG001002003/PT01S00_842547E119_8697242018100100000000MS00_GG001002003.tif",
+      "eo:bands": [
+        {
+          "name": "band-1",
+          "common_name": "red",
+          "center_wavelength": 0.63
         },
-        "metadata": {
-            "type": "application/xml",
-            "roles": [
-                "metadata"
-            ],
-            "href": "PT01S00_842547E119_8697242018100100000000MS00_GG001002003/vendor_metadata/20181001_015433_1027_3B_AnalyticMS_metadata.xml",
-            "size": 10420
+        {
+          "name": "band-2",
+          "common_name": "green",
+          "center_wavelength": 0.545
         },
-        "overview": {
-            "type": "image/jpeg",
-            "roles": [
-                "overview"
-            ],
-            "title": "Scene Overview",
-            "href": "PT01S00_842547E119_8697242018100100000000MS00_GG001002003/PT01S00_842547E119_8697242018100100000000MS00_GG001002003-br.jpg",
-            "size": 846975
+        {
+          "name": "band-3",
+          "common_name": "blue",
+          "center_wavelength": 0.485
         },
-        "thumbnail": {
-            "type": "image/jpeg",
-            "roles": [
-                "thumbnail"
-            ],
-            "title": "Scene Thumbnail",
-            "href": "PT01S00_842547E119_8697242018100100000000MS00_GG001002003/PT01S00_842547E119_8697242018100100000000MS00_GG001002003-th.jpg",
-            "size": 38126
+        {
+          "name": "band-4",
+          "common_name": "nir",
+          "center_wavelength": 0.82
         }
+      ],
+      "proj:shape": [
+        8966,
+        4411
+      ],
+      "raster:bands": [
+        {
+          "sampling": "area",
+          "values": {
+            "TOA radiance": {
+              "unit": "W⋅sr−1⋅m−2⋅nm−1",
+              "scale": 0.01,
+              "offset": 0
+            },
+            "TOA reflectance": {
+              "unit": "W⋅sr−1⋅m−2⋅nm−1",
+              "scale": 0.0000185074513929,
+              "offset": 0
+            }
+          },
+          "nodata": 0,
+          "stats_max": 32925,
+          "stats_mean": 8498.9400644319,
+          "stats_min": 1962,
+          "stats_stddev": 5056.1292002722,
+          "stats_valid_percent": 61.09
+        },
+        {
+          "sampling": "area",
+          "values": {
+            "TOA radiance": {
+              "unit": "W⋅sr−1⋅m−2⋅nm−1",
+              "scale": 0.01,
+              "offset": 0
+            },
+            "TOA reflectance": {
+              "unit": "W⋅sr−1⋅m−2⋅nm−1",
+              "scale": 0.0000196236732904,
+              "offset": 0
+            }
+          },
+          "nodata": 0,
+          "stats_max": 22063,
+          "stats_mean": 7185.2123645206,
+          "stats_min": 3884,
+          "stats_stddev": 3799.4562788636,
+          "stats_valid_percent": 61.09
+        },
+        {
+          "sampling": "area",
+          "values": {
+            "TOA radiance": {
+              "unit": "W⋅sr−1⋅m−2⋅nm−1",
+              "scale": 0.01,
+              "offset": 0
+            },
+            "TOA reflectance": {
+              "unit": "W⋅sr−1⋅m−2⋅nm−1",
+              "scale": 0.0000218499248607,
+              "offset": 0
+            }
+          },
+          "nodata": 0,
+          "stats_max": 29693,
+          "stats_mean": 5829.583942362,
+          "stats_min": 1061,
+          "stats_stddev": 4683.0650025253,
+          "stats_valid_percent": 61.09
+        },
+        {
+          "sampling": "area",
+          "values": {
+            "TOA radiance": {
+              "unit": "W⋅sr−1⋅m−2⋅nm−1",
+              "scale": 0.01,
+              "offset": 0
+            },
+            "TOA reflectance": {
+              "unit": "W⋅sr−1⋅m−2⋅nm−1",
+              "scale": 0.0000330920389986,
+              "offset": 0
+            }
+          },
+          "nodata": 0,
+          "stats_max": 31836,
+          "stats_mean": 6785.2511255265,
+          "stats_min": 1685,
+          "stats_stddev": 3842.4324936707,
+          "stats_valid_percent": 61.09
+        }
+      ],
+      "size": 180076568
     },
-    "type": "Feature",
-    "id": "PT01S00_842547E119_8697242018100100000000MS00_GG001002003",
-    "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-            [
-                [
-                    119.749003733,
-                    -0.782842043003
-                ],
-                [
-                    119.990422256,
-                    -0.782842043003
-                ],
-                [
-                    119.990422256,
-                    -0.902255498348
-                ],
-                [
-                    119.749003733,
-                    -0.902255498348
-                ],
-                [
-                    119.749003733,
-                    -0.782842043003
-                ]
-            ]
-        ]
+    "metadata": {
+      "type": "application/xml",
+      "roles": [
+        "metadata"
+      ],
+      "href": "PT01S00_842547E119_8697242018100100000000MS00_GG001002003/vendor_metadata/20181001_015433_1027_3B_AnalyticMS_metadata.xml",
+      "size": 10420
     },
-    "properties": {
-        "datetime": "2018-10-01T01:54:33+00:00",
-        "mission": "planetscope",
-        "platform": "planetscope",
-        "instruments": [
-            "ps2"
+    "overview": {
+      "type": "image/jpeg",
+      "roles": [
+        "overview"
+      ],
+      "title": "Scene Overview",
+      "href": "PT01S00_842547E119_8697242018100100000000MS00_GG001002003/PT01S00_842547E119_8697242018100100000000MS00_GG001002003-br.jpg",
+      "size": 846975
+    },
+    "thumbnail": {
+      "type": "image/jpeg",
+      "roles": [
+        "thumbnail"
+      ],
+      "title": "Scene Thumbnail",
+      "href": "PT01S00_842547E119_8697242018100100000000MS00_GG001002003/PT01S00_842547E119_8697242018100100000000MS00_GG001002003-th.jpg",
+      "size": 38126
+    }
+  },
+  "type": "Feature",
+  "id": "PT01S00_842547E119_8697242018100100000000MS00_GG001002003",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          119.749003733,
+          -0.782842043003
         ],
-        "gsd": 3.0,
-        "sat:orbit_state": "descending",
-        "sat:absolute_orbit": 1736074,
-        "view:sun_elevation": 60.99449,
-        "view:sun_azimuth": 94.82318,
-        "view:incidence_angle": 0.1531593,
-        "view:off_nadir": 0.1102388,
-        "proj:epsg": 32750,
-        "processing:level": "L3B",
-        "title": "Planetscope PS2 L3B 01/10/2018 01:54:33",
-        "disaster:call_id": 857
-    },
-    "bbox": [
-        119.749003733,
-        -0.902255498348,
-        119.990422256,
-        -0.782842043003
+        [
+          119.990422256,
+          -0.782842043003
+        ],
+        [
+          119.990422256,
+          -0.902255498348
+        ],
+        [
+          119.749003733,
+          -0.902255498348
+        ],
+        [
+          119.749003733,
+          -0.782842043003
+        ]
+      ]
     ]
+  },
+  "properties": {
+    "datetime": "2018-10-01T01:54:33+00:00",
+    "mission": "planetscope",
+    "platform": "planetscope",
+    "instruments": [
+      "ps2"
+    ],
+    "gsd": 3,
+    "sat:orbit_state": "descending",
+    "sat:absolute_orbit": 1736074,
+    "view:sun_elevation": 60.99449,
+    "view:sun_azimuth": 94.82318,
+    "view:incidence_angle": 0.1531593,
+    "view:off_nadir": 0.1102388,
+    "proj:epsg": 32750,
+    "processing:level": "L3B",
+    "title": "Planetscope PS2 L3B 01/10/2018 01:54:33",
+    "disaster:call_id": 857
+  },
+  "bbox": [
+    119.749003733,
+    -0.902255498348,
+    119.990422256,
+    -0.782842043003
+  ]
 }

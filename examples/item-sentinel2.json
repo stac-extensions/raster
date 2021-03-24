@@ -61,6 +61,29 @@
         "sentinel:valid_cloud_cover": true
     },
     "collection": "sentinel-s2-l2a-cogs",
+    "raster:composites": [
+        {
+            "name": "Shortwave Infra-red",
+            "range": [
+                0,
+                10000
+            ],
+            "bands": [
+                {
+                    "asset_key": "B12",
+                    "band_index": 1
+                },
+                {
+                    "asset_key": "B8A",
+                    "band_index": 1
+                },
+                {
+                    "asset_key": "B04",
+                    "band_index": 1
+                }
+            ]
+        }
+    ],
     "assets": {
         "thumbnail": {
             "title": "Thumbnail",
@@ -172,20 +195,6 @@
                 0.0,
                 0.0,
                 1.0
-            ],
-            "raster:bands": [
-                {
-                    "stats_min": 0,
-                    "stats_max": 255
-                },
-                {
-                    "stats_min": 0,
-                    "stats_max": 255
-                },
-                {
-                    "stats_min": 0,
-                    "stats_max": 255
-                }
             ]
         },
         "B01": {
@@ -221,8 +230,13 @@
             ],
             "raster:bands": [
                 {
+                    "data_type": "unit16",
+                    "nodata": 0,
                     "stats_min": 1,
                     "stats_max": 20567,
+                    "stats_mean": 2339.4759595597,
+                    "stats_stddev": 3026.6973619954,
+                    "stats_valid_percent": 99.83,
                     "values": {
                         "BOA reflectance": {
                             "unit": "W/m²/sr/μm"
@@ -261,6 +275,22 @@
                 0.0,
                 0.0,
                 1.0
+            ],
+            "raster:bands": [
+                {
+                    "data_type": "unit16",
+                    "nodata": 0,
+                    "stats_min": 1,
+                    "stats_max": 19264,
+                    "stats_mean": 2348.069117847,
+                    "stats_stddev": 2916.5446249911,
+                    "stats_valid_percent": 99.99,
+                    "values": {
+                        "BOA reflectance": {
+                            "unit": "W/m²/sr/μm"
+                        }
+                    }
+                }
             ]
         },
         "B03": {
@@ -648,32 +678,5 @@
             ]
         }
     },
-    "links": [
-        {
-            "rel": "self",
-            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/33/S/VB/2021/2/S2B_33SVB_20210221_0_L2A/S2B_33SVB_20210221_0_L2A.json",
-            "type": "application/json"
-        },
-        {
-            "rel": "canonical",
-            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/33/S/VB/2021/2/S2B_33SVB_20210221_0_L2A/S2B_33SVB_20210221_0_L2A.json",
-            "type": "application/json"
-        },
-        {
-            "title": "sentinel-s2-l2a-aws/workflow-publish-sentinel/tiles-33-S-VB-2021-2-21-0",
-            "rel": "via-cirrus",
-            "href": "https://cirrus-earth-search.aws.element84.com/v0/catid/sentinel-s2-l2a-aws/workflow-publish-sentinel/tiles-33-S-VB-2021-2-21-0"
-        },
-        {
-            "title": "Source STAC Item",
-            "rel": "derived_from",
-            "href": "https://cirrus-v0-data-1qm7gekzjucbq.s3.us-west-2.amazonaws.com/sentinel-s2-l2a/33/S/VB/2021/2/S2B_33SVB_20210221_0_L2A/S2B_33SVB_20210221_0_L2A.json",
-            "type": "application/json"
-        },
-        {
-            "title": "sentinel-s2-l2a/workflow-cog-archive/S2B_33SVB_20210221_0_L2A",
-            "rel": "via-cirrus",
-            "href": "https://cirrus-earth-search.aws.element84.com/v0/catid/sentinel-s2-l2a/workflow-cog-archive/S2B_33SVB_20210221_0_L2A"
-        }
-    ]
+    "links": []
 }

@@ -128,7 +128,7 @@ From the Sentinel-2 example:
     "bands": [
       { "asset_key": "B12", "band_index": 1 },
       { "asset_key": "B8A", "band_index": 1 },
-      { "asset_key": "B4", "band_index": 1 }
+      { "asset_key": "B04", "band_index": 1 }
     ]
   }
 ]
@@ -137,7 +137,7 @@ From the Sentinel-2 example:
 | Query key | value                                                               | Example value                                                                              |
 | --------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | url       | STAC Item URL                                                       | https://raw.githubusercontent.com/stac-extensions/raster/main/examples/item-sentinel2.json |
-| assets    | Assets keys defined in the `bands` objects with field `asset_key`   | `B12,B8A,B4`                                                                               |
+| assets    | Assets keys defined in the `bands` objects with field `asset_key`   | `B12,B8A,B04`                                                                               |
 | bidx      | Band indices defined in the `bands` objects with field `band_index` | `1,1,1`                                                                                    |
 | rescale   | Delimited Min,Max bounds defined in field `range`                   | `0,10000`                                                                                  |
 

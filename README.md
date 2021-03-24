@@ -145,8 +145,6 @@ From the [Sentinel-2 example](examples/item-sentinel2.json):
 
 URL:
 
-POLYGON(( ,14.869 37.862, 37.862,15.113 37.682,14.869 37.682))
-
 `https://api.cogeo.xyz/stac/crop/14.869,37.682,15.113,37.862/256x256.png?url=https://raw.githubusercontent.com/stac-extensions/raster/main/examples/item-sentinel2.json&assets=B12,B8A,B04&resampling_method=average&rescale=0,10000&return_mask=true`
 
 Result: Lava thermal signature of Mount Etna eruption (February 2021)

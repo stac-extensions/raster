@@ -41,6 +41,7 @@ When specifying a raster band object at asset level. It is recommended to use
 | stats_stdev          | number                                      | standard deviation value of the pixels in the band                                                                                                                               |
 | stats_valid_percent  | number                                      | percentage of valid (not `nodata`) pixel                                                                                                                                         |
 | values               | Map<string, [Value](#value-object) Object>] | Dictionary of value objects that can be computed, each with a unique key.                                                                                                        |
+| overview_max_gsd | number | The maximum Ground Sample Distance represented in an overview. This should be the GSD of the highest level overview, generally of a [Cloud Optimized GeoTIFF](http://cogeo.org/), but should work with any format.
 | color_interpretation | string                                      | the color interpretation of the pixels in the bands. One of the [color interpreation](#color-interpretation)) below.                                                             |
 
 ## Value Object
@@ -59,6 +60,8 @@ When specifying a raster band object at asset level. It is recommended to use
 In remote sensing, many imagery raster corresponds to raw data without any radiometric processing. Each pixel is given in digital numbers (DN), i.e. native pixel values from the sensor acquisition. Those digital numbers quantify the energy recorded by the detector (optical or radar). The sensor radiometric calibration aims to turn back the DN value into a physical unit value (radiance, light power, backscatter). Hereafter, some examples of the usage of the `values` dictionary to perform radiometric correction.
 
 ##### Digital Numbers to Radiance (optical sensor)
+
+<!-- https://labo.obs-mip.fr/multitemp/radiometric-quantities-irradiance-radiance-reflectance/ -->
 
 A conventional way of deriving Top Of Atmosphere (TOA) Radiance in ![formula](https://render.githubusercontent.com/render/math?math=W.sr^{-1}.m^{-3}) from DN values using `scale` and `offset` in the following formula:
 

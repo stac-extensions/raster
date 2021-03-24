@@ -1,7 +1,7 @@
 # Raster Extension Specification
 
 - **Title:** Raster
-- **Identifier:** https://stac-extensions.github.io/raster/v1.0.0/schema.json
+- **Identifier:** `https://stac-extensions.github.io/raster/v1.0.0/schema.json`
 - **Field Name Prefix:** raster
 - **Scope:** Item
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
@@ -9,7 +9,13 @@
 
 This document explains the Raster Extension to the [SpatioTemporal Asset Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification.
 
-An item can describe assets that are rasters of one or multiple bands with some information common to them all (raster size, projection) and also specific to each of them (data type, unit, number of bits used, nodata). A raster is ofthen strongly linked with the the georeferencing transform and coordinate system definition of all bands (using the [projection extension](https://github.com/radiantearth/stac-spec/tree/master/extensions/projection)). In many applications, it is interesting to have some metadata about the raster in the asset (values statistics, value interpretation, transforms). Finally, it is helping the user to have some rendering hints of the item using one or more raster assets (RGB combination, simple band value processing) and to create on the fly visualisation with dynamic tilers.
+An item can describe assets that are rasters of one or multiple bands with some information common to them all (raster size, projection)
+and also specific to each of them (data type, unit, number of bits used, nodata).
+A raster is ofthen strongly linked with the the georeferencing transform and coordinate system definition
+of all bands (using the [projection extension](https://github.com/radiantearth/stac-spec/tree/master/extensions/projection)).
+In many applications, it is interesting to have some metadata about the raster in the asset (values statistics, value interpretation, transforms).
+Finally, it is helping the user to have some rendering hints of the item using one or
+more raster assets (RGB combination, simple band value processing) and to create on the fly visualisation with dynamic tilers.
 
 - Examples:
   - [Planet Item example](examples/item-planet.json): Shows the basic usage of the extension in a STAC Item
@@ -20,19 +26,21 @@ An item can describe assets that are rasters of one or multiple bands with some 
 
 ## Item Asset fields
 
-| Field Name        | Type                                                   | Description                                                                                                                                                                |
-| ----------------- | ------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| raster:bands      | \[[Raster band Object](#raster-band-object)]           | An array of available bands where each object is a \[[Band Object](#band-object)]. If given, requires at least one band.                                  |
+| Field Name   | Type                                         | Description                                                                                                                     |
+| ------------ | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| raster:bands | \[[Raster band Object](#raster-band-object)] | An array of available bands where each object is a \[[Band Object](#raster-band-object)]. If given, requires at least one band. |
 
 ## Item Properties
 
-| Field Name        | Type                                                   | Description                                                                                                                                                                |
-| ----------------- | ------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Field Name        | Type                                                   | Description                                                                                                                                                |
+| ----------------- | ------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | raster:composites | \[[Raster Composite Object](#raster-composite-object)] | An array of possible band composition where each object is a \[[Composite Object](#raster-composite-object)]. If given, requires at least one composition. |
 
 ## Raster Band Object
 
-When specifying a raster band object at asset level. It is recommended to use the [projection](https://github.com/radiantearth/stac-spec/tree/master/extensions/projection) extension to specify information about the raster projection, especially `proj:shape` to specify the height and width of the raster.
+When specifying a raster band object at asset level, it is recommended to use
+the [projection](https://github.com/radiantearth/stac-spec/tree/master/extensions/projection) extension 
+to specify information about the raster projection, especially `proj:shape` to specify the height and width of the raster.
 
 | Field Name           | Type                                        | Description                                                                                                                                                                                                        |
 | -------------------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -45,13 +53,18 @@ When specifying a raster band object at asset level. It is recommended to use th
 | stats_max            | number                                      | maximum value of the pixels in the band                                                                                                                                                                            |
 | stats_stdev          | number                                      | standard deviation value of the pixels in the band                                                                                                                                                                 |
 | stats_valid_percent  | number                                      | percentage of valid (not `nodata`) pixel                                                                                                                                                                           |
-| values               | Map<string, [Value](#value-object) Object>] | Dictionary of value objects that can be computed, each with a unique key describing the value.                                                                                                                                          |
+| values               | Map<string, [Value](#value-object) Object>] | Dictionary of value objects that can be computed, each with a unique key describing the value.                                                                                                                     |
 | overview_max_gsd     | number                                      | The maximum Ground Sample Distance represented in an overview. This should be the GSD of the highest level overview, generally of a [Cloud Optimized GeoTIFF](http://cogeo.org/), but should work with any format. |
 | color_interpretation | string                                      | the color interpretation of the pixels in the bands. One of the [color interpreation](#color-interpretation)) below.                                                                                               |
 
-**overview_max_gsd**: This field helps renderers of understand what zoom levels they can efficiently show. It is generally used in conjunction with gsd (from [common metadata](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#instrument)). `overview_max_gsd` enables the calculation of the 'minimum' zoom level that a renderer would want to show, and then the maximum zoom level is calculated from the gsd - the resolution of the image. The former is based on the highest level of overview (also known as a pyramid) contained in the asset.
+**overview_max_gsd**: This field helps renderers of understand what zoom levels they can efficiently show.
+It is generally used in conjunction with gsd
+(from [common metadata](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#instrument)).
+`overview_max_gsd` enables the calculation of the 'minimum' zoom level that a renderer would want to show,
+and then the maximum zoom level is calculated from the gsd - the resolution of the image.
+The former is based on the highest level of overview (also known as a pyramid) contained in the asset.
 
-<img src="https://user-images.githubusercontent.com/407017/90821250-75ce5280-e2e7-11ea-9008-6c073e083be0.png" alt="image pyramid" width="300">
+![overviews](https://user-images.githubusercontent.com/407017/90821250-75ce5280-e2e7-11ea-9008-6c073e083be0.png =300x)
 
 So in the above image it would be the ground sample distance of 'level 4', which will be a much higher gsd than the image,
 as each pixel is greatly down-sampled. Dynamic tile servers (like [titiler](https://github.com/developmentseed/titiler)) will
@@ -65,7 +78,7 @@ Value object describes the raw pixel value in the band or any other derivable va
 
 | Field Name | Type   | Description                                                                                                                                                               |
 | ---------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| unit       | string | **REQUIRED**. unit denomination of the value                                                                                                                                            |
+| unit       | string | **REQUIRED**. unit denomination of the value                                                                                                                              |
 | from       | string | key of another value in the [`values`](#raster-band-object) dictionary to be used as input to compute the value. If empty the value of the pixel in the band is the input |
 | scale      | number | multiplicator factor of the pixel value to transform into the value (i.e. translate digital number to reflectance).                                                       |
 | offset     | number | number to be added to the pixel value to transform into the value (i.e. translate digital number to reflectance).                                                         |
@@ -123,7 +136,7 @@ Raster composites are intended to be used to specify some possible sensor band c
 | name              | string                      | **REQUIRED**. Denomination of the band composition (e.g. `ndvi`, `Color Infrared (vegetation)`  )                                                                                                                          |
 | nodata            | number                      | Pixel values used to identify pixels that are nodata in the composition .                                                                                                                                                  |
 | range             | \[number]                   | range of valid pixels values in the composition                                                                                                                                                                            |
-| bands             | \[[string](#band-selector)] | An ordered array of string following [Band Selector](#band-selector) syntax. If given, requires at least one band. **REQUIRED** if no `band_expression` specified                                                                  |
+| bands             | \[[string](#band-selector)] | An ordered array of string following [Band Selector](#band-selector) syntax. If given, requires at least one band. **REQUIRED** if no `band_expression` specified                                                          |
 | band_expression   | string                      | Band math expression (e.g `(b4-b1)/(b4+b1)`). **REQUIRED** if no `bands` specified                                                                                                                                         |
 | resampling_method | string                      | Resampling method, one of `nearest`, `average`, `bilinear` or `cubic`.                                                                                                                                                     |
 | color_map         | string                      | Identifier of a color mapping. Currently based on [rio-tiler color maps](https://cogeotiff.github.io/rio-tiler/colormap/) that includes some from Matplotlib and some custom ones that are commonly used with raster data. |
@@ -140,6 +153,10 @@ with
 - `band_index` (OPTIONAL): Band position index in the raster asset
 
 examples: `B4`, `data{2}`
+
+### Color Interpretation
+
+TBD
 
 ## Dynamic tile servers integration
 

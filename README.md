@@ -141,8 +141,7 @@ From the [Sentinel-2 example](examples/item-sentinel2.json):
 | Query key | value                                                               | Example value                                                                              |
 | --------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | url       | STAC Item URL                                                       | `https://raw.githubusercontent.com/stac-extensions/raster/main/examples/item-sentinel2.json` |
-| assets    | Assets keys defined in the `bands` objects with field `asset_key`   | `B12,B8A,B04`                                                                              |
-| bidx      | Band indices defined in the `bands` objects with field `band_index` | `1,1,1`                                                                                    |
+| assets    | Assets keys defined in the `bands` objects with field `asset_key`   | `B12,B8A,B04`                                                                              |                                                                                 |
 | rescale   | Delimited Min,Max bounds defined in field `range`                   | `0,10000`                                                                                  |
 
 URL: `https://api.cogeo.xyz/stac/crop/14.869,37.682,15.113,37.862/256x256.png?url=https://raw.githubusercontent.com/stac-extensions/raster/main/examples/item-sentinel2.json&assets=B12,B8A,B04&resampling_method=average&rescale=0,10000&return_mask=true`
@@ -153,7 +152,7 @@ URL: `https://api.cogeo.xyz/stac/crop/14.869,37.682,15.113,37.862/256x256.png?ur
 
 #### Normalized Difference Vegetation Index (NDVI) example
 
-From the Landsat-8 example \[[article](https://www.usgs.gov/core-science-systems/nli/landsat/landsat-normalized-difference-vegetation-index?qt-science_support_page_related_con=0#qt-science_support_page_related_con)]:
+From the [Landsat-8 example](examples/item-landsat8.json) \[[article](https://www.usgs.gov/core-science-systems/nli/landsat/landsat-normalized-difference-vegetation-index?qt-science_support_page_related_con=0#qt-science_support_page_related_con)]:
 
 ```json
 "raster:composites":[ 
@@ -165,21 +164,23 @@ From the Landsat-8 example \[[article](https://www.usgs.gov/core-science-systems
       { "asset_key": "B4", "band_index": 1 },
     ],
     "band_math_formula": "(B5–B4)/(B5+B4)",
+    "color_map": "ylgn"
   }
 ]
 ```
 
 | Query key  | value                                                             | Example value                                                                             |
 | ---------- | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| url        | STAC Item URL                                                     | https://raw.githubusercontent.com/stac-extensions/raster/main/examples/item-landsat8.json |
+| url        | STAC Item URL                                                     | `https://raw.githubusercontent.com/stac-extensions/raster/main/examples/item-landsat8.json` |
 | assets     | Assets keys defined in the `bands` objects with field `asset_key` | `B4,B5,`                                                                                  |
 | rescale    | Delimited Min,Max bounds defined in field `range`                 | `-1,1`                                                                            |
 | expression | Band math formula as defined in field `band_math_formula`         | `(B5–B4)/(B5+B4)`   |
+| color_map | Color map defined in field `color_map`  | `ylgn` |
 
 URL:
 
-`https://api.cogeo.xyz/stac/preview.png?url=https%3A%2F%2Fearth-search.aws.element84.com%2Fv0%2Fcollections%2Flandsat-8-l1-c1%2Fitems%2FLC08_L1TP_044033_20210305_20210312_01_T1&assets=B4%2CB5&expression=%28B5%E2%80%93B4%29%2F%28B5%2BB4%29&max_size=512&width=512&resampling_method=average&rescale=-1%2C1&color_map=ylgn&return_mask=true`
+`https://api.cogeo.xyz/stac/preview.png?url=https://raw.githubusercontent.com/stac-extensions/raster/main/examples/item-landsat8.json&assets=B4,B5&expression=(B5–B4)/(B5+B4)&max_size=512&width=512&resampling_method=average&rescale=-1,1&color_map=ylgn&return_mask=true`
 
 Result:  Landsat Surface Reflectance Normalized Difference Vegetation Index (NDVI) path 44 row 33.
 
-![sacramento](https://api.cogeo.xyz/stac/preview.png?url=https%3A%2F%2Fearth-search.aws.element84.com%2Fv0%2Fcollections%2Flandsat-8-l1-c1%2Fitems%2FLC08_L1TP_044033_20210305_20210312_01_T1&assets=B4%2CB5&expression=%28B5%E2%80%93B4%29%2F%28B5%2BB4%29&max_size=512&width=512&resampling_method=average&rescale=-1%2C1&color_map=ylgn&return_mask=true)
+![sacramento](https://api.cogeo.xyz/stac/preview.png?url=https://raw.githubusercontent.com/stac-extensions/raster/main/examples/item-landsat8.json&assets=B4,B5&expression=(B5–B4)/(B5+B4)&max_size=512&width=512&resampling_method=average&rescale=-1,1&color_map=ylgn&return_mask=true)

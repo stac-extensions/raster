@@ -3,7 +3,7 @@
 - **Title:** Raster
 - **Identifier:** https://stac-extensions.github.io/raster/v1.0.0/schema.json
 - **Field Name Prefix:** raster
-- **Scope:** Item, Collection
+- **Scope:** Item
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
 - **Owner**: @emmanuelmathot
 
@@ -15,7 +15,6 @@ An item can describe assets that are rasters of one or multiple bands with some 
   - [Planet Item example](examples/item-planet.json): Shows the basic usage of the extension in a STAC Item
   - [Sentinel-2 Item example](examples/item-sentinel2.json): Shows the statistics about individual bands and some RGB composites example
   - [Landsat-8 Item example](examples/item-landsat8.json): Shows the advanced composite example with band math processing
-  - [Collection example](examples/collection.json): Shows the basic usage of the extension in a STAC Collection
 - [JSON Schema](json-schema/schema.json)
 - [Changelog](./CHANGELOG.md)
 

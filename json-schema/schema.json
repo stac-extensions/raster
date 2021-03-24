@@ -1,11 +1,11 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://stac-extensions.github.io/raster/v1.0.0/schema.json#",
-  "title": "Template Extension",
-  "description": "STAC Template Extension for STAC Items and STAC Collections.",
+  "title": "raster Extension",
+  "description": "STAC Raster Extension for STAC Items.",
   "oneOf": [
     {
-      "$comment": "This is the schema for STAC extension raster.",
+      "$comment": "This is the schema for STAC extension raster in Items.",
       "allOf": [
         {
           "type": "object",
@@ -20,12 +20,12 @@
             },
             "properties": {
               "allOf": [
-                {
-                  "$comment": "Require fields here for item properties.",
-                  "required": [
-                    "template:new_field"
-                  ]
-                },
+                // {
+                //   "$comment": "Require fields here for item properties.",
+                //   "required": [
+                //     "template:new_field"
+                //   ]
+                // },
                 {
                   "$ref": "#/definitions/fields"
                 }
@@ -35,6 +35,42 @@
               "type": "object",
               "additionalProperties": {
                 "$ref": "#/definitions/fields"
+              }
+            }
+          },
+          "$comment": "The if-then-else below checks whether the raster:bands is given in assets or not. If yes, allows raster:bands in properties (else), otherwise, disallows eo:bands in properties (then).",
+          "if": {
+            "required": [
+              "assets"
+            ],
+            "properties": {
+              "assets": {
+                "type": "object",
+                "additionalProperties": {
+                  "properties": {
+                    "raster:bands": false
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "properties": {
+                "properties": {
+                  "raster:bands": false
+                }
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "properties": {
+                "properties": {
+                  "raster:bands": {
+                    "$ref": "#/definitions/bands"
+                  }
+                }
               }
             }
           }
@@ -69,13 +105,6 @@
               }
             }
           }
-        },
-        {
-          "$comment": "Remove this and the following object if this is not an extension to a Collection.",
-          "$ref": "#/definitions/stac_extensions"
-        },
-        {
-          "$ref": "#/definitions/fields"
         }
       ]
     }
@@ -120,9 +149,9 @@
               "type": "number"
             }
           }
-        }, 
+        },
         "template:another_one": {
-          "type": "array", 
+          "type": "array",
           "items": {
             "type": "number"
           }

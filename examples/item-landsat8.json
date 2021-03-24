@@ -1,6 +1,6 @@
 {
   "type": "Feature",
-  "stac_version": "1.0.0-beta.2",
+  "stac_version": "1.0.0-rc.1",
   "id": "LC08_L1TP_044033_20210305_20210312_01_T1",
   "properties": {
     "gsd": 30,
@@ -23,7 +23,18 @@
     "landsat:wrs_row": "33",
     "datetime": "2021-03-05T18:45:37.619485Z",
     "created": "2021-03-16T01:40:56.703Z",
-    "updated": "2021-03-16T01:40:56.703Z"
+    "updated": "2021-03-16T01:40:56.703Z",
+    "raster:composites": [
+      {
+        "name": "Normalized Difference Vegetation Index",
+        "range": [
+          -1,
+          1
+        ],
+        "expression": "(B5–B4)/(B5+B4)",
+        "color_map": "ylgn"
+      }
+    ]
   },
   "geometry": {
     "type": "Polygon",
@@ -53,17 +64,6 @@
     ]
   },
   "links": [],
-  "raster:composites": [
-    {
-      "name": "Normalized Difference Vegetation Index",
-      "range": [
-        -1,
-        1
-      ],
-      "band_math_formula": "(B5–B4)/(B5+B4)",
-      "color_map": "ylgn"
-    }
-  ],
   "assets": {
     "thumbnail": {
       "href": "https://landsat-pds.s3.us-west-2.amazonaws.com/c1/L8/044/033/LC08_L1TP_044033_20210305_20210312_01_T1/LC08_L1TP_044033_20210305_20210312_01_T1_thumb_large.jpg",

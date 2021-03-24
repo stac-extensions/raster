@@ -21,50 +21,14 @@
             "properties": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/fields"
+                  "$ref": "#/definitions/itemfields"
                 }
               ]
             },
             "assets": {
               "type": "object",
               "additionalProperties": {
-                "$ref": "#/definitions/fields"
-              }
-            }
-          },
-          "$comment": "The if-then-else below checks whether the raster:bands is given in assets or not. If yes, allows raster:bands in properties (else), otherwise, disallows eo:bands in properties (then).",
-          "if": {
-            "required": [
-              "assets"
-            ],
-            "properties": {
-              "assets": {
-                "type": "object",
-                "additionalProperties": {
-                  "properties": {
-                    "raster:bands": false
-                  }
-                }
-              }
-            }
-          },
-          "then": {
-            "properties": {
-              "properties": {
-                "properties": {
-                  "raster:bands": false
-                }
-              }
-            }
-          },
-          "else": {
-            "properties": {
-              "properties": {
-                "properties": {
-                  "raster:bands": {
-                    "$ref": "#/definitions/bands"
-                  }
-                }
+                "$ref": "#/definitions/assetfields"
               }
             }
           }
@@ -89,13 +53,13 @@
             "assets": {
               "type": "object",
               "additionalProperties": {
-                "$ref": "#/definitions/fields"
+                "$ref": "#/definitions/itemfields"
               }
             },
             "item_assets": {
               "type": "object",
               "additionalProperties": {
-                "$ref": "#/definitions/fields"
+                "$ref": "#/definitions/itemfields"
               }
             }
           }
@@ -118,41 +82,30 @@
         }
       }
     },
-    "fields": {
+    "itemfields": {
       "$comment": "Add your new fields here. Don't require them here, do that above in the item schema.",
       "type": "object",
       "properties": {
-        "raster:new_field": {
-          "type": "string"
-        },
-        "raster:xyz": {
-          "type": "object",
-          "required": [
-            "x",
-            "y",
-            "z"
-          ],
-          "properties": {
-            "x": {
-              "type": "number"
-            },
-            "y": {
-              "type": "number"
-            },
-            "z": {
-              "type": "number"
-            }
-          }
-        },
-        "raster:another_one": {
-          "type": "array",
-          "items": {
-            "type": "number"
-          }
+        "raster:composites": {
+          "$ref": "#/definitions/composites"
         }
       },
       "patternProperties": {
-        "^(?!template:)": {
+        "^(?!raster:)": {
+          "$comment": "Above, change `template` to the prefix of this extension"
+        }
+      },
+      "additionalProperties": false
+    },
+    "assetfields": {
+      "type": "object",
+      "properties": {
+        "raster:bands": {
+          "$ref": "#/definitions/bands"
+        }
+      },
+      "patternProperties": {
+        "^(?!raster:)": {
           "$comment": "Above, change `template` to the prefix of this extension"
         }
       },
@@ -166,6 +119,7 @@
         "title": "Band",
         "type": "object",
         "minProperties": 1,
+        "additionalProperties": false,
         "properties": {
           "data_type": {
             "title": "Data type of the band",
@@ -260,6 +214,59 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "composites": {
+      "title": "Band Compositions",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "title": "Band",
+        "type": "object",
+        "minProperties": 1,
+        "additionalProperties": false,
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "title": "Denomination of the band composition",
+            "type": "string"
+          },
+          "nodata": {
+            "title": "No data pixel value",
+            "type": "number"
+          },
+          "range": {
+            "title": "Range of valid pixels values in the composition",
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "number"
+            }
+          },
+          "bands": {
+            "title": "An ordered array of band selector",
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": "string"
+            }
+          },
+          "expression": {
+            "title": "Band math expression",
+            "type": "string"
+          },
+          "resampling_method": {
+            "title": "Resampling method",
+            "type": "string"
+          },
+          "color_map": {
+            "title": "Identifier of a color mapping",
+            "type": "string"
           }
         }
       }

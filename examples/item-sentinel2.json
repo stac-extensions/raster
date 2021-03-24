@@ -58,23 +58,23 @@
     "sentinel:product_id": "S2B_MSIL2A_20210221T095029_N0214_R079_T33SVB_20210221T115149",
     "sentinel:data_coverage": 100,
     "eo:cloud_cover": 21.22,
-    "sentinel:valid_cloud_cover": true
+    "sentinel:valid_cloud_cover": true,
+    "raster:composites": [
+      {
+        "name": "Shortwave Infra-red",
+        "range": [
+          0,
+          10000
+        ],
+        "bands": [
+          "B12",
+          "B8A",
+          "B04"
+        ]
+      }
+    ]
   },
   "collection": "sentinel-s2-l2a-cogs",
-  "raster:composites": [
-    {
-      "name": "Shortwave Infra-red",
-      "range": [
-        0,
-        10000
-      ],
-      "bands": [
-        "B12",
-        "B8A",
-        "B04"
-      ]
-    }
-  ],
   "assets": {
     "thumbnail": {
       "title": "Thumbnail",
@@ -221,7 +221,7 @@
       ],
       "raster:bands": [
         {
-          "data_type": "unit16",
+          "data_type": "uint16",
           "nodata": 0,
           "stats_min": 1,
           "stats_max": 20567,
@@ -269,7 +269,7 @@
       ],
       "raster:bands": [
         {
-          "data_type": "unit16",
+          "data_type": "uint16",
           "nodata": 0,
           "stats_min": 1,
           "stats_max": 19264,
@@ -317,7 +317,7 @@
       ],
       "raster:bands": [
         {
-          "data_type": "unit16",
+          "data_type": "uint16",
           "nodata": 0,
           "stats_min": 1,
           "stats_max": 18064,
@@ -365,7 +365,7 @@
       ],
       "raster:bands": [
         {
-          "data_type": "unit16",
+          "data_type": "uint16",
           "nodata": 0,
           "stats_min": 1,
           "stats_max": 17200,
@@ -412,7 +412,7 @@
       ],
       "raster:bands": [
         {
-          "data_type": "unit16",
+          "data_type": "uint16",
           "nodata": 0,
           "stats_min": 1,
           "stats_max": 16842,
@@ -459,7 +459,7 @@
       ],
       "raster:bands": [
         {
-          "data_type": "unit16",
+          "data_type": "uint16",
           "nodata": 0,
           "stats_min": 1,
           "stats_max": 16502,

@@ -66,18 +66,19 @@
         },
         {
           "sampling": "area",
-          "values": {
-            "TOA radiance": {
+          "values": [
+            {
+              "name": "TOA radiance",
               "unit": "W⋅sr−1⋅m−2⋅nm−1",
               "scale": 0.01,
               "offset": 0
             },
-            "TOA reflectance": {
-              "unit": "W⋅sr−1⋅m−2⋅nm−1",
+            {
+              "name": "TOA reflectance",
               "scale": 0.0000196236732904,
               "offset": 0
             }
-          },
+          ],
           "nodata": 0,
           "stats_max": 22063,
           "stats_mean": 7185.2123645206,
@@ -87,18 +88,20 @@
         },
         {
           "sampling": "area",
-          "values": {
-            "TOA radiance": {
+          "values": [
+            {
+              "name": "TOA radiance",
               "unit": "W⋅sr−1⋅m−2⋅nm−1",
               "scale": 0.01,
               "offset": 0
             },
-            "TOA reflectance": {
+            {
+              "name": "TOA reflectance",
               "unit": "W⋅sr−1⋅m−2⋅nm−1",
               "scale": 0.0000218499248607,
               "offset": 0
             }
-          },
+          ],
           "nodata": 0,
           "stats_max": 29693,
           "stats_mean": 5829.583942362,
@@ -108,18 +111,20 @@
         },
         {
           "sampling": "area",
-          "values": {
-            "TOA radiance": {
+          "values": [
+            {
+              "name": "TOA radiance",
               "unit": "W⋅sr−1⋅m−2⋅nm−1",
               "scale": 0.01,
               "offset": 0
             },
-            "TOA reflectance": {
+            {
+              "name": "TOA reflectance",
               "unit": "W⋅sr−1⋅m−2⋅nm−1",
               "scale": 0.0000330920389986,
               "offset": 0
             }
-          },
+          ],
           "nodata": 0,
           "stats_max": 31836,
           "stats_mean": 6785.2511255265,

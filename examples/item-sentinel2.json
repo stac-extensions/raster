@@ -228,11 +228,12 @@
           "stats_mean": 2339.4759595597,
           "stats_stddev": 3026.6973619954,
           "stats_valid_percent": 99.83,
-          "values": {
-            "BOA reflectance": {
+          "values": [
+            {
+              "name": "BOA reflectance",
               "unit": "W/m²/sr/μm"
             }
-          }
+          ]
         }
       ]
     },
@@ -276,11 +277,12 @@
           "stats_mean": 2348.069117847,
           "stats_stddev": 2916.5446249911,
           "stats_valid_percent": 99.99,
-          "values": {
-            "BOA reflectance": {
+          "values": [
+            {
+              "name": "BOA reflectance",
               "unit": "W/m²/sr/μm"
             }
-          }
+          ]
         }
       ]
     },
@@ -324,11 +326,12 @@
           "stats_mean": 2384.4680007438,
           "stats_stddev": 2675.410513295,
           "stats_valid_percent": 99.999,
-          "values": {
-            "BOA reflectance": {
+          "values": [
+            {
+              "name": "BOA reflectance",
               "unit": "W/m²/sr/μm"
             }
-          }
+          ]
         }
       ]
     },
@@ -372,11 +375,12 @@
           "stats_mean": 2273.9667970732,
           "stats_stddev": 2618.272802792,
           "stats_valid_percent": 99.999,
-          "values": {
-            "BOA reflectance": {
+          "values": [
+            {
+              "name": "BOA reflectance",
               "unit": "W/m²/sr/μm"
             }
-          }
+          ]
         }
       ]
     },
@@ -419,11 +423,12 @@
           "stats_mean": 2634.1490243416,
           "stats_stddev": 2634.1490243416,
           "stats_valid_percent": 99.999,
-          "values": {
-            "BOA reflectance": {
+          "values": [
+            {
+              "name": "BOA reflectance",
               "unit": "W/m²/sr/μm"
             }
-          }
+          ]
         }
       ]
     },
@@ -466,11 +471,12 @@
           "stats_mean": 3329.8844628619,
           "stats_stddev": 2303.0096294469,
           "stats_valid_percent": 99.999,
-          "values": {
-            "BOA reflectance": {
+          "values": [
+            {
+              "name": "BOA reflectance",
               "unit": "W/m²/sr/μm"
             }
-          }
+          ]
         }
       ]
     },

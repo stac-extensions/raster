@@ -44,18 +44,19 @@
       "raster:bands": [
         {
           "sampling": "area",
-          "values": {
-            "TOA radiance": {
+          "values": [
+            {
+              "name": "TOA radiance",
               "unit": "W⋅sr−1⋅m−2⋅nm−1",
               "scale": 0.01,
               "offset": 0
             },
-            "TOA reflectance": {
-              "unit": "W⋅sr−1⋅m−2⋅nm−1",
+            {
+              "name": "TOA reflectance",
               "scale": 0.0000185074513929,
               "offset": 0
             }
-          },
+          ],
           "nodata": 0,
           "stats_max": 32925,
           "stats_mean": 8498.9400644319,

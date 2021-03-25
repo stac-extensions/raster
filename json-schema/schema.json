@@ -188,88 +188,95 @@
             "type": "string"
           },
           "values": {
-            "title": "Dictionary of value objects that can be computed",
-            "type": "object",
-            "additionalProperties": {
+            "title": "Array of values",
+            "type": "array",
+            "items": {
+              "title": "value",
               "type": "object",
-              "required": [
-                "unit"
-              ],
-              "properties": {
-                "unit": {
-                  "title": "Unit denomination of the value",
-                  "type": "string"
-                },
-                "from": {
-                  "title": "Key of another object value to be the source",
-                  "type": "string"
-                },
-                "scale": {
-                  "title": "Multiplicator factor of the pixel value",
-                  "type": "number"
-                },
-                "offset": {
-                  "title": "Number to be added to the pixel value",
-                  "type": "number"
+              "additionalProperties": {
+                "type": "object",
+                "required": [
+                  "name"
+                ],
+                "properties": {
+                  "name": {
+                    "title": "value name",
+                    "type": "string"
+                  },
+                  "unit": {
+                    "title": "Unit denomination of the value",
+                    "type": "string"
+                  },
+                  "from": {
+                    "title": "name of another object value to be the source",
+                    "type": "string"
+                  },
+                  "scale": {
+                    "title": "Multiplicator factor of the pixel value",
+                    "type": "number"
+                  },
+                  "offset": {
+                    "title": "Number to be added to the pixel value",
+                    "type": "number"
+                  }
                 }
               }
             }
           }
         }
-      }
-    },
-    "composites": {
-      "title": "Band Compositions",
-      "type": "array",
-      "minItems": 1,
-      "items": {
-        "title": "Band",
-        "type": "object",
-        "minProperties": 1,
-        "additionalProperties": false,
-        "required": [
-          "name"
-        ],
-        "properties": {
-          "name": {
-            "title": "Denomination of the band composition",
-            "type": "string"
-          },
-          "nodata": {
-            "title": "No data pixel value",
-            "type": "number"
-          },
-          "range": {
-            "title": "Range of valid pixels values in the composition",
-            "type": "array",
-            "minItems": 2,
-            "maxItems": 2,
-            "items": {
+      },
+      "composites": {
+        "title": "Band Compositions",
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "title": "Band",
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": false,
+          "required": [
+            "name"
+          ],
+          "properties": {
+            "name": {
+              "title": "Denomination of the band composition",
+              "type": "string"
+            },
+            "nodata": {
+              "title": "No data pixel value",
               "type": "number"
-            }
-          },
-          "bands": {
-            "title": "An ordered array of band selector",
-            "type": "array",
-            "minItems": 2,
-            "items": {
+            },
+            "range": {
+              "title": "Range of valid pixels values in the composition",
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number"
+              }
+            },
+            "bands": {
+              "title": "An ordered array of band selector",
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "type": "string"
+              }
+            },
+            "expression": {
+              "title": "Band math expression",
+              "type": "string"
+            },
+            "resampling_method": {
+              "title": "Resampling method",
+              "type": "string"
+            },
+            "color_map": {
+              "title": "Identifier of a color mapping",
               "type": "string"
             }
-          },
-          "expression": {
-            "title": "Band math expression",
-            "type": "string"
-          },
-          "resampling_method": {
-            "title": "Resampling method",
-            "type": "string"
-          },
-          "color_map": {
-            "title": "Identifier of a color mapping",
-            "type": "string"
           }
         }
       }
     }
   }
-}

@@ -5,7 +5,7 @@
   "description": "STAC Template Extension for STAC Items and STAC Collections.",
   "oneOf": [
     {
-      "$comment": "This is the schema for STAC Items.",
+      "$comment": "This is the schema for STAC Items. Remove this object if this extension only applies to Collections.",
       "allOf": [
         {
           "type": "object",
@@ -45,7 +45,7 @@
       ]
     },
     {
-      "$comment": "This is the schema for STAC Collections.",
+      "$comment": "This is the schema for STAC Collections. Remove this object if this extension does not define top-level fields for Collections AND can't be used in collection assets or item asset defintions.",
       "allOf": [
         {
           "type": "object",
@@ -71,10 +71,10 @@
           }
         },
         {
-          "$comment": "Remove this and the following object if this is not an extension to a Collection.",
           "$ref": "#/definitions/stac_extensions"
         },
         {
+          "$comment": "Remove this object if this extension does not define top-level fields for Collections.",
           "$ref": "#/definitions/fields"
         }
       ]

@@ -1,8 +1,7 @@
 {
   "stac_version": "1.0.0-rc.1",
   "stac_extensions": [
-    "collection-assets",
-    "item-assets",
+    "https://stac-extensions.github.io/item-assets/v1.0.0/schema.json",
     "https://stac-extensions.github.io/template/v1.0.0/schema.json"
   ],
   "type": "Collection",
@@ -49,6 +48,9 @@
   },
   "item_assets": {
     "data": {
+      "roles": [
+        "data"
+      ],
       "template:new_field": "test"
     }
   },

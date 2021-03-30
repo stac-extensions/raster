@@ -59,40 +59,23 @@ for running tests are copied here for convenience.
 
 ### Running tests
 
-The same check-markdown and check-examples programs that runs as a check on PR's is part of the repo and can be run locally. 
+The same checks that run as checks on PR's are part of the repository and can be run locally to verify that changes are valid. 
 To run tests locally, you'll need `npm`, which is a standard part of any [node.js installation](https://nodejs.org/en/download/).
-Alternatively, you can also use [`yarn`](https://yarnpkg.com/) instead of `npm`.
-In this case replace all occurrences of `npm` with `yarn` below.
 
 First you'll need to install everything with npm once. Just navigate to the root of this repository and on 
 your command line run:
-
 ```bash
 npm install
 ```
 
 Then to check markdown formatting and test the examples against the JSON schema, you can run:
-
 ```bash
-npm run test
+npm test
 ```
 
 This will spit out the same texts that you see online, and you can then go and fix your markdown or examples.
 
-To just check the markdown run:
-
-```bash
-npm run check-markdown
-```
-
-To just check the examples run:
-
-```bash
-npm run check-examples
-```
-
 If the tests reveal formatting problems with the examples, you can fix them with:
-
 ```bash
 npm run format-examples
 ```

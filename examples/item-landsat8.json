@@ -1,6 +1,6 @@
 {
   "type": "Feature",
-  "stac_version": "1.0.0-rc.1",
+  "stac_version": "1.0.0-rc.2",
   "id": "LC08_L1TP_044033_20210305_20210312_01_T1",
   "properties": {
     "gsd": 30,
@@ -245,9 +245,9 @@
     39.95894
   ],
   "stac_extensions": [
-    "eo",
-    "projection",
-    "view",
+    "https://stac-extensions.github.io/eo/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/view/v1.0.0/schema.json",
     "https://stac-extensions.github.io/raster/v1.0.0/schema.json"
   ],
   "collection": "landsat-8-l1-c1"

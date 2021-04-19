@@ -58,21 +58,7 @@
     "sentinel:product_id": "S2B_MSIL2A_20210221T095029_N0214_R079_T33SVB_20210221T115149",
     "sentinel:data_coverage": 100,
     "eo:cloud_cover": 21.22,
-    "sentinel:valid_cloud_cover": true,
-    "raster:composites": [
-      {
-        "name": "Shortwave Infra-red",
-        "range": [
-          0,
-          10000
-        ],
-        "bands": [
-          "B12",
-          "B8A",
-          "B04"
-        ]
-      }
-    ]
+    "sentinel:valid_cloud_cover": true
   },
   "collection": "sentinel-s2-l2a-cogs",
   "assets": {
@@ -189,7 +175,7 @@
       ]
     },
     "B01": {
-      "title": "Band 1 (coastal)",
+      "title": "Band 1 (coastal) BOA reflectance",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "roles": [
         "data"
@@ -228,17 +214,12 @@
           "stats_mean": 2339.4759595597,
           "stats_stddev": 3026.6973619954,
           "stats_valid_percent": 99.83,
-          "values": [
-            {
-              "name": "BOA reflectance",
-              "unit": "W/m²/sr/μm"
-            }
-          ]
+          "unit": "W/m²/sr/μm"
         }
       ]
     },
     "B02": {
-      "title": "Band 2 (blue)",
+      "title": "Band 2 (blue) BOA reflectance",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "roles": [
         "data"
@@ -277,17 +258,12 @@
           "stats_mean": 2348.069117847,
           "stats_stddev": 2916.5446249911,
           "stats_valid_percent": 99.99,
-          "values": [
-            {
-              "name": "BOA reflectance",
-              "unit": "W/m²/sr/μm"
-            }
-          ]
+          "unit": "W/m²/sr/μm"
         }
       ]
     },
     "B03": {
-      "title": "Band 3 (green)",
+      "title": "Band 3 (green) BOA reflectance",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "roles": [
         "data"
@@ -326,17 +302,12 @@
           "stats_mean": 2384.4680007438,
           "stats_stddev": 2675.410513295,
           "stats_valid_percent": 99.999,
-          "values": [
-            {
-              "name": "BOA reflectance",
-              "unit": "W/m²/sr/μm"
-            }
-          ]
+          "unit": "W/m²/sr/μm"
         }
       ]
     },
     "B04": {
-      "title": "Band 4 (red)",
+      "title": "Band 4 (red) BOA reflectance",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "roles": [
         "data"
@@ -375,17 +346,12 @@
           "stats_mean": 2273.9667970732,
           "stats_stddev": 2618.272802792,
           "stats_valid_percent": 99.999,
-          "values": [
-            {
-              "name": "BOA reflectance",
-              "unit": "W/m²/sr/μm"
-            }
-          ]
+          "unit": "W/m²/sr/μm"
         }
       ]
     },
     "B05": {
-      "title": "Band 5",
+      "title": "Band 5 BOA reflectance",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "roles": [
         "data"
@@ -423,17 +389,12 @@
           "stats_mean": 2634.1490243416,
           "stats_stddev": 2634.1490243416,
           "stats_valid_percent": 99.999,
-          "values": [
-            {
-              "name": "BOA reflectance",
-              "unit": "W/m²/sr/μm"
-            }
-          ]
+          "unit": "W/m²/sr/μm"
         }
       ]
     },
     "B06": {
-      "title": "Band 6",
+      "title": "Band 6 BOA reflectance",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "roles": [
         "data"
@@ -471,17 +432,12 @@
           "stats_mean": 3329.8844628619,
           "stats_stddev": 2303.0096294469,
           "stats_valid_percent": 99.999,
-          "values": [
-            {
-              "name": "BOA reflectance",
-              "unit": "W/m²/sr/μm"
-            }
-          ]
+          "unit": "W/m²/sr/μm"
         }
       ]
     },
     "B07": {
-      "title": "Band 7",
+      "title": "Band 7 BOA reflectance",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "roles": [
         "data"
@@ -512,7 +468,7 @@
       ]
     },
     "B08": {
-      "title": "Band 8 (nir)",
+      "title": "Band 8 (nir) BOA reflectance",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "roles": [
         "data"
@@ -544,7 +500,7 @@
       ]
     },
     "B8A": {
-      "title": "Band 8A",
+      "title": "Band 8A BOA reflectance",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "roles": [
         "data"
@@ -575,7 +531,7 @@
       ]
     },
     "B09": {
-      "title": "Band 9",
+      "title": "Band 9 BOA reflectance",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "roles": [
         "data"
@@ -606,7 +562,7 @@
       ]
     },
     "B11": {
-      "title": "Band 11 (swir16)",
+      "title": "Band 11 (swir16) BOA reflectance",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "roles": [
         "data"
@@ -638,7 +594,7 @@
       ]
     },
     "B12": {
-      "title": "Band 12 (swir22)",
+      "title": "Band 12 (swir22) BOA reflectance",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "roles": [
         "data"
@@ -736,6 +692,20 @@
         0,
         0,
         1
+      ]
+    }
+  },
+  "virtual:assets": {
+    "SIR": {
+      "title": "Shortwave Infra-red",
+      "raster:range": [
+        0,
+        10000
+      ],
+      "href": [
+        "#B12",
+        "#B8A",
+        "#B04"
       ]
     }
   },

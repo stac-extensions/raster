@@ -30,89 +30,58 @@ more raster assets (RGB combination, simple band value processing) and to create
 | ------------ | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | raster:bands | \[[Raster band Object](#raster-band-object)] | An array of available bands where each object is a \[[Band Object](#raster-band-object)]. If given, requires at least one band. |
 
-## Item Properties
-
-| Field Name        | Type                                                   | Description                                                                                                                                                |
-| ----------------- | ------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| raster:composites | \[[Raster Composite Object](#raster-composite-object)] | An array of possible band composition where each object is a \[[Composite Object](#raster-composite-object)]. If given, requires at least one composition. |
-
 ## Raster Band Object
 
 When specifying a raster band object at asset level, it is recommended to use
 the [projection](https://github.com/radiantearth/stac-spec/tree/master/extensions/projection) extension 
 to specify information about the raster projection, especially `proj:shape` to specify the height and width of the raster.
 
-| Field Name           | Type                             | Description                                                                                                                                                                                                        |
-| -------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| nodata               | number                           | Pixel values used to identify pixels that are nodata in the assets .                                                                                                                                               |
-| sampling             | string                           | One of `area` or `point`. Indicates whether a pixel value should be assumed to represent a sampling over the region of the pixel or a point sample at the center of the pixel.                                     |
-| data_type            | string                           | The data type of the band. One of the [data types as decribed in file extension](https://github.com/stac-extensions/file#data-types).                                                                              |
-| nbits                | number                           | The actual number of bits used for this band. Normally only present when the number of bits is non-standard for the `datatype`, such as when a 1 bit TIFF is represented as byte                                   |
-| stats_mean           | number                           | mean value of all the pixels in the band                                                                                                                                                                           |
-| stats_min            | number                           | minimum value of the pixels in the band                                                                                                                                                                            |
-| stats_max            | number                           | maximum value of the pixels in the band                                                                                                                                                                            |
-| stats_stdev          | number                           | standard deviation value of the pixels in the band                                                                                                                                                                 |
-| stats_valid_percent  | number                           | percentage of valid (not `nodata`) pixel                                                                                                                                                                           |
-| values               | \[[Value Object](#value-object)] | Array of value objects                                                                                                                                                                                             |
-| overview_max_gsd     | number                           | The maximum Ground Sample Distance represented in an overview. This should be the GSD of the highest level overview, generally of a [Cloud Optimized GeoTIFF](http://cogeo.org/), but should work with any format. |
-| color_interpretation | string                           | the color interpretation of the pixels in the bands. One of the [color interpreation](#color-interpretation)) below.                                                                                               |
-
-**overview_max_gsd**: This field helps renderers of understand what zoom levels they can efficiently show.
-It is generally used in conjunction with gsd
-(from [common metadata](https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#instrument)).
-`overview_max_gsd` enables the calculation of the 'minimum' zoom level that a renderer would want to show,
-and then the maximum zoom level is calculated from the gsd - the resolution of the image.
-The former is based on the highest level of overview (also known as a pyramid) contained in the asset.
-
-![overviews](images/overviews.png)
-
-So in the above image it would be the ground sample distance of 'level 4', which will be a much higher gsd than the image,
-as each pixel is greatly down-sampled.
-Dynamic tile servers (like [titiler](https://github.com/developmentseed/titiler)) will
-generally convert the gsd to [zoom levels](https://wiki.openstreetmap.org/wiki/Zoom_levels),
-[Web Mercator](https://en.wikipedia.org/wiki/Web_Mercator_projection) or others,
-which is easily done
-(example python [to webmercator](https://github.com/cogeotiff/rio-cogeo/blob/b9b57301c2b7a4be560c887176c282e68ca63c27/rio_cogeo/utils.py#L62-L66)
-or arbitrary
-[TileMatrixSet](https://github.com/cogeotiff/rio-tiler-crs/blob/834bcf3d39cdc555b3ce930439ab186d00fd5fc5/rio_tiler_crs/cogeo.py#L98-L105))
-
-## Value Object
-
-Value object describes the raw pixel value in the band or any other derivable values from that band.
-
-| Field Name | Type   | Description                                                                                                                                                               |
-| ---------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| name       | string | name of the value                                                                                                                                                         |
-| unit       | string | unit denomination of the value                                                                                                                                            |
-| from       | string | key of another value in the [`values`](#raster-band-object) dictionary to be used as input to compute the value. If empty the value of the pixel in the band is the input |
-| scale      | number | multiplicator factor of the pixel value to transform into the value (i.e. translate digital number to reflectance).                                                       |
-| offset     | number | number to be added to the pixel value to transform into the value (i.e. translate digital number to reflectance).                                                         |
+| Field Name          | Type   | Description                                                                                                                                                                      |
+| ------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| nodata              | number | Pixel values used to identify pixels that are nodata in the assets .                                                                                                             |
+| sampling            | string | One of `area` or `point`. Indicates whether a pixel value should be assumed to represent a sampling over the region of the pixel or a point sample at the center of the pixel.   |
+| data_type           | string | The data type of the band. One of the [data types as described above](#data-types).                                                                                              |
+| bits_per_sample     | number | The actual number of bits used for this band. Normally only present when the number of bits is non-standard for the `datatype`, such as when a 1 bit TIFF is represented as byte |
+| stats_mean          | number | mean value of all the pixels in the band                                                                                                                                         |
+| stats_min           | number | minimum value of the pixels in the band                                                                                                                                          |
+| stats_max           | number | maximum value of the pixels in the band                                                                                                                                          |
+| stats_stdev         | number | standard deviation value of the pixels in the band                                                                                                                               |
+| stats_valid_percent | number | percentage of valid (not `nodata`) pixel                                                                                                                                         |
+| unit                | string | unit denomination of the pixel value                                                                                                                                             |
+| scale               | number | multiplicator factor of the pixel value to transform into the value (i.e. translate digital number to reflectance).                                                              |
+| offset              | number | number to be added to the pixel value to transform into the value (i.e. translate digital number to reflectance).                                                                |
 
 `scale` and `offset` defines parameters to compute another value. Next paragraphs describe some use cases.
 
-`from` allows chaining values with each others. The following basic example show its usage
+### Data Types
 
-```json
-"values": [
-  {
-    "name": "A",
-    "unit": "m",
-  },
-  {
-    "name": "B",
-    "unit": "cm",
-    "scale": 0.01,
-    "offset": 0
-  },
-  {
-    "name": "C",
-    "unit": "mm",
-    "scale": 0.1,
-    "offset": 0,
-    "from": "B"
-  }
-]
-```
+The data type gives information about the values in the file.
+This can be used to indicate the (maximum) range of numerical values expected.
+For example `uint8` indicates that the numbers are in a range between 0 and 255,
+they can never be smaller or larger. This can help to pick the optimal numerical
+data type when reading the files to keep memory consumption low.
+Nevertheless, it doesn't necessarily mean that the expected values fill the whole range.
+For example, there can be use cases for `uint8` that just use the numbers 0 to 10 for example.
+Through other extensions it might be possible to specify an exact value range so
+that visualizations can be optimized.
+The allowed values for `file:data_type` are:
+
+- `int8`: 8-bit integer
+- `int16`: 16-bit integer
+- `int32`: 32-bit integer
+- `int64`: 64-bit integer
+- `uint8`: unsigned 8-bit integer (common for 8-bit RGB PNG's)
+- `uint16`: unsigned 16-bit integer
+- `uint32`: unsigned 32-bit integer
+- `uint64`: unsigned 64-bit integer
+- `float16`: 16-bit float
+- `float32`: 32-bit float
+- `float64`: 64-big float
+- `cint16`: 16-bit complex integer
+- `cint32`: 32-bit complex integer
+- `cfloat32`: 32-bit complex float
+- `cfloat64`: 64-bit complex float
+- `other`: Other data type than the ones listed above (e.g. boolean, string, higher precision numbers)
 
 ### Use Scale and offset as radiometric calibration parameters
 
@@ -139,11 +108,15 @@ in ![formula](https://render.githubusercontent.com/render/math?math=W.sr^{-1}.m^
 For example, the above value conversion is described in the values dictionary as
 
 ```json
-"values": {
-  "TOA radiance": {
-      "unit": "W⋅sr−1⋅m−3",
-      "scale": 0.0145,
-      "offset": 3.48
+"assets": {
+  "B4": {
+      "title": "TOA reflectance",
+      "raster:bands": [{
+        "nodata": 0,
+        "unit": "W⋅sr−1⋅m−3",
+        "scale": 0.0145,
+        "offset": 3.48
+      }]
   }
 }
 ```
@@ -158,46 +131,32 @@ and the 0 limnimetric scale to compute a water level.
 In the following value definition example, 185 meters must be substracted from the pixel value to correspond to the water level.
 
 ```json
-"values": {
-  "Water Level": {
-      "unit": "m",
-      "offset": -185
+"assets": {
+  "WaterLevel": {
+      "title": "Water Level at station",
+      "raster:bands": [{
+        "unit": "m",
+        "offset": -185
+      }]
   }
 }
 ```
 
-## Raster Composite Object
+## Raster Composition using `virtual:assets`
 
-Raster composites are intended to be used to specify some possible sensor band combination with generic parameters.
-It can be useful to propose visualization hints like spectral indices from electro-optical sensor (e.g. NDVI)
-or specific overviews (e.g. Thermal signatures).
+This extension describes how to specify possible raster bands composition. This requires the usage of the [virtual-assets](https://github.com/stac-extensions/virtual-assets) extensions that allows to specify assets composition and repositioning and some fields of the[processing](https://github.com/stac-extensions/processing) extension).
 
-| Field Name        | Type                        | Description                                                                                                                                                                                                                |
-| ----------------- | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| name              | string                      | **REQUIRED**. Denomination of the band composition (e.g. `ndvi`, `Color Infrared (vegetation)`  )                                                                                                                          |
-| nodata            | number                      | Pixel values used to identify pixels that are nodata in the composition .                                                                                                                                                  |
-| range             | \[number]                   | range of valid pixels values in the composition                                                                                                                                                                            |
-| bands             | \[[string](#band-selector)] | An ordered array of string following [Band Selector](#band-selector) syntax. If given, requires at least one band. **REQUIRED** if no `band_expression` specified                                                          |
-| band_expression   | string                      | Band math expression (e.g `(b4-b1)/(b4+b1)`). **REQUIRED** if no `bands` specified                                                                                                                                         |
-| resampling_method | string                      | Resampling method, one of `nearest`, `average`, `bilinear` or `cubic`.                                                                                                                                                     |
-| color_map         | string                      | Identifier of a color mapping. Currently based on [rio-tiler color maps](https://cogeotiff.github.io/rio-tiler/colormap/) that includes some from Matplotlib and some custom ones that are commonly used with raster data. |
+At least one virtual asset is required to make a raster composite.
 
-## Band Selector
+### Virtual Asset fields
 
-The band selector is a string indicating the raster asset by its key and optional band index if multi-band raster asset.
+Raster composites defines the following fields in `virtual:assets` items.
 
-`<asset_key>[{<band_index>}]`
-
-with
-
-- `asset_key` (**REQUIRED**): Asset key to the raster asset in the item 
-- `band_index` (OPTIONAL): Band position index in the raster asset
-
-examples: `B4`, `data{2}`
-
-### Color Interpretation
-
-TBD
+| Field Name               | Type      | Description                                                            |
+| ------------------------ | --------- | ---------------------------------------------------------------------- |
+| raster:range             | \[number] | range of valid pixels values in the composition                        |
+| raster:resampling_method | string    | Resampling method, one of `nearest`, `average`, `bilinear` or `cubic`. |
+| processing:expression    | string    | [https://github.com/stac-extensions/processing/pull/2]                 |
 
 ## Dynamic tile servers integration
 
@@ -215,13 +174,14 @@ Some query parameters could be set with the information from raster extension.
 From the [Sentinel-2 example](examples/item-sentinel2.json):
 
 ```json
-"raster:composites":[ 
+"virtual:assets":{
+  "SIR":
   {
-    "name": "Shortwave Infra-red",
-    "range": [0, 10000],
-    "bands": [ "B12", "B8A", "B04"]
+    "title": "Shortwave Infra-red",
+    "raster:range": [0, 10000],
+    "href": [ "#B12", "#B8A", "#B04"]
   }
-]
+}
 ```
 
 | Query key | value                                                             | Example value                                                                                |
@@ -241,12 +201,13 @@ URL: `https://api.cogeo.xyz/stac/crop/14.869,37.682,15.113,37.862/256x256.png?ur
 From the [Landsat-8 example](examples/item-landsat8.json) \[[article](https://www.usgs.gov/core-science-systems/nli/landsat/landsat-normalized-difference-vegetation-index?qt-science_support_page_related_con=0#qt-science_support_page_related_con)]:
 
 ```json
-"raster:composites":[ 
+"virtual:assets":{
+  "NDVI": 
   {
-    "name": "Normalized Difference Vegetation Index",
-    "range": [-1, 1],
-    "expression": "(B5–B4)/(B5+B4)",
-    "color_map": "ylgn"
+    "href": [ "#B04", "#B05" ],
+    "title": "Normalized Difference Vegetation Index",
+    "raster:range": [-1, 1],
+    "processing:expression": "(B05–B04)/(B05+B04)",
   }
 ]
 ```

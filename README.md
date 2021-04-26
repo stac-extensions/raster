@@ -33,23 +33,24 @@ more raster assets (RGB combination, simple band value processing) and to create
 ## Raster Band Object
 
 When specifying a raster band object at asset level, it is recommended to use
-the [projection](https://github.com/radiantearth/stac-spec/tree/master/extensions/projection) extension 
+the [projection](https://github.com/radiantearth/stac-spec/tree/master/extensions/projection) extension
 to specify information about the raster projection, especially `proj:shape` to specify the height and width of the raster.
 
-| Field Name          | Type   | Description                                                                                                                                                                      |
-| ------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| nodata              | number | Pixel values used to identify pixels that are nodata in the assets .                                                                                                             |
-| sampling            | string | One of `area` or `point`. Indicates whether a pixel value should be assumed to represent a sampling over the region of the pixel or a point sample at the center of the pixel.   |
-| data_type           | string | The data type of the band. One of the [data types as described above](#data-types).                                                                                              |
-| bits_per_sample     | number | The actual number of bits used for this band. Normally only present when the number of bits is non-standard for the `datatype`, such as when a 1 bit TIFF is represented as byte |
-| stats_mean          | number | mean value of all the pixels in the band                                                                                                                                         |
-| stats_min           | number | minimum value of the pixels in the band                                                                                                                                          |
-| stats_max           | number | maximum value of the pixels in the band                                                                                                                                          |
-| stats_stdev         | number | standard deviation value of the pixels in the band                                                                                                                               |
-| stats_valid_percent | number | percentage of valid (not `nodata`) pixel                                                                                                                                         |
-| unit                | string | unit denomination of the pixel value                                                                                                                                             |
-| scale               | number | multiplicator factor of the pixel value to transform into the value (i.e. translate digital number to reflectance).                                                              |
-| offset              | number | number to be added to the pixel value to transform into the value (i.e. translate digital number to reflectance).                                                                |
+| Field Name          | Type      | Description                                                                                                                                                                      |
+| ------------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| nodata              | number    | Pixel values used to identify pixels that are nodata in the assets .                                                                                                             |
+| sampling            | string    | One of `area` or `point`. Indicates whether a pixel value should be assumed to represent a sampling over the region of the pixel or a point sample at the center of the pixel.   |
+| data_type           | string    | The data type of the band. One of the [data types as described above](#data-types).                                                                                              |
+| bits_per_sample     | number    | The actual number of bits used for this band. Normally only present when the number of bits is non-standard for the `datatype`, such as when a 1 bit TIFF is represented as byte |
+| spatial_resolution          | number  | Average spatial resolution (in meters) of the pixels in the band.                                                                                                                                                           |
+| stats_mean          | number    | mean value of all the pixels in the band                                                                                                                                         |
+| stats_min           | number    | minimum value of the pixels in the band                                                                                                                                          |
+| stats_max           | number    | maximum value of the pixels in the band                                                                                                                                          |
+| stats_stdev         | number    | standard deviation value of the pixels in the band                                                                                                                               |
+| stats_valid_percent | number    | percentage of valid (not `nodata`) pixel                                                                                                                                         |
+| unit                | string    | unit denomination of the pixel value                                                                                                                                             |
+| scale               | number    | multiplicator factor of the pixel value to transform into the value (i.e. translate digital number to reflectance).                                                              |
+| offset              | number    | number to be added to the pixel value to transform into the value (i.e. translate digital number to reflectance).                                                                |
 
 `scale` and `offset` defines parameters to compute another value. Next paragraphs describe some use cases.
 
@@ -144,7 +145,7 @@ In the following value definition example, 185 meters must be substracted from t
 
 ## Raster Composition using `virtual:assets`
 
-This extension describes how to specify possible raster bands composition. This requires the usage of the [virtual-assets](https://github.com/stac-extensions/virtual-assets) extensions that allows to specify assets composition and repositioning and some fields of the[processing](https://github.com/stac-extensions/processing) extension).
+This extension describes how to specify possible raster bands composition. This requires the usage of the [virtual-assets](https://github.com/stac-extensions/virtual-assets) extensions that allows to specify assets composition and repositioning and some fields of the [processing](https://github.com/stac-extensions/processing) extension).
 
 At least one virtual asset is required to make a raster composite.
 
@@ -209,7 +210,7 @@ From the [Landsat-8 example](examples/item-landsat8.json) \[[article](https://ww
     "raster:range": [-1, 1],
     "processing:expression": "(B05–B04)/(B05+B04)",
   }
-]
+}
 ```
 
 | Query key  | value                                                     | Example value                                                                               |

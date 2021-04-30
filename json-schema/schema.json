@@ -11,19 +11,11 @@
           "type": "object",
           "required": [
             "type",
-            "properties",
             "assets"
           ],
           "properties": {
             "type": {
               "const": "Feature"
-            },
-            "properties": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/itemfields"
-                }
-              ]
             },
             "assets": {
               "type": "object",
@@ -53,13 +45,7 @@
             "assets": {
               "type": "object",
               "additionalProperties": {
-                "$ref": "#/definitions/itemfields"
-              }
-            },
-            "item_assets": {
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/itemfields"
+                "$ref": "#/definitions/assetfields"
               }
             }
           }
@@ -81,21 +67,6 @@
           }
         }
       }
-    },
-    "itemfields": {
-      "$comment": "Add your new fields here. Don't require them here, do that above in the item schema.",
-      "type": "object",
-      "properties": {
-        "raster:composites": {
-          "$ref": "#/definitions/composites"
-        }
-      },
-      "patternProperties": {
-        "^(?!raster:)": {
-          "$comment": "Above, change `template` to the prefix of this extension"
-        }
-      },
-      "additionalProperties": false
     },
     "assetfields": {
       "type": "object",
@@ -119,7 +90,7 @@
         "title": "Band",
         "type": "object",
         "minProperties": 1,
-        "additionalProperties": false,
+        "additionalProperties": true,
         "properties": {
           "data_type": {
             "title": "Data type of the band",
@@ -143,7 +114,11 @@
               "other"
             ]
           },
-          "nbits": {
+          "unit": {
+            "title": "Unit denomination of the pixel value",
+            "type": "string"
+          },
+          "bits_per_sample": {
             "title": "The actual number of bits used for this band",
             "type": "integer"
           },
@@ -159,120 +134,45 @@
             "title": "No data pixel value",
             "type": "number"
           },
-          "stats_mean": {
-            "title": "Mean value of all the pixels in the band",
+          "scale": {
+            "title": "multiplicator factor of the pixel value to transform into the value",
             "type": "number"
           },
-          "stats_min": {
-            "title": "Minimum value of all the pixels in the band",
+          "offset": {
+            "title": "number to be added to the pixel value to transform into the value",
             "type": "number"
           },
-          "stats_max": {
-            "title": "Maximum value of all the pixels in the band",
+          "spatial_resolution": {
+            "title": "Average spatial resolution (in meters) of the pixels in the band",
             "type": "number"
           },
-          "stats_stddev": {
-            "title": "Standard deviation value of all the pixels in the band",
-            "type": "number"
-          },
-          "stats_valid_percent": {
-            "title": "Percentage of valid (not nodata) pixel",
-            "type": "number"
-          },
-          "overview_max_gsd": {
-            "title": "The maximum Ground Sample Distance represented in an overview",
-            "type": "number"
-          },
-          "color_interpretation": {
-            "title": "The color interpretation of the pixels in the bands",
-            "type": "string"
-          },
-          "values": {
-            "title": "Array of values",
-            "type": "array",
-            "items": {
-              "title": "value",
-              "type": "object",
-              "additionalProperties": false,
-              "required": [
-                "name"
-              ],
-              "properties": {
-                "name": {
-                  "title": "value name",
-                  "type": "string"
-                },
-                "unit": {
-                  "title": "Unit denomination of the value",
-                  "type": "string"
-                },
-                "from": {
-                  "title": "name of another object value to be the source",
-                  "type": "string"
-                },
-                "scale": {
-                  "title": "Multiplicator factor of the pixel value",
-                  "type": "number"
-                },
-                "offset": {
-                  "title": "Number to be added to the pixel value",
-                  "type": "number"
-                }
+          "statistics": {
+            "title": "Statistics",
+            "type": "object",
+            "minProperties": 1,
+            "additionalProperties": false,
+            "properties": {
+              "mean": {
+                "title": "Mean value of all the pixels in the band",
+                "type": "number"
+              },
+              "minimum": {
+                "title": "Minimum value of all the pixels in the band",
+                "type": "number"
+              },
+              "maximum": {
+                "title": "Maximum value of all the pixels in the band",
+                "type": "number"
+              },
+              "stddev": {
+                "title": "Standard deviation value of all the pixels in the band",
+                "type": "number"
+              },
+              "valid_percent": {
+                "title": "Percentage of valid (not nodata) pixel",
+                "type": "number"
               }
             }
-          }
-        }
-      }
-    },
-    "composites": {
-      "title": "Band Compositions",
-      "type": "array",
-      "minItems": 1,
-      "items": {
-        "title": "Band",
-        "type": "object",
-        "minProperties": 1,
-        "additionalProperties": true,
-        "required": [
-          "name"
-        ],
-        "properties": {
-          "name": {
-            "title": "Denomination of the band composition",
-            "type": "string"
-          },
-          "nodata": {
-            "title": "No data pixel value",
-            "type": "number"
-          },
-          "range": {
-            "title": "Range of valid pixels values in the composition",
-            "type": "array",
-            "minItems": 2,
-            "maxItems": 2,
-            "items": {
-              "type": "number"
-            }
-          },
-          "bands": {
-            "title": "An ordered array of band selector",
-            "type": "array",
-            "minItems": 2,
-            "items": {
-              "type": "string"
-            }
-          },
-          "expression": {
-            "title": "Band math expression",
-            "type": "string"
-          },
-          "resampling_method": {
-            "title": "Resampling method",
-            "type": "string"
-          },
-          "color_map": {
-            "title": "Identifier of a color mapping",
-            "type": "string"
           }
         }
       }

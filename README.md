@@ -27,6 +27,7 @@ In many applications, it is interesting to have some metadata about the raster i
 | ------------ | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | raster:bands | \[[Raster band Object](#raster-band-object)] | An array of available bands where each object is a \[[Band Object](#raster-band-object)]. If given, requires at least one band. |
 
+
 ## Raster Band Object
 
 When specifying a raster band object at asset level, it is recommended to use
@@ -44,6 +45,7 @@ to specify information about the raster projection, especially `proj:shape` to s
 | unit               | string                                  | unit denomination of the pixel value                                                                                                                                             |
 | scale              | number                                  | multiplicator factor of the pixel value to transform into the value (i.e. translate digital number to reflectance).                                                              |
 | offset             | number                                  | number to be added to the pixel value (after scaling) to transform into the value (i.e. translate digital number to reflectance).                                                |
+| gdalinfo | [gdalinfo Band Object](#gdalinfo-band-object) | [gdalinfo](https://gdal.org/programs/gdalinfo.html) Band object representing information about a band in a raster dataset. |
 
 `scale` and `offset` defines parameters to compute another value. Next paragraphs describe some use cases.
 
@@ -144,4 +146,208 @@ In the following value definition example, 185 meters must be substracted from t
       }]
   }
 }
+```
+
+## [gdalinfo](https://gdal.org/programs/gdalinfo.html) band Object
+
+[gdalinfo](https://gdal.org/programs/gdalinfo.html) commands lists exhaustive information about a raster dataset. It provides options to get statistics and histograms of the values in the bands of the raster. This object can be obtained from GDAL([GDALRasterBand](https://gdal.org/doxygen/classGDALRasterBand.html)). To get it on the command line you can use the `gdalinfo` CLI with the info command: `$ gdalinfo -json` and get the corresponfing object in the array of bands.
+
+Example:
+
+```console
+$ gdalinfo -json PT01S00_842547E119_8697242018100100000000MS00_GG001002003/PT01S00_842547E119_8697242018100100000000MS00_GG001002003.tif
+{
+  "description":"PT01S00_842547E119_8697242018100100000000MS00_GG001002003.tif",
+  "driverShortName":"GTiff",
+  "driverLongName":"GeoTIFF",
+  [...]
+}
+```
+
+returns a json with a property `bands`. Every item in the array can be used in the `gdalinfo` field.
+
+```json
+{
+  "bands":[
+    {
+      "band":1,
+      "block":[
+        256,
+        256
+      ],
+      "type":"UInt16",
+      "colorInterpretation":"Red",
+      "min":1962.0,
+      "max":32925.0,
+      "minimum":1962.0,
+      "maximum":32925.0,
+      "mean":8498.94,
+      "stdDev":5056.129,
+      "noDataValue":0.0,
+      "overviews":[
+        {
+          "size":[
+            2989,
+            1471
+          ]
+        },
+        {
+          "size":[
+            997,
+            491
+          ]
+        },
+        {
+          "size":[
+            333,
+            164
+          ]
+        }
+      ],
+      "metadata":{
+        "":{
+          "STATISTICS_MAXIMUM":"32925",
+          "STATISTICS_MEAN":"8498.9400644319",
+          "STATISTICS_MINIMUM":"1962",
+          "STATISTICS_STDDEV":"5056.1292002722",
+          "STATISTICS_VALID_PERCENT":"61.09"
+        }
+      }
+    },
+    {
+      "band":2,
+      "block":[
+        256,
+        256
+      ],
+      "type":"UInt16",
+      "colorInterpretation":"Green",
+      "min":3884.0,
+      "max":22063.0,
+      "minimum":3884.0,
+      "maximum":22063.0,
+      "mean":7185.212,
+      "stdDev":3799.456,
+      "noDataValue":0.0,
+      "overviews":[
+        {
+          "size":[
+            2989,
+            1471
+          ]
+        },
+        {
+          "size":[
+            997,
+            491
+          ]
+        },
+        {
+          "size":[
+            333,
+            164
+          ]
+        }
+      ],
+      "metadata":{
+        "":{
+          "STATISTICS_MAXIMUM":"22063",
+          "STATISTICS_MEAN":"7185.2123645206",
+          "STATISTICS_MINIMUM":"3884",
+          "STATISTICS_STDDEV":"3799.4562788636",
+          "STATISTICS_VALID_PERCENT":"61.09"
+        }
+      }
+    },
+    {
+      "band":3,
+      "block":[
+        256,
+        256
+      ],
+      "type":"UInt16",
+      "colorInterpretation":"Blue",
+      "min":1061.0,
+      "max":29693.0,
+      "minimum":1061.0,
+      "maximum":29693.0,
+      "mean":5829.584,
+      "stdDev":4683.065,
+      "noDataValue":0.0,
+      "overviews":[
+        {
+          "size":[
+            2989,
+            1471
+          ]
+        },
+        {
+          "size":[
+            997,
+            491
+          ]
+        },
+        {
+          "size":[
+            333,
+            164
+          ]
+        }
+      ],
+      "metadata":{
+        "":{
+          "STATISTICS_MAXIMUM":"29693",
+          "STATISTICS_MEAN":"5829.583942362",
+          "STATISTICS_MINIMUM":"1061",
+          "STATISTICS_STDDEV":"4683.0650025253",
+          "STATISTICS_VALID_PERCENT":"61.09"
+        }
+      }
+    },
+    {
+      "band":4,
+      "block":[
+        256,
+        256
+      ],
+      "type":"UInt16",
+      "colorInterpretation":"Undefined",
+      "min":1685.0,
+      "max":31836.0,
+      "minimum":1685.0,
+      "maximum":31836.0,
+      "mean":6785.251,
+      "stdDev":3842.432,
+      "noDataValue":0.0,
+      "overviews":[
+        {
+          "size":[
+            2989,
+            1471
+          ]
+        },
+        {
+          "size":[
+            997,
+            491
+          ]
+        },
+        {
+          "size":[
+            333,
+            164
+          ]
+        }
+      ],
+      "metadata":{
+        "":{
+          "STATISTICS_MAXIMUM":"31836",
+          "STATISTICS_MEAN":"6785.2511255265",
+          "STATISTICS_MINIMUM":"1685",
+          "STATISTICS_STDDEV":"3842.4324936707",
+          "STATISTICS_VALID_PERCENT":"61.09"
+        }
+      }
+    }
+  ]
 ```

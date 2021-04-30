@@ -27,7 +27,6 @@ In many applications, it is interesting to have some metadata about the raster i
 | ------------ | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | raster:bands | \[[Raster band Object](#raster-band-object)] | An array of available bands where each object is a \[[Band Object](#raster-band-object)]. If given, requires at least one band. |
 
-
 ## Raster Band Object
 
 When specifying a raster band object at asset level, it is recommended to use
@@ -150,7 +149,11 @@ In the following value definition example, 185 meters must be substracted from t
 
 ## [gdalinfo](https://gdal.org/programs/gdalinfo.html) band Object
 
-[gdalinfo](https://gdal.org/programs/gdalinfo.html) commands lists exhaustive information about a raster dataset. It provides options to get statistics and histograms of the values in the bands of the raster. This object can be obtained from GDAL([GDALRasterBand](https://gdal.org/doxygen/classGDALRasterBand.html)). To get it on the command line you can use the `gdalinfo` CLI with the info command: `$ gdalinfo -json` and get the corresponfing object in the array of bands.
+[gdalinfo](https://gdal.org/programs/gdalinfo.html) commands lists exhaustive information about a raster dataset.
+It provides options to get statistics and histograms of the values in the bands of the raster.
+This object can be obtained from GDAL([GDALRasterBand](https://gdal.org/doxygen/classGDALRasterBand.html)).
+To get it on the command line you can use the `gdalinfo` CLI with the info command:
+`$ gdalinfo -json` and get the corresponding object in the array of bands.
 
 Example:
 

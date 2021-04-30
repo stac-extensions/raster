@@ -18,7 +18,6 @@ In many applications, it is interesting to have some metadata about the raster i
 - Examples:
   - [Planet Item example](examples/item-planet.json): Shows the basic usage of the extension in a STAC Item
   - [Sentinel-2 Item example](examples/item-sentinel2.json): Shows the statistics about individual bands and some RGB composites example
-  - [Landsat-8 Item example](examples/item-landsat8.json): Shows the advanced composite example with band math processing
 - [JSON Schema](json-schema/schema.json)
 - [Changelog](./CHANGELOG.md)
 
@@ -34,17 +33,17 @@ When specifying a raster band object at asset level, it is recommended to use
 the [projection](https://github.com/radiantearth/stac-spec/tree/master/extensions/projection) extension
 to specify information about the raster projection, especially `proj:shape` to specify the height and width of the raster.
 
-| Field Name          | Type      | Description                                                                                                                                                                      |
-| ------------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| nodata              | number    | Pixel values used to identify pixels that are nodata in the assets .                                                                                                             |
-| sampling            | string    | One of `area` or `point`. Indicates whether a pixel value should be assumed to represent a sampling over the region of the pixel or a point sample at the center of the pixel.   |
-| data_type           | string    | The data type of the band. One of the [data types as described above](#data-types).                                                                                              |
-| bits_per_sample     | number    | The actual number of bits used for this band. Normally only present when the number of bits is non-standard for the `datatype`, such as when a 1 bit TIFF is represented as byte |
-| spatial_resolution          | number  | Average spatial resolution (in meters) of the pixels in the band.                                                                                                                                                           |
-| statistics          |  [Statistics Object](#statistics-object)   | Statistics of all the pixels in the band                                                                                                                                         |
-| unit                | string    | unit denomination of the pixel value                                                                                                                                             |
-| scale               | number    | multiplicator factor of the pixel value to transform into the value (i.e. translate digital number to reflectance).                                                              |
-| offset              | number    | number to be added to the pixel value to transform into the value (i.e. translate digital number to reflectance).                                                                |
+| Field Name         | Type                                    | Description                                                                                                                                                                      |
+| ------------------ | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| nodata             | number                                  | Pixel values used to identify pixels that are nodata in the assets .                                                                                                             |
+| sampling           | string                                  | One of `area` or `point`. Indicates whether a pixel value should be assumed to represent a sampling over the region of the pixel or a point sample at the center of the pixel.   |
+| data_type          | string                                  | The data type of the band. One of the [data types as described above](#data-types).                                                                                              |
+| bits_per_sample    | number                                  | The actual number of bits used for this band. Normally only present when the number of bits is non-standard for the `datatype`, such as when a 1 bit TIFF is represented as byte |
+| spatial_resolution | number                                  | Average spatial resolution (in meters) of the pixels in the band.                                                                                                                |
+| statistics         | [Statistics Object](#statistics-object) | Statistics of all the pixels in the band                                                                                                                                         |
+| unit               | string                                  | unit denomination of the pixel value                                                                                                                                             |
+| scale              | number                                  | multiplicator factor of the pixel value to transform into the value (i.e. translate digital number to reflectance).                                                              |
+| offset             | number                                  | number to be added to the pixel value (after scaling) to transform into the value (i.e. translate digital number to reflectance).                                                |
 
 `scale` and `offset` defines parameters to compute another value. Next paragraphs describe some use cases.
 
@@ -80,13 +79,13 @@ The allowed values for `file:data_type` are:
 
 ### Statistics Object
 
-| Field Name          | Type      | Description                                                                                                                                                                      |
-| ------------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| mean          | number    | mean value of all the pixels in the band                                                                                                                                         |
-| minimum           | number    | minimum value of the pixels in the band                                                                                                                                          |
-| maximum           | number    | maximum value of the pixels in the band                                                                                                                                          |
-| stdev         | number    | standard deviation value of the pixels in the band                                                                                                                               |
-| valid_percent | number    | percentage of valid (not `nodata`) pixel                                                                                                                                         |
+| Field Name    | Type   | Description                                        |
+| ------------- | ------ | -------------------------------------------------- |
+| mean          | number | mean value of all the pixels in the band           |
+| minimum       | number | minimum value of the pixels in the band            |
+| maximum       | number | maximum value of the pixels in the band            |
+| stdev         | number | standard deviation value of the pixels in the band |
+| valid_percent | number | percentage of valid (not `nodata`) pixel           |
 
 ### Use Scale and offset as radiometric calibration parameters
 

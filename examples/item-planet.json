@@ -45,93 +45,71 @@
       "raster:bands": [
         {
           "sampling": "area",
-          "values": [
-            {
-              "name": "TOA radiance",
-              "unit": "W⋅sr−1⋅m−2⋅nm−1",
-              "scale": 0.01,
-              "offset": 0
-            },
-            {
-              "name": "TOA reflectance",
-              "scale": 0.0000185074513929,
-              "offset": 0
-            }
-          ],
+          "name": "Red TOA reflectance",
+          "unit": "W⋅sr−1⋅m−2⋅nm−1",
+          "data_type": "uint16",
+          "scale": 0.01,
+          "offset": 0,
           "nodata": 0,
-          "stats_max": 32925,
-          "stats_mean": 8498.9400644319,
-          "stats_min": 1962,
-          "stats_stddev": 5056.1292002722,
-          "stats_valid_percent": 61.09
+          "spatial_resolution": 3,
+          "statistics": {
+            "maximum": 32925,
+            "mean": 8498.9400644319,
+            "minimum": 1962,
+            "stddev": 5056.1292002722,
+            "valid_percent": 61.09
+          }
         },
         {
           "sampling": "area",
-          "values": [
-            {
-              "name": "TOA radiance",
-              "unit": "W⋅sr−1⋅m−2⋅nm−1",
-              "scale": 0.01,
-              "offset": 0
-            },
-            {
-              "name": "TOA reflectance",
-              "scale": 0.0000196236732904,
-              "offset": 0
-            }
-          ],
+          "name": "Green TOA reflectance",
+          "unit": "W⋅sr−1⋅m−2⋅nm−1",
+          "data_type": "uint16",
+          "scale": 0.0000196236732904,
+          "offset": 0,
           "nodata": 0,
-          "stats_max": 22063,
-          "stats_mean": 7185.2123645206,
-          "stats_min": 3884,
-          "stats_stddev": 3799.4562788636,
-          "stats_valid_percent": 61.09
+          "spatial_resolution": 3,
+          "statistics": {
+            "maximum": 22063,
+            "mean": 7185.2123645206,
+            "minimum": 3884,
+            "stddev": 3799.4562788636,
+            "valid_percent": 61.09
+          }
         },
         {
           "sampling": "area",
-          "values": [
-            {
-              "name": "TOA radiance",
-              "unit": "W⋅sr−1⋅m−2⋅nm−1",
-              "scale": 0.01,
-              "offset": 0
-            },
-            {
-              "name": "TOA reflectance",
-              "unit": "W⋅sr−1⋅m−2⋅nm−1",
-              "scale": 0.0000218499248607,
-              "offset": 0
-            }
-          ],
+          "name": "Blue TOA reflectance",
+          "unit": "W⋅sr−1⋅m−2⋅nm−1",
+          "data_type": "uint16",
+          "scale": 0.0000218499248607,
+          "offset": 0,
           "nodata": 0,
-          "stats_max": 29693,
-          "stats_mean": 5829.583942362,
-          "stats_min": 1061,
-          "stats_stddev": 4683.0650025253,
-          "stats_valid_percent": 61.09
+          "spatial_resolution": 3,
+          "statistics": {
+            "maximum": 29693,
+            "mean": 5829.583942362,
+            "minimum": 1061,
+            "stddev": 4683.0650025253,
+            "valid_percent": 61.09
+          }
         },
         {
           "sampling": "area",
-          "values": [
-            {
-              "name": "TOA radiance",
-              "unit": "W⋅sr−1⋅m−2⋅nm−1",
-              "scale": 0.01,
-              "offset": 0
-            },
-            {
-              "name": "TOA reflectance",
-              "unit": "W⋅sr−1⋅m−2⋅nm−1",
-              "scale": 0.0000330920389986,
-              "offset": 0
-            }
-          ],
+          "name": "NIR TOA reflectance",
+          "unit": "W⋅sr−1⋅m−2⋅nm−1",
+          "data_type": "uint16",
+          "scale": 0.0000218499248607,
+          "offset": 0,
           "nodata": 0,
-          "stats_max": 31836,
-          "stats_mean": 6785.2511255265,
-          "stats_min": 1685,
-          "stats_stddev": 3842.4324936707,
-          "stats_valid_percent": 61.09
+          "spatial_resolution": 3,
+          "statistics": {
+            "maximum": 31836,
+            "mean": 6785.2511255265,
+            "minimum": 1685,
+            "stddev": 3842.4324936707,
+            "valid_percent": 61.09
+          }
         }
       ],
       "size": 180076568

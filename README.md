@@ -44,6 +44,7 @@ to specify information about the raster projection, especially `proj:shape` to s
 | unit               | string                                  | unit denomination of the pixel value                                                                                                                                             |
 | scale              | number                                  | multiplicator factor of the pixel value to transform into the value (i.e. translate digital number to reflectance).                                                              |
 | offset             | number                                  | number to be added to the pixel value (after scaling) to transform into the value (i.e. translate digital number to reflectance).                                                |
+| histogram          | [Histogram Object](#histogram-object)   | Histogram distribution information of the pixels values in the band                                                                                                                                                |
 
 `scale` and `offset` defines parameters to compute another value. Next paragraphs describe some use cases.
 
@@ -125,7 +126,7 @@ For example, the above value conversion is described in the values dictionary as
 }
 ```
 
-### Transform height measurement to water level
+#### Transform height measurement to water level
 
 In remote sensing, radar altimeter instruments measures an absolute height from an absolute georeference (e.g. WGS 84 geoid).
 In hydrology, you prefer having the water level relative to the "0 limnimetric scale".
@@ -145,3 +146,31 @@ In the following value definition example, 185 meters must be substracted from t
   }
 }
 ```
+
+### Histogram Object
+
+The histogram object provides with distribution of pixel values in the band. Those values are sampled in buckets.
+
+| Field Name | Type      | Description                                                                 |
+| ---------- | --------- | --------------------------------------------------------------------------- |
+| count      | number    | number of buckets of the distribution.                                      |
+| min        | number    | minimum value of the distribution. Also the mean value of the first bucket. |
+| max        | number    | minimum value of the distribution. Also the mean value of the last bucket.  |
+| buckets    | \[number] | Array of integer indicating the number of pixels included in the bucket.    |
+
+The information in histogram object may be useful to prepare a user interface in the perspective of the manipulation of the pixels value
+for raster visualization.
+For instance to enhances an image by changing properties such as brightness, contrast, and gamma through multiple stretch types
+such as statistical functions.
+
+![histogram](images/histogram.png)
+
+The Histogram Object is part of the JSON document produced by [gdalinfo](https://gdal.org/programs/gdalinfo.html) command line tool
+on the raster file with the `-hist` and `-json` argument. For instance
+
+```console
+$ gdalinfo -json -hist PT01S00_842547E119_8697242018100100000000MS00_GG001002003/PT01S00_842547E119_8697242018100100000000MS00_GG001002003.tif
+```
+
+produces this [file](gdalinfo.json) in wich there are `histogram` fields for each band.
+The [planet example](examples/item-planet.json) includes them.

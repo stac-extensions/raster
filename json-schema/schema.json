@@ -173,6 +173,41 @@
                 "type": "number"
               }
             }
+          },
+          "histogram": {
+            "title": "Histogram",
+            "type": "object",
+            "additionalItems": false,
+            "required": [
+              "count",
+              "min",
+              "max",
+              "buckets"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "count": {
+                "title": "number of buckets",
+                "type": "number"
+              },
+              "min": {
+                "title": "Minimum value of the buckets",
+                "type": "number"
+              },
+              "max": {
+                "title": "Maximum value of the buckets",
+                "type": "number"
+              },
+              "buckets": {
+                "title": "distribution buckets",
+                "type": "array",
+                "minItems": 3,
+                "items": {
+                  "title": "number of pixels in the bucket",
+                  "type": "integer"
+                }
+              }
+            }
           }
         }
       }

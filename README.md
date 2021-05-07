@@ -160,7 +160,7 @@ The histogram object provides with distribution of pixel values in the band. Tho
 
 The information in histogram object may be useful to prepare a user interface in the perspective of the manipulation of the pixels value
 for raster visualization.
-For instance to enhances an image by changing properties such as brightness, contrast, and gamma through multiple stretch types
+For instance to enhance an image by changing properties such as brightness, contrast, and gamma through multiple stretch types
 such as statistical functions.
 
 ![histogram](images/histogram.png)

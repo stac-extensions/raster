@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+`histogram` field for the histogram distribution information of the pixels values in the band
+
 ### Changed
 
 ### Deprecated

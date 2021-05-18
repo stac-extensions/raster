@@ -159,9 +159,13 @@ The histogram object provides with distribution of pixel values in the band. Tho
 | buckets    | \[number] | Array of integer indicating the number of pixels included in the bucket.    |
 
 The information in histogram object may be useful to prepare a user interface in the perspective of the manipulation of the pixels value
-for raster visualization.
+for raster visualization such as true color composite balancing.
+
 For instance to enhance an image by changing properties such as brightness, contrast, and gamma through multiple stretch types
 such as statistical functions.
+
+Each bucket width all equals depending on the number of buckets. It can be computed with the following formula:
+`Bucket width = ( max - min ) ÷ count`
 
 ![histogram](images/histogram.png)
 

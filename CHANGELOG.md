@@ -8,8 +8,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-`histogram` field for the histogram distribution information of the pixels values in the band
-
 ### Changed
 
 ### Deprecated
@@ -18,4 +16,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-[Unreleased]: <https://github.com/stac-extensions/template/compare/v1.0.0...HEAD>
+## [V1.0.0]
+
+- Initial release
+
+[Unreleased]: <https://github.com/stac-extensions/raster/compare/v1.0.0...HEAD>
+[v1.0.0]: <https://github.com/stac-extensions/tree/v1.0.0>

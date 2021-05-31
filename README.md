@@ -13,7 +13,7 @@ An item can describe assets that are rasters of one or multiple bands with some 
 and also specific to each of them (data type, unit, number of bits used, nodata).
 A raster is ofthen strongly linked with the the georeferencing transform and coordinate system definition
 of all bands (using the [projection extension](https://github.com/radiantearth/stac-spec/tree/master/extensions/projection)).
-In many applications, it is interesting to have some metadata about the raster in the asset (values statistics, value interpretation, transforms).
+In many applications, it is interesting to have some metadata about the rasters in the asset (values statistics, value interpretation, transforms).
 
 - Examples:
   - [Planet Item example](examples/item-planet.json): Shows the basic usage of the extension in a STAC Item
@@ -35,16 +35,16 @@ to specify information about the raster projection, especially `proj:shape` to s
 
 | Field Name         | Type                                    | Description                                                                                                                                                                      |
 | ------------------ | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| nodata             | number                                  | Pixel values used to identify pixels that are nodata in the assets .                                                                                                             |
+| nodata             | number                                  | Pixel values used to identify pixels that are nodata in the band .                                                                                                               |
 | sampling           | string                                  | One of `area` or `point`. Indicates whether a pixel value should be assumed to represent a sampling over the region of the pixel or a point sample at the center of the pixel.   |
-| data_type          | string                                  | The data type of the band. One of the [data types as described above](#data-types).                                                                                              |
+| data_type          | string                                  | The data type of the pixels in the band. One of the [data types as described above](#data-types).                                                                                |
 | bits_per_sample    | number                                  | The actual number of bits used for this band. Normally only present when the number of bits is non-standard for the `datatype`, such as when a 1 bit TIFF is represented as byte |
 | spatial_resolution | number                                  | Average spatial resolution (in meters) of the pixels in the band.                                                                                                                |
 | statistics         | [Statistics Object](#statistics-object) | Statistics of all the pixels in the band                                                                                                                                         |
 | unit               | string                                  | unit denomination of the pixel value                                                                                                                                             |
 | scale              | number                                  | multiplicator factor of the pixel value to transform into the value (i.e. translate digital number to reflectance).                                                              |
 | offset             | number                                  | number to be added to the pixel value (after scaling) to transform into the value (i.e. translate digital number to reflectance).                                                |
-| histogram          | [Histogram Object](#histogram-object)   | Histogram distribution information of the pixels values in the band                                                                                                                                                |
+| histogram          | [Histogram Object](#histogram-object)   | Histogram distribution information of the pixels values in the band                                                                                                              |
 
 `scale` and `offset` defines parameters to compute another value. Next paragraphs describe some use cases.
 
@@ -150,6 +150,7 @@ In the following value definition example, 185 meters must be substracted from t
 ### Histogram Object
 
 The histogram object provides with distribution of pixel values in the band. Those values are sampled in buckets.
+An histogram object is atomic and all fields are **REQUIRED**.
 
 | Field Name | Type      | Description                                                                 |
 | ---------- | --------- | --------------------------------------------------------------------------- |

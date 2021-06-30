@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Allow "inf" and "NaN" as valid nodata values [#18](https://github.com/stac-extensions/raster/issues/18)
+- Allow "inf" and "nan" as valid nodata values [#18](https://github.com/stac-extensions/raster/issues/18)
 
 ### Changed
 

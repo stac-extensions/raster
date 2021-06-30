@@ -566,7 +566,7 @@
         {
           "data_type": "uint16",
           "spatial_resolution": 60,
-          "nodata": "NaN"
+          "nodata": "nan"
         }
       ],
       "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/33/S/VB/2021/2/S2B_33SVB_20210221_0_L2A/B09.tif",

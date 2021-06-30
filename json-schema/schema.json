@@ -132,7 +132,19 @@
           },
           "nodata": {
             "title": "No data pixel value",
-            "type": "number"
+            "oneOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "nan",
+                  "inf",
+                  "-inf"
+                ]
+              }
+            ]
           },
           "scale": {
             "title": "multiplicator factor of the pixel value to transform into the value",

@@ -1,7 +1,7 @@
 # Raster Extension Specification
 
 - **Title:** Raster
-- **Identifier:** <https://stac-extensions.github.io/raster/v1.0.0/schema.json>
+- **Identifier:** <https://stac-extensions.github.io/raster/v1.1.0/schema.json>
 - **Field Name Prefix:** raster
 - **Scope:** Item, Collection
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
@@ -35,7 +35,7 @@ to specify information about the raster projection, especially `proj:shape` to s
 
 | Field Name         | Type                                    | Description                                                                                                                                                                      |
 | ------------------ | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| nodata             | number | string                                  | Pixel values used to identify pixels that are nodata in the band either by the pixel value as a number or `nan`, `inf` or `-inf`.                                                                                                               |
+| nodata             | number | string                         | Pixel values used to identify pixels that are nodata in the band either by the pixel value as a number or `nan`, `inf` or `-inf`.                                                                                                               |
 | sampling           | string                                  | One of `area` or `point`. Indicates whether a pixel value should be assumed to represent a sampling over the region of the pixel or a point sample at the center of the pixel.   |
 | data_type          | string                                  | The data type of the pixels in the band. One of the [data types as described above](#data-types).                                                                                |
 | bits_per_sample    | number                                  | The actual number of bits used for this band. Normally only present when the number of bits is non-standard for the `datatype`, such as when a 1 bit TIFF is represented as byte |

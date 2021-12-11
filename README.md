@@ -11,7 +11,7 @@ This document explains the Raster Extension to the [SpatioTemporal Asset Catalog
 
 An item can describe assets that are rasters of one or multiple bands with some information common to them all (raster size, projection)
 and also specific to each of them (data type, unit, number of bits used, nodata).
-A raster is ofthen strongly linked with the the georeferencing transform and coordinate system definition
+A raster is often strongly linked with the georeferencing transform and coordinate system definition
 of all bands (using the [projection extension](https://github.com/radiantearth/stac-spec/tree/master/extensions/projection)).
 In many applications, it is interesting to have some metadata about the rasters in the asset (values statistics, value interpretation, transforms).
 
@@ -37,16 +37,16 @@ to specify information about the raster projection, especially `proj:shape` to s
 | ------------------ | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | nodata             | number\|string                          | Pixel values used to identify pixels that are nodata in the band either by the pixel value as a number or `nan`, `inf` or `-inf` (all strings).                                                                                                               |
 | sampling           | string                                  | One of `area` or `point`. Indicates whether a pixel value should be assumed to represent a sampling over the region of the pixel or a point sample at the center of the pixel.   |
-| data_type          | string                                  | The data type of the pixels in the band. One of the [data types as described above](#data-types).                                                                                |
-| bits_per_sample    | number                                  | The actual number of bits used for this band. Normally only present when the number of bits is non-standard for the `datatype`, such as when a 1 bit TIFF is represented as byte |
+| data_type          | string                                  | The data type of the pixels in the band. One of the [data types as described below](#data-types).                                                                                |
+| bits_per_sample    | number                                  | The actual number of bits used for this band. Normally only present when the number of bits is non-standard for the `datatype`, such as when a 1 bit TIFF is represented as byte. |
 | spatial_resolution | number                                  | Average spatial resolution (in meters) of the pixels in the band.                                                                                                                |
-| statistics         | [Statistics Object](#statistics-object) | Statistics of all the pixels in the band                                                                                                                                         |
-| unit               | string                                  | unit denomination of the pixel value                                                                                                                                             |
-| scale              | number                                  | multiplicator factor of the pixel value to transform into the value (i.e. translate digital number to reflectance).                                                              |
-| offset             | number                                  | number to be added to the pixel value (after scaling) to transform into the value (i.e. translate digital number to reflectance).                                                |
-| histogram          | [Histogram Object](#histogram-object)   | Histogram distribution information of the pixels values in the band                                                                                                              |
+| statistics         | [Statistics Object](#statistics-object) | Statistics of all the pixels in the band.                                                                                                                                         |
+| unit               | string                                  | Unit denomination of the pixel value.                                                                                                                                             |
+| scale              | number                                  | Multiplicator factor of the pixel value to transform into the value (i.e. translate digital number to reflectance).                                                              |
+| offset             | number                                  | Number to be added to the pixel value (after scaling) to transform into the value (i.e. translate digital number to reflectance).                                                |
+| histogram          | [Histogram Object](#histogram-object)   | Histogram distribution information of the pixels values in the band.                                                                                                              |
 
-`scale` and `offset` defines parameters to compute another value. Next paragraphs describe some use cases.
+`scale` and `offset` define parameters to compute another value. The following paragraphs describe some use cases.
 
 ### Data Types
 
@@ -149,8 +149,8 @@ In the following value definition example, 185 meters must be substracted from t
 
 ### Histogram Object
 
-The histogram object provides with distribution of pixel values in the band. Those values are sampled in buckets.
-An histogram object is atomic and all fields are **REQUIRED**.
+The distribution of pixel values of a band can be provided with a histogram object. Those values are sampled in buckets.
+A histogram object is atomic and all fields are **REQUIRED**.
 
 | Field Name | Type      | Description                                                                 |
 | ---------- | --------- | --------------------------------------------------------------------------- |
@@ -159,10 +159,10 @@ An histogram object is atomic and all fields are **REQUIRED**.
 | max        | number    | minimum value of the distribution. Also the mean value of the last bucket.  |
 | buckets    | \[number] | Array of integer indicating the number of pixels included in the bucket.    |
 
-The information in histogram object may be useful to prepare a user interface in the perspective of the manipulation of the pixels value
+The information in histogram objects may be useful to prepare a user interface in the perspective of the manipulation of the pixels value
 for raster visualization such as true color composite balancing.
 
-For instance to enhance an image by changing properties such as brightness, contrast, and gamma through multiple stretch types
+For instance, to enhance an image by changing properties such as brightness, contrast, and gamma through multiple stretch types
 such as statistical functions.
 
 Each bucket width all equals depending on the number of buckets. It can be computed with the following formula:

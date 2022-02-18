@@ -139,7 +139,7 @@ where:
 - ESUN(b) is the mean TOA solar irradiance (or [solar illumination](https://github.com/stac-extensions/eo#solar_illumination)) in W/m2/micrometers
 - s is the [solar zenith angle](https://github.com/stac-extensions/view#item-properties) in degrees.
 
-source: https://www.orfeo-toolbox.org/CookBook/Applications/app_OpticalCalibration.html
+source: <https://www.orfeo-toolbox.org/CookBook/Applications/app_OpticalCalibration.html>
 
 #### Transform height measurement to water level
 

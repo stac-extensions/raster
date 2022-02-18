@@ -105,10 +105,10 @@ A conventional way of deriving Top Of Atmosphere (TOA) Radiance
 in ![formula](https://render.githubusercontent.com/render/math?math=W.sr^{-1}.m^{-3})
 from DN values using `scale` and `offset` in the following formula:
 
-![formula](https://render.githubusercontent.com/render/math?math=L_\lambda%20=%20scale%20\times%20DN%20%2B%20offset)
+![formula](https://render.githubusercontent.com/render/math?math=\color{gray}L_\lambda%20=%20scale%20\times%20DN%20%2B%20offset)
 
-where ![formula](https://render.githubusercontent.com/render/math?math=L_\lambda) is TOA Radiance
-in ![formula](https://render.githubusercontent.com/render/math?math=W.sr^{-1}.m^{-3}).
+where ![formula](https://render.githubusercontent.com/render/math?math=\color{gray}L_\lambda) is TOA Radiance
+in ![formula](https://render.githubusercontent.com/render/math?math=\color{gray}W.sr^{-1}.m^{-3}).
 
 For example, the above value conversion is described in the values dictionary as
 
@@ -125,6 +125,21 @@ For example, the above value conversion is described in the values dictionary as
   }
 }
 ```
+
+#### Radiance to TOA Reflectance (optical sensor)
+
+In order to convert the above TOA radiance to TOA reflectance, the following formula can be used:
+
+![formula](https://render.githubusercontent.com/render/math?math=\color{gray}R=(pi*L*d*d)/(ESUN*cos(s)))
+
+where:
+
+- L is the spectral radiance for the band (see previous section)
+- d is the earth-sun distance (in astronomical units) and depends on the acquisition’s day and month ([Core STAC specification](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#properties-object))
+- ESUN(b) is the mean TOA solar irradiance (or [solar illumination](https://github.com/stac-extensions/eo#solar_illumination)) in W/m2/micrometers
+- s is the [solar zenith angle](https://github.com/stac-extensions/view#item-properties) in degrees.
+
+source: https://www.orfeo-toolbox.org/CookBook/Applications/app_OpticalCalibration.html
 
 #### Transform height measurement to water level
 

@@ -85,7 +85,7 @@ The allowed values for `file:data_type` are:
 | mean          | number | mean value of all the pixels in the band           |
 | minimum       | number | minimum value of the pixels in the band            |
 | maximum       | number | maximum value of the pixels in the band            |
-| stdev         | number | standard deviation value of the pixels in the band |
+| stddev        | number | standard deviation value of the pixels in the band |
 | valid_percent | number | percentage of valid (not `nodata`) pixel           |
 
 ### Use Scale and offset as radiometric calibration parameters

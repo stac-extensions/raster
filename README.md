@@ -59,7 +59,7 @@ Nevertheless, it doesn't necessarily mean that the expected values fill the whol
 For example, there can be use cases for `uint8` that just use the numbers 0 to 10 for example.
 Through other extensions it might be possible to specify an exact value range so
 that visualizations can be optimized.
-The allowed values for `file:data_type` are:
+The allowed values for `data_type` are:
 
 - `int8`: 8-bit integer
 - `int16`: 16-bit integer
@@ -174,7 +174,7 @@ The Histogram Object is part of the JSON document produced by [gdalinfo](https:/
 on the raster file with the `-hist` and `-json` argument. For instance
 
 ```console
-$ gdalinfo -json -hist PT01S00_842547E119_8697242018100100000000MS00_GG001002003/PT01S00_842547E119_8697242018100100000000MS00_GG001002003.tif
+gdalinfo -json -hist PT01S00_842547E119_8697242018100100000000MS00_GG001002003/PT01S00_842547E119_8697242018100100000000MS00_GG001002003.tif
 ```
 
 produces this [file](gdalinfo.json) in wich there are `histogram` fields for each band.

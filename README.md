@@ -4,7 +4,7 @@
 - **Identifier:** <https://stac-extensions.github.io/raster/v1.1.0/schema.json>
 - **Field Name Prefix:** raster
 - **Scope:** Item, Collection
-- **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
+- **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Candidate
 - **Owner**: @emmanuelmathot
 
 This document explains the Raster Extension to the [SpatioTemporal Asset Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification.

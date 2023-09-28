@@ -115,10 +115,10 @@ For example, the above value conversion is described in the values dictionary as
 ```json
 "assets": {
   "B4": {
-      "title": "TOA reflectance",
+      "title": "TOA radiance band 4",
       "raster:bands": [{
         "nodata": 0,
-        "unit": "W⋅sr−1⋅m−3",
+        "unit": "W⋅sr−1⋅m−2",
         "scale": 0.0145,
         "offset": 3.48
       }]

@@ -20,5 +20,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release
 
+[Unreleased]: <https://github.com/stac-extensions/raster/compare/v1.1.0...HEAD>
 [v1.1.0]: <https://github.com/stac-extensions/tree/v1.1.0>
 [v1.0.0]: <https://github.com/stac-extensions/tree/v1.0.0>

@@ -209,6 +209,7 @@
         {
           "data_type": "uint16",
           "spatial_resolution": 60,
+          "bits_per_sample": 15,
           "nodata": 0,
           "statistics": {
             "minimum": 1,
@@ -255,6 +256,7 @@
         {
           "data_type": "uint16",
           "spatial_resolution": 10,
+          "bits_per_sample": 15,
           "nodata": 0,
           "statistics": {
             "minimum": 1,
@@ -301,6 +303,7 @@
         {
           "data_type": "uint16",
           "spatial_resolution": 10,
+          "bits_per_sample": 15,
           "nodata": 0,
           "statistics": {
             "minimum": 1,
@@ -347,6 +350,7 @@
         {
           "data_type": "uint16",
           "spatial_resolution": 10,
+          "bits_per_sample": 15,
           "nodata": 0,
           "statistics": {
             "minimum": 1,
@@ -392,6 +396,7 @@
         {
           "data_type": "uint16",
           "spatial_resolution": 20,
+          "bits_per_sample": 15,
           "nodata": 0,
           "statistics": {
             "minimum": 1,
@@ -437,6 +442,7 @@
         {
           "data_type": "uint16",
           "spatial_resolution": 20,
+          "bits_per_sample": 15,
           "nodata": 0,
           "statistics": {
             "minimum": 1,
@@ -560,6 +566,7 @@
         {
           "data_type": "uint16",
           "spatial_resolution": 60,
+          "bits_per_sample": 15,
           "nodata": "nan"
         }
       ],

@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add link `rel="gcps"` to Ground Control Points document
 
+### Changed
+
+- Some clarifications abd fixes in the README and examples [#41](https://github.com/stac-extensions/raster/pull/41)
+
 ## [v1.1.0]
 
 ### Added

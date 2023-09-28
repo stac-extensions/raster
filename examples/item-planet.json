@@ -46,7 +46,6 @@
         {
           "sampling": "area",
           "name": "Red TOA reflectance",
-          "unit": "W⋅sr−1⋅m−2⋅nm−1",
           "data_type": "uint16",
           "scale": 0.01,
           "offset": 0,
@@ -326,7 +325,6 @@
         {
           "sampling": "area",
           "name": "Green TOA reflectance",
-          "unit": "W⋅sr−1⋅m−2⋅nm−1",
           "data_type": "uint16",
           "scale": 0.0000196236732904,
           "offset": 0,
@@ -606,7 +604,6 @@
         {
           "sampling": "area",
           "name": "Blue TOA reflectance",
-          "unit": "W⋅sr−1⋅m−2⋅nm−1",
           "data_type": "uint16",
           "scale": 0.0000218499248607,
           "offset": 0,
@@ -886,7 +883,6 @@
         {
           "sampling": "area",
           "name": "NIR TOA reflectance",
-          "unit": "W⋅sr−1⋅m−2⋅nm−1",
           "data_type": "uint16",
           "scale": 0.0000218499248607,
           "offset": 0,

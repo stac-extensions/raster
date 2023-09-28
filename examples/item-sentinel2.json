@@ -209,6 +209,7 @@
         {
           "data_type": "uint16",
           "spatial_resolution": 60,
+          "bits_per_sample": 15,
           "nodata": 0,
           "statistics": {
             "minimum": 1,
@@ -216,8 +217,7 @@
             "mean": 2339.4759595597,
             "stddev": 3026.6973619954,
             "valid_percent": 99.83
-          },
-          "unit": "W/m²/sr/μm"
+          }
         }
       ]
     },
@@ -256,6 +256,7 @@
         {
           "data_type": "uint16",
           "spatial_resolution": 10,
+          "bits_per_sample": 15,
           "nodata": 0,
           "statistics": {
             "minimum": 1,
@@ -263,8 +264,7 @@
             "mean": 2348.069117847,
             "stddev": 2916.5446249911,
             "valid_percent": 99.99
-          },
-          "unit": "W/m²/sr/μm"
+          }
         }
       ]
     },
@@ -303,6 +303,7 @@
         {
           "data_type": "uint16",
           "spatial_resolution": 10,
+          "bits_per_sample": 15,
           "nodata": 0,
           "statistics": {
             "minimum": 1,
@@ -310,8 +311,7 @@
             "mean": 2384.4680007438,
             "stddev": 2675.410513295,
             "valid_percent": 99.999
-          },
-          "unit": "W/m²/sr/μm"
+          }
         }
       ]
     },
@@ -350,6 +350,7 @@
         {
           "data_type": "uint16",
           "spatial_resolution": 10,
+          "bits_per_sample": 15,
           "nodata": 0,
           "statistics": {
             "minimum": 1,
@@ -357,8 +358,7 @@
             "mean": 2273.9667970732,
             "stddev": 2618.272802792,
             "valid_percent": 99.999
-          },
-          "unit": "W/m²/sr/μm"
+          }
         }
       ]
     },
@@ -396,6 +396,7 @@
         {
           "data_type": "uint16",
           "spatial_resolution": 20,
+          "bits_per_sample": 15,
           "nodata": 0,
           "statistics": {
             "minimum": 1,
@@ -403,8 +404,7 @@
             "mean": 2634.1490243416,
             "stddev": 2634.1490243416,
             "valid_percent": 99.999
-          },
-          "unit": "W/m²/sr/μm"
+          }
         }
       ]
     },
@@ -442,6 +442,7 @@
         {
           "data_type": "uint16",
           "spatial_resolution": 20,
+          "bits_per_sample": 15,
           "nodata": 0,
           "statistics": {
             "minimum": 1,
@@ -449,8 +450,7 @@
             "mean": 3329.8844628619,
             "stddev": 2303.0096294469,
             "valid_percent": 99.999
-          },
-          "unit": "W/m²/sr/μm"
+          }
         }
       ]
     },
@@ -566,6 +566,7 @@
         {
           "data_type": "uint16",
           "spatial_resolution": 60,
+          "bits_per_sample": 15,
           "nodata": "nan"
         }
       ],

@@ -33,17 +33,17 @@ When specifying a raster band object at asset level, it is recommended to use
 the [projection](https://github.com/radiantearth/stac-spec/tree/master/extensions/projection) extension
 to specify information about the raster projection, especially `proj:shape` to specify the height and width of the raster.
 
-| Field Name         | Type                                    | Description                                                                                                                                                                      |
-| ------------------ | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| nodata             | number\|string                          | Pixel values used to identify pixels that are nodata in the band either by the pixel value as a number or `nan`, `inf` or `-inf` (all strings).                                                                                                               |
-| sampling           | string                                  | One of `area` or `point`. Indicates whether a pixel value should be assumed to represent a sampling over the region of the pixel or a point sample at the center of the pixel.   |
-| data_type          | string                                  | The data type of the pixels in the band. One of the [data types as described below](#data-types).                                                                                |
+| Field Name         | Type                                    | Description                                                                                                                                                                       |
+| ------------------ | --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| nodata             | number\|string                          | Pixel values used to identify pixels that are nodata in the band either by the pixel value as a number or `nan`, `inf` or `-inf` (all strings).                                   |
+| sampling           | string                                  | One of `area` or `point`. Indicates whether a pixel value should be assumed to represent a sampling over the region of the pixel or a point sample at the center of the pixel.    |
+| data_type          | string                                  | The data type of the pixels in the band. One of the [data types as described below](#data-types).                                                                                 |
 | bits_per_sample    | number                                  | The actual number of bits used for this band. Normally only present when the number of bits is non-standard for the `datatype`, such as when a 1 bit TIFF is represented as byte. |
-| spatial_resolution | number                                  | Average spatial resolution (in meters) of the pixels in the band.                                                                                                                |
+| spatial_resolution | number                                  | Average spatial resolution (in meters) of the pixels in the band.                                                                                                                 |
 | statistics         | [Statistics Object](#statistics-object) | Statistics of all the pixels in the band.                                                                                                                                         |
 | unit               | string                                  | Unit denomination of the pixel value.                                                                                                                                             |
-| scale              | number                                  | Multiplicator factor of the pixel value to transform into the value (i.e. translate digital number to reflectance).                                                              |
-| offset             | number                                  | Number to be added to the pixel value (after scaling) to transform into the value (i.e. translate digital number to reflectance).                                                |
+| scale              | number                                  | Multiplicator factor of the pixel value to transform into the value (i.e. translate digital number to reflectance).                                                               |
+| offset             | number                                  | Number to be added to the pixel value (after scaling) to transform into the value (i.e. translate digital number to reflectance).                                                 |
 | histogram          | [Histogram Object](#histogram-object)   | Histogram distribution information of the pixels values in the band.                                                                                                              |
 
 `scale` and `offset` define parameters to compute another value. The following paragraphs describe some use cases.
@@ -194,3 +194,43 @@ gdalinfo -json -hist PT01S00_842547E119_8697242018100100000000MS00_GG001002003/P
 
 produces this [file](gdalinfo.json) in wich there are `histogram` fields for each band.
 The [planet example](examples/item-planet.json) includes them.
+
+## Relation types
+
+The following types should be used as applicable `rel` types in the
+[Link Object](https://github.com/radiantearth/stac-spec/tree/master/item-spec/item-spec.md#link-object).
+
+| Type | Description                                                                                                                                                         |
+| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| gcps | This link points to a [document](https://gdal.org/drivers/raster/vrt.html#vrtdataset) providing with a list of Ground Control Points for the dataset, mapping between pixel/line coordinates and georeferenced coordinates |
+
+## Contributing
+
+All contributions are subject to the
+[STAC Specification Code of Conduct](https://github.com/radiantearth/stac-spec/blob/master/CODE_OF_CONDUCT.md).
+For contributions, please follow the
+[STAC specification contributing guide](https://github.com/radiantearth/stac-spec/blob/master/CONTRIBUTING.md) Instructions
+for running tests are copied here for convenience.
+
+### Running tests
+
+The same checks that run as checks on PR's are part of the repository and can be run locally to verify that changes are valid. 
+To run tests locally, you'll need `npm`, which is a standard part of any [node.js installation](https://nodejs.org/en/download/).
+
+First you'll need to install everything with npm once. Just navigate to the root of this repository and on 
+your command line run:
+```bash
+npm install
+```
+
+Then to check markdown formatting and test the examples against the JSON schema, you can run:
+```bash
+npm test
+```
+
+This will spit out the same texts that you see online, and you can then go and fix your markdown or examples.
+
+If the tests reveal formatting problems with the examples, you can fix them with:
+```bash
+npm run format-examples
+```

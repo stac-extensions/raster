@@ -42,23 +42,23 @@
         8966,
         4411
       ],
-      "raster:bands": [
+      "bands": [
         {
-          "sampling": "area",
+          "raster:sampling": "area",
           "name": "Red TOA reflectance",
-          "data_type": "uint16",
-          "scale": 0.01,
-          "offset": 0,
-          "nodata": 0,
-          "spatial_resolution": 3,
-          "statistics": {
+          "raster:data_type": "uint16",
+          "raster:scale": 0.01,
+          "raster:offset": 0,
+          "raster:nodata": 0,
+          "raster:spatial_resolution": 3,
+          "raster:statistics": {
             "maximum": 32925,
             "mean": 8498.9400644319,
             "minimum": 1962,
             "stddev": 5056.1292002722,
             "valid_percent": 61.09
           },
-          "histogram": {
+          "raster:histogram": {
             "count": 256,
             "min": 1901.288235294118,
             "max": 32985.71176470588,
@@ -323,21 +323,21 @@
           }
         },
         {
-          "sampling": "area",
+          "raster:sampling": "area",
           "name": "Green TOA reflectance",
-          "data_type": "uint16",
-          "scale": 0.0000196236732904,
-          "offset": 0,
-          "nodata": 0,
-          "spatial_resolution": 3,
-          "statistics": {
+          "raster:data_type": "uint16",
+          "raster:scale": 0.0000196236732904,
+          "raster:offset": 0,
+          "raster:nodata": 0,
+          "raster:spatial_resolution": 3,
+          "raster:statistics": {
             "maximum": 22063,
             "mean": 7185.2123645206,
             "minimum": 3884,
             "stddev": 3799.4562788636,
             "valid_percent": 61.09
           },
-          "histogram": {
+          "raster:histogram": {
             "count": 256,
             "min": 3848.354901960784,
             "max": 22098.64509803921,
@@ -602,21 +602,21 @@
           }
         },
         {
-          "sampling": "area",
+          "raster:sampling": "area",
           "name": "Blue TOA reflectance",
-          "data_type": "uint16",
-          "scale": 0.0000218499248607,
-          "offset": 0,
-          "nodata": 0,
-          "spatial_resolution": 3,
-          "statistics": {
+          "raster:data_type": "uint16",
+          "raster:scale": 0.0000218499248607,
+          "raster:offset": 0,
+          "raster:nodata": 0,
+          "raster:spatial_resolution": 3,
+          "raster:statistics": {
             "maximum": 29693,
             "mean": 5829.583942362,
             "minimum": 1061,
             "stddev": 4683.0650025253,
             "valid_percent": 61.09
           },
-          "histogram": {
+          "raster:histogram": {
             "count": 256,
             "min": 1004.858823529412,
             "max": 29749.14117647059,
@@ -881,21 +881,21 @@
           }
         },
         {
-          "sampling": "area",
+          "raster:sampling": "area",
           "name": "NIR TOA reflectance",
-          "data_type": "uint16",
-          "scale": 0.0000218499248607,
-          "offset": 0,
-          "nodata": 0,
-          "spatial_resolution": 3,
-          "statistics": {
+          "raster:data_type": "uint16",
+          "raster:scale": 0.0000218499248607,
+          "raster:offset": 0,
+          "raster:nodata": 0,
+          "raster:spatial_resolution": 3,
+          "raster:statistics": {
             "maximum": 31836,
             "mean": 6785.2511255265,
             "minimum": 1685,
             "stddev": 3842.4324936707,
             "valid_percent": 61.09
           },
-          "histogram": {
+          "raster:histogram": {
             "count": 256,
             "min": 1625.880392156863,
             "max": 31895.11960784314,

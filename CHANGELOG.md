@@ -15,17 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Some clarifications and fixes in the README and examples [#41](https://github.com/stac-extensions/raster/pull/41)
 - `raster:bands` is now using the more general `bands` field from STAC 1.1 common metadata
-- The following fields in the `raster:bands` object have been moved/renamed:
-   - nodata -> raster:nodata
-   - sampling -> raster:sampling
-   - data_type -> raster:data_type
-   - bits_per_sample -> raster:bits_per_sample
-   - spatial_resolution -> raster:spatial_resolution
-   - statistics -> raster:statistics
-   - unit -> raster:unit
-   - scale -> raster:scale
-   - offset -> raster:offset
-   - histogram -> raster:histogram
+- All of the fields in the `raster:bands` object have been renamed to have a prefix of `raster:`
 
 ### Removed
 

@@ -21,32 +21,35 @@ In many applications, it is interesting to have some metadata about the rasters 
 - [JSON Schema](json-schema/schema.json)
 - [Changelog](./CHANGELOG.md)
 
-## Item Asset fields
+## Fields
 
-| Field Name   | Type                                         | Description                                                                                                                     |
-| ------------ | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| raster:bands | \[[Raster band Object](#raster-band-object)] | An array of available bands where each object is a \[[Band Object](#raster-band-object)]. If given, requires at least one band. |
+The fields in the table below can be used in these parts of STAC documents:
 
-## Raster Band Object
+- [ ] Catalogs
+- [ ] Collections
+- [x] Item Properties (incl. Summaries in Collections)
+- [x] Assets (for both Collections and Items, incl. Item Asset Definitions in Collections)
+- [x] Bands
+- [ ] Links
 
-When specifying a raster band object at asset level, it is recommended to use
+When using the raster extension, it is recommended to use
 the [projection](https://github.com/radiantearth/stac-spec/tree/master/extensions/projection) extension
 to specify information about the raster projection, especially `proj:shape` to specify the height and width of the raster.
 
 | Field Name         | Type                                    | Description                                                                                                                                                                       |
 | ------------------ | --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| nodata             | number\|string                          | Pixel values used to identify pixels that are nodata in the band either by the pixel value as a number or `nan`, `inf` or `-inf` (all strings).                                   |
-| sampling           | string                                  | One of `area` or `point`. Indicates whether a pixel value should be assumed to represent a sampling over the region of the pixel or a point sample at the center of the pixel.    |
-| data_type          | string                                  | The data type of the pixels in the band. One of the [data types as described below](#data-types).                                                                                 |
-| bits_per_sample    | number                                  | The actual number of bits used for this band. Normally only present when the number of bits is non-standard for the `datatype`, such as when a 1 bit TIFF is represented as byte. |
-| spatial_resolution | number                                  | Average spatial resolution (in meters) of the pixels in the band.                                                                                                                 |
-| statistics         | [Statistics Object](#statistics-object) | Statistics of all the pixels in the band.                                                                                                                                         |
-| unit               | string                                  | Unit denomination of the pixel value.                                                                                                                                             |
-| scale              | number                                  | Multiplicator factor of the pixel value to transform into the value (i.e. translate digital number to reflectance).                                                               |
-| offset             | number                                  | Number to be added to the pixel value (after scaling) to transform into the value (i.e. translate digital number to reflectance).                                                 |
-| histogram          | [Histogram Object](#histogram-object)   | Histogram distribution information of the pixels values in the band.                                                                                                              |
+| raster:nodata             | number\|string                          | Pixel values used to identify pixels that are nodata in the band either by the pixel value as a number or `nan`, `inf` or `-inf` (all strings).                                   |
+| raster:sampling           | string                                  | One of `area` or `point`. Indicates whether a pixel value should be assumed to represent a sampling over the region of the pixel or a point sample at the center of the pixel.    |
+| raster:data_type          | string                                  | The data type of the pixels in the band. One of the [data types as described below](#data-types).                                                                                 |
+| raster:bits_per_sample    | number                                  | The actual number of bits used for this band. Normally only present when the number of bits is non-standard for the `datatype`, such as when a 1 bit TIFF is represented as byte. |
+| raster:spatial_resolution | number                                  | Average spatial resolution (in meters) of the pixels in the band.                                                                                                                 |
+| raster:statistics         | [Statistics Object](#statistics-object) | Statistics of all the pixels in the band.                                                                                                                                         |
+| raster:unit               | string                                  | Unit denomination of the pixel value.                                                                                                                                             |
+| raster:scale              | number                                  | Multiplicator factor of the pixel value to transform into the value (i.e. translate digital number to reflectance).                                                               |
+| raster:offset             | number                                  | Number to be added to the pixel value (after scaling) to transform into the value (i.e. translate digital number to reflectance).                                                 |
+| raster:histogram          | [Histogram Object](#histogram-object)   | Histogram distribution information of the pixels values in the band.                                                                                                              |
 
-`scale` and `offset` define parameters to compute another value. The following paragraphs describe some use cases.
+`raster:scale` and `raster:offset` define parameters to compute another value. The following paragraphs describe some use cases.
 
 ### Data Types
 
@@ -116,11 +119,11 @@ For example, the above value conversion is described in the values dictionary as
 "assets": {
   "B4": {
       "title": "TOA radiance band 4",
-      "raster:bands": [{
-        "nodata": 0,
-        "unit": "W⋅sr−1⋅m−2",
-        "scale": 0.0145,
-        "offset": 3.48
+      "bands": [{
+        "raster:nodata": 0,
+        "raster:unit": "W⋅sr−1⋅m−2",
+        "raster:scale": 0.0145,
+        "raster:offset": 3.48
       }]
   }
 }
@@ -154,9 +157,9 @@ In the following value definition example, 185 meters must be substracted from t
 "assets": {
   "WaterLevel": {
       "title": "Water Level at station",
-      "raster:bands": [{
-        "unit": "m",
-        "offset": -185
+      "bands": [{
+        "raster:unit": "m",
+        "raster:offset": -185
       }]
   }
 }

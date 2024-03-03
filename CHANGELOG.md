@@ -9,10 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Add link `rel="gcps"` to Ground Control Points document
+- All raster fields can now be used in the new bands field in STAC 1.1
 
 ### Changed
 
-- Some clarifications abd fixes in the README and examples [#41](https://github.com/stac-extensions/raster/pull/41)
+- Some clarifications and fixes in the README and examples [#41](https://github.com/stac-extensions/raster/pull/41)
+- `raster:bands` is now using the more general `bands` field from STAC 1.1 common metadata
+- All of the fields in the `raster:bands` object have been renamed to have a prefix of `raster:`
+
+### Removed
+
+- `raster:bands` - use `bands` in STAC core instead
 
 ## [v1.1.0]
 

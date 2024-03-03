@@ -205,13 +205,13 @@
         0,
         1
       ],
-      "raster:bands": [
+      "bands": [
         {
-          "data_type": "uint16",
-          "spatial_resolution": 60,
-          "bits_per_sample": 15,
-          "nodata": 0,
-          "statistics": {
+          "raster:data_type": "uint16",
+          "raster:spatial_resolution": 60,
+          "raster:bits_per_sample": 15,
+          "raster:nodata": 0,
+          "raster:statistics": {
             "minimum": 1,
             "maximum": 20567,
             "mean": 2339.4759595597,
@@ -252,13 +252,13 @@
         0,
         1
       ],
-      "raster:bands": [
+      "bands": [
         {
-          "data_type": "uint16",
-          "spatial_resolution": 10,
-          "bits_per_sample": 15,
-          "nodata": 0,
-          "statistics": {
+          "raster:data_type": "uint16",
+          "raster:spatial_resolution": 10,
+          "raster:bits_per_sample": 15,
+          "raster:nodata": 0,
+          "raster:statistics": {
             "minimum": 1,
             "maximum": 19264,
             "mean": 2348.069117847,
@@ -299,13 +299,13 @@
         0,
         1
       ],
-      "raster:bands": [
+      "bands": [
         {
-          "data_type": "uint16",
-          "spatial_resolution": 10,
-          "bits_per_sample": 15,
-          "nodata": 0,
-          "statistics": {
+          "raster:data_type": "uint16",
+          "raster:spatial_resolution": 10,
+          "raster:bits_per_sample": 15,
+          "raster:nodata": 0,
+          "raster:statistics": {
             "minimum": 1,
             "maximum": 18064,
             "mean": 2384.4680007438,
@@ -346,13 +346,13 @@
         0,
         1
       ],
-      "raster:bands": [
+      "bands": [
         {
-          "data_type": "uint16",
-          "spatial_resolution": 10,
-          "bits_per_sample": 15,
-          "nodata": 0,
-          "statistics": {
+          "raster:data_type": "uint16",
+          "raster:spatial_resolution": 10,
+          "raster:bits_per_sample": 15,
+          "raster:nodata": 0,
+          "raster:statistics": {
             "minimum": 1,
             "maximum": 17200,
             "mean": 2273.9667970732,
@@ -392,13 +392,13 @@
         0,
         1
       ],
-      "raster:bands": [
+      "bands": [
         {
-          "data_type": "uint16",
-          "spatial_resolution": 20,
-          "bits_per_sample": 15,
-          "nodata": 0,
-          "statistics": {
+          "raster:data_type": "uint16",
+          "raster:spatial_resolution": 20,
+          "raster:bits_per_sample": 15,
+          "raster:nodata": 0,
+          "raster:statistics": {
             "minimum": 1,
             "maximum": 16842,
             "mean": 2634.1490243416,
@@ -438,13 +438,13 @@
         0,
         1
       ],
-      "raster:bands": [
+      "bands": [
         {
-          "data_type": "uint16",
-          "spatial_resolution": 20,
-          "bits_per_sample": 15,
-          "nodata": 0,
-          "statistics": {
+          "raster:data_type": "uint16",
+          "raster:spatial_resolution": 20,
+          "raster:bits_per_sample": 15,
+          "raster:nodata": 0,
+          "raster:statistics": {
             "minimum": 1,
             "maximum": 16502,
             "mean": 3329.8844628619,
@@ -562,12 +562,12 @@
           "full_width_half_max": 0.026
         }
       ],
-      "raster:bands": [
+      "bands": [
         {
-          "data_type": "uint16",
-          "spatial_resolution": 60,
-          "bits_per_sample": 15,
-          "nodata": "nan"
+          "raster:data_type": "uint16",
+          "raster:spatial_resolution": 60,
+          "raster:bits_per_sample": 15,
+          "raster:nodata": "nan"
         }
       ],
       "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/33/S/VB/2021/2/S2B_33SVB_20210221_0_L2A/B09.tif",
@@ -718,20 +718,6 @@
         0,
         0,
         1
-      ]
-    }
-  },
-  "virtual:assets": {
-    "SIR": {
-      "title": "Shortwave Infra-red",
-      "raster:range": [
-        0,
-        10000
-      ],
-      "href": [
-        "#B12",
-        "#B8A",
-        "#B04"
       ]
     }
   },

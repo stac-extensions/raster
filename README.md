@@ -21,32 +21,35 @@ In many applications, it is interesting to have some metadata about the rasters 
 - [JSON Schema](json-schema/schema.json)
 - [Changelog](./CHANGELOG.md)
 
-## Item Asset fields
+## Fields
 
-| Field Name   | Type                                         | Description                                                                                                                     |
-| ------------ | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| raster:bands | \[[Raster band Object](#raster-band-object)] | An array of available bands where each object is a \[[Band Object](#raster-band-object)]. If given, requires at least one band. |
+The fields in the table below can be used in these parts of STAC documents:
 
-## Raster Band Object
+- [ ] Catalogs
+- [ ] Collections
+- [x] Item Properties (incl. Summaries in Collections)
+- [x] Assets (for both Collections and Items, incl. Item Asset Definitions in Collections)
+- [x] Bands
+- [ ] Links
 
-When specifying a raster band object at asset level, it is recommended to use
+When using the raster extension, it is recommended to use
 the [projection](https://github.com/radiantearth/stac-spec/tree/master/extensions/projection) extension
 to specify information about the raster projection, especially `proj:shape` to specify the height and width of the raster.
 
 | Field Name         | Type                                    | Description                                                                                                                                                                       |
 | ------------------ | --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| nodata             | number\|string                          | Pixel values used to identify pixels that are nodata in the band either by the pixel value as a number or `nan`, `inf` or `-inf` (all strings).                                   |
-| sampling           | string                                  | One of `area` or `point`. Indicates whether a pixel value should be assumed to represent a sampling over the region of the pixel or a point sample at the center of the pixel.    |
-| data_type          | string                                  | The data type of the pixels in the band. One of the [data types as described below](#data-types).                                                                                 |
-| bits_per_sample    | number                                  | The actual number of bits used for this band. Normally only present when the number of bits is non-standard for the `datatype`, such as when a 1 bit TIFF is represented as byte. |
-| spatial_resolution | number                                  | Average spatial resolution (in meters) of the pixels in the band.                                                                                                                 |
-| statistics         | [Statistics Object](#statistics-object) | Statistics of all the pixels in the band.                                                                                                                                         |
-| unit               | string                                  | Unit denomination of the pixel value.                                                                                                                                             |
-| scale              | number                                  | Multiplicator factor of the pixel value to transform into the value (i.e. translate digital number to reflectance).                                                               |
-| offset             | number                                  | Number to be added to the pixel value (after scaling) to transform into the value (i.e. translate digital number to reflectance).                                                 |
-| histogram          | [Histogram Object](#histogram-object)   | Histogram distribution information of the pixels values in the band.                                                                                                              |
+| raster:nodata             | number\|string                          | Pixel values used to identify pixels that are nodata in the band either by the pixel value as a number or `nan`, `inf` or `-inf` (all strings).                                   |
+| raster:sampling           | string                                  | One of `area` or `point`. Indicates whether a pixel value should be assumed to represent a sampling over the region of the pixel or a point sample at the center of the pixel.    |
+| raster:data_type          | string                                  | The data type of the pixels in the band. One of the [data types as described below](#data-types).                                                                                 |
+| raster:bits_per_sample    | number                                  | The actual number of bits used for this band. Normally only present when the number of bits is non-standard for the `datatype`, such as when a 1 bit TIFF is represented as byte. |
+| raster:spatial_resolution | number                                  | Average spatial resolution (in meters) of the pixels in the band.                                                                                                                 |
+| raster:statistics         | [Statistics Object](#statistics-object) | Statistics of all the pixels in the band.                                                                                                                                         |
+| raster:unit               | string                                  | Unit denomination of the pixel value.                                                                                                                                             |
+| raster:scale              | number                                  | Multiplicator factor of the pixel value to transform into the value (i.e. translate digital number to reflectance).                                                               |
+| raster:offset             | number                                  | Number to be added to the pixel value (after scaling) to transform into the value (i.e. translate digital number to reflectance).                                                 |
+| raster:histogram          | [Histogram Object](#histogram-object)   | Histogram distribution information of the pixels values in the band.                                                                                                              |
 
-`scale` and `offset` define parameters to compute another value. The following paragraphs describe some use cases.
+`raster:scale` and `raster:offset` define parameters to compute another value. The following paragraphs describe some use cases.
 
 ### Data Types
 
@@ -88,27 +91,44 @@ The allowed values for `data_type` are:
 | stddev        | number | standard deviation value of the pixels in the band |
 | valid_percent | number | percentage of valid (not `nodata`) pixel           |
 
-### Use Scale and offset as radiometric calibration parameters
+### Scale and Offset Uses and Examples
 
-In remote sensing, many imagery raster corresponds to raw data without any radiometric processing.
-Each pixel is given in digital numbers (DN), i.e. native pixel values from the sensor acquisition.
-Those digital numbers quantify the energy recorded by the detector (optical or radar).
-The sensor radiometric calibration aims to turn back the DN value into a
-physical unit value (radiance, light power, backscatter).
-Hereafter, some examples of the usage of the `values` dictionary to perform radiometric correction.
+In remote sensing, most imagery raster corresponds to just unitless raw pixel values that may be converted
+into specific units given a scale and an offset. The raw pixel values are referred to as 
+Digital Numbers (DN). Using a Scale and Offset simply provide a more efficient
+way to store data with less bytes. In these cases the data provider will include scale and offset
+values for transforming the data into a physical measurement, such as radiance, power, altitude, or
+backscatter. Several examples are given below.
 
-#### Digital Numbers to Radiance (optical sensor)
+Users should be careful to always apply any provided scale and offset
 
-<!-- https://labo.obs-mip.fr/multitemp/radiometric-quantities-irradiance-radiance-reflectance/ -->
+#### DN to Reflectance
 
-A conventional way of deriving Top Of Atmosphere (TOA) Radiance
-in ![formula](https://render.githubusercontent.com/render/math?math=W.sr^{-1}.m^{-3})
+A very common use case is to store reflectance values, which range from 0 - 1.0, as integers rather than
+utilizing the larger floating point data type. Data is stored in a 2-byte Integer and ranges from
+1 to 10,0000 by using a scale of 0.0001, resulting in a file half the size of one using 4 by te floats.
+
+```json
+"assets": {
+  "B4": {
+      "title": "TOA radiance band 4",
+      "bands": [{
+        "raster:nodata": 0,
+        "raster:scale": 0.0001,
+        "raster:offset": 0.0
+      }]
+  }
+}
+```
+
+#### Digital Numbers to Optical Radiance
+
+A conventional way of deriving Top Of Atmosphere (TOA) Radiance in $ W.sr^{-1}.m^{-3}\ $
 from DN values using `scale` and `offset` in the following formula:
 
-![formula](https://render.githubusercontent.com/render/math?math=\color{gray}L_\lambda%20=%20scale%20\times%20DN%20%2B%20offset)
+$$ L_\lambda=scale\times DN + offset $$
 
-where ![formula](https://render.githubusercontent.com/render/math?math=\color{gray}L_\lambda) is TOA Radiance
-in ![formula](https://render.githubusercontent.com/render/math?math=\color{gray}W.sr^{-1}.m^{-3}).
+where $ L_\lambda $ is TOA Radiance with units of $ W.sr^{-1}.m^{-3} $.
 
 For example, the above value conversion is described in the values dictionary as
 
@@ -116,32 +136,32 @@ For example, the above value conversion is described in the values dictionary as
 "assets": {
   "B4": {
       "title": "TOA radiance band 4",
-      "raster:bands": [{
-        "nodata": 0,
-        "unit": "W⋅sr−1⋅m−2",
-        "scale": 0.0145,
-        "offset": 3.48
+      "bands": [{
+        "raster:nodata": 0,
+        "raster:unit": "W⋅sr−1⋅m−2",
+        "raster:scale": 0.0145,
+        "raster:offset": 3.48
       }]
   }
 }
 ```
 
-#### Radiance to TOA Reflectance (optical sensor)
+##### Radiance to TOA Optical Reflectance
 
 In order to convert the above TOA radiance to TOA reflectance, the following formula can be used:
 
-![formula](https://render.githubusercontent.com/render/math?math=\color{gray}R=(pi*L*d*d)/(ESUN*cos(s)))
+$$ R=(pi*L*d*d)/(ESUN*cos(s)) $$
 
 where:
 
 - L is the spectral radiance for the band (see previous section)
-- d is the earth-sun distance (in astronomical units) and depends on the acquisition’s day and month ([Core STAC specification](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#properties-object))
-- ESUN(b) is the mean TOA solar irradiance (or [solar illumination](https://github.com/stac-extensions/eo#solar_illumination)) in W/m2/micrometers
+- d is the earth-sun distance (in astronomical units) and depends on the acquisition’s day and month
+- ESUN is the mean TOA solar irradiance (or [solar illumination](https://github.com/stac-extensions/eo#solar_illumination)) in W/m2/micrometers
 - s is the [solar zenith angle](https://github.com/stac-extensions/view#item-properties) in degrees.
 
 source: <https://www.orfeo-toolbox.org/CookBook/Applications/app_OpticalCalibration.html>
 
-#### Transform height measurement to water level
+#### Altitude to water level
 
 In remote sensing, radar altimeter instruments measures an absolute height from an absolute georeference (e.g. WGS 84 geoid).
 In hydrology, you prefer having the water level relative to the "0 limnimetric scale".
@@ -154,9 +174,9 @@ In the following value definition example, 185 meters must be substracted from t
 "assets": {
   "WaterLevel": {
       "title": "Water Level at station",
-      "raster:bands": [{
-        "unit": "m",
-        "offset": -185
+      "bands": [{
+        "raster:unit": "m",
+        "raster:offset": -185
       }]
   }
 }

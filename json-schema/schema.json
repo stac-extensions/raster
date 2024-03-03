@@ -3,56 +3,82 @@
   "$id": "https://stac-extensions.github.io/raster/v1.1.0/schema.json#",
   "title": "raster Extension",
   "description": "STAC Raster Extension for STAC Items.",
+  "type": "object",
+  "required": [
+    "stac_extensions"
+  ],
+  "properties": {
+    "stac_extensions": {
+      "type": "array",
+      "contains": {
+        "const": "https://stac-extensions.github.io/raster/v1.1.0/schema.json"
+      }
+    }
+  },
   "oneOf": [
     {
-      "$comment": "This is the schema for STAC extension raster in Items.",
-      "allOf": [
-        {
+      "$comment": "This is the schema for Items",
+      "type": "object",
+      "required": [
+        "type",
+        "properties",
+        "assets"
+      ],
+      "properties": {
+        "type": {
+          "const": "Feature"
+        },
+        "properties": {
+          "$ref": "#/definitions/fields"
+        },
+        "assets": {
           "type": "object",
-          "required": [
-            "type",
-            "assets"
-          ],
+          "additionalProperties": {
+            "$ref": "#/definitions/fields"
+          }
+        }
+      },
+      "anyOf": [
+        {
           "properties": {
-            "type": {
-              "const": "Feature"
-            },
-            "assets": {
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/assetfields"
-              }
+            "properties": {
+              "$ref": "#/definitions/require_any"
             }
           }
         },
         {
-          "$ref": "#/definitions/stac_extensions"
+          "$ref": "#/definitions/require_in_assets"
         }
       ]
     },
     {
       "$comment": "This is the schema for STAC Collections.",
-      "allOf": [
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "const": "Collection"
+        },
+        "assets": {
+          "$ref": "#/definitions/fields"
+        },
+        "item_assets": {
+          "$ref": "#/definitions/fields"
+        }
+      },
+      "anyOf": [
         {
-          "type": "object",
-          "required": [
-            "type"
-          ],
+          "$ref": "#/definitions/require_in_item_assets"
+        },
+        {
+          "$ref": "#/definitions/require_in_assets"
+        },
+        {
           "properties": {
-            "type": {
-              "const": "Collection"
-            },
-            "assets": {
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/assetfields"
-              }
-            },
-            "item_assets": {
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/assetfields"
-              }
+            "summaries": {
+              "$ref": "#/definitions/require_any"
             }
           }
         }
@@ -60,175 +86,217 @@
     }
   ],
   "definitions": {
-    "stac_extensions": {
-      "type": "object",
+    "require_any": {
+      "anyOf": [
+        {"required": ["raster:data_type"]},
+        {"required": ["raster:unit"]},
+        {"required": ["raster:bits_per_sample"]},
+        {"required": ["raster:sampling"]},
+        {"required": ["raster:nodata"]},
+        {"required": ["raster:scale"]},
+        {"required": ["raster:offset"]},
+        {"required": ["raster:spatial_resolution"]},
+        {"required": ["raster:statistics"]},
+        {"required": ["raster:histogram"]},
+        {
+          "$ref": "#/definitions/require_in_bands"
+        }
+      ]
+    },
+    "require_in_bands": {
       "required": [
-        "stac_extensions"
+        "bands"
       ],
       "properties": {
-        "stac_extensions": {
-          "type": "array",
-          "contains": {
-            "const": "https://stac-extensions.github.io/raster/v1.1.0/schema.json"
+        "bands": {
+          "not": {
+            "additionalProperties": {
+              "not": {
+                "$ref": "#/definitions/require_any"
+              }
+            }
           }
         }
       }
     },
-    "assetfields": {
+    "require_in_assets": {
+      "required": [
+        "assets"
+      ],
+      "properties": {
+        "assets": {
+          "not": {
+            "additionalProperties": {
+              "not": {
+                "$ref": "#/definitions/require_any"
+              }
+            }
+          }
+        }
+      }
+    },
+    "require_in_item_assets": {
+      "required": [
+        "item_assets"
+      ],
+      "properties": {
+        "item_assets": {
+          "not": {
+            "additionalProperties": {
+              "not": {
+                "$ref": "#/definitions/require_any"
+              }
+            }
+          }
+        }
+      }
+    },
+    "fields": {
       "type": "object",
       "properties": {
-        "raster:bands": {
-          "$ref": "#/definitions/bands"
+        "bands": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fields"
+          }
+        },
+        "raster:data_type": {
+          "title": "Data type of the band",
+          "type": "string",
+          "enum": [
+            "int8",
+            "int16",
+            "int32",
+            "int64",
+            "uint8",
+            "uint16",
+            "uint32",
+            "uint64",
+            "float16",
+            "float32",
+            "float64",
+            "cint16",
+            "cint32",
+            "cfloat32",
+            "cfloat64",
+            "other"
+          ]
+        },
+        "raster:unit": {
+          "title": "Unit denomination of the pixel value",
+          "type": "string"
+        },
+        "raster:bits_per_sample": {
+          "title": "The actual number of bits used for this band",
+          "type": "integer"
+        },
+        "raster:sampling": {
+          "title": "Pixel sampling in the band",
+          "type": "string",
+          "enum": [
+            "area",
+            "point"
+          ]
+        },
+        "raster:nodata": {
+          "title": "No data pixel value",
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string",
+              "enum": [
+                "nan",
+                "inf",
+                "-inf"
+              ]
+            }
+          ]
+        },
+        "raster:scale": {
+          "title": "multiplicator factor of the pixel value to transform into the value",
+          "type": "number"
+        },
+        "raster:offset": {
+          "title": "number to be added to the pixel value to transform into the value",
+          "type": "number"
+        },
+        "raster:spatial_resolution": {
+          "title": "Average spatial resolution (in meters) of the pixels in the band",
+          "type": "number"
+        },
+        "raster:statistics": {
+          "title": "Statistics",
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": false,
+          "properties": {
+            "mean": {
+              "title": "Mean value of all the pixels in the band",
+              "type": "number"
+            },
+            "minimum": {
+              "title": "Minimum value of all the pixels in the band",
+              "type": "number"
+            },
+            "maximum": {
+              "title": "Maximum value of all the pixels in the band",
+              "type": "number"
+            },
+            "stddev": {
+              "title": "Standard deviation value of all the pixels in the band",
+              "type": "number"
+            },
+            "valid_percent": {
+              "title": "Percentage of valid (not nodata) pixel",
+              "type": "number"
+            }
+          }
+        },
+        "raster:histogram": {
+          "title": "Histogram",
+          "type": "object",
+          "additionalItems": false,
+          "required": [
+            "count",
+            "min",
+            "max",
+            "buckets"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "count": {
+              "title": "number of buckets",
+              "type": "number"
+            },
+            "min": {
+              "title": "Minimum value of the buckets",
+              "type": "number"
+            },
+            "max": {
+              "title": "Maximum value of the buckets",
+              "type": "number"
+            },
+            "buckets": {
+              "title": "distribution buckets",
+              "type": "array",
+              "minItems": 3,
+              "items": {
+                "title": "number of pixels in the bucket",
+                "type": "integer"
+              }
+            }
+          }
         }
       },
       "patternProperties": {
-        "^(?!raster:)": {
-          "$comment": "Above, change `template` to the prefix of this extension"
-        }
+        "^(?!raster:)": {}
       },
       "additionalProperties": false
-    },
-    "bands": {
-      "title": "Bands",
-      "type": "array",
-      "minItems": 1,
-      "items": {
-        "title": "Band",
-        "type": "object",
-        "minProperties": 1,
-        "additionalProperties": true,
-        "properties": {
-          "data_type": {
-            "title": "Data type of the band",
-            "type": "string",
-            "enum": [
-              "int8",
-              "int16",
-              "int32",
-              "int64",
-              "uint8",
-              "uint16",
-              "uint32",
-              "uint64",
-              "float16",
-              "float32",
-              "float64",
-              "cint16",
-              "cint32",
-              "cfloat32",
-              "cfloat64",
-              "other"
-            ]
-          },
-          "unit": {
-            "title": "Unit denomination of the pixel value",
-            "type": "string"
-          },
-          "bits_per_sample": {
-            "title": "The actual number of bits used for this band",
-            "type": "integer"
-          },
-          "sampling": {
-            "title": "Pixel sampling in the band",
-            "type": "string",
-            "enum": [
-              "area",
-              "point"
-            ]
-          },
-          "nodata": {
-            "title": "No data pixel value",
-            "oneOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "string",
-                "enum": [
-                  "nan",
-                  "inf",
-                  "-inf"
-                ]
-              }
-            ]
-          },
-          "scale": {
-            "title": "multiplicator factor of the pixel value to transform into the value",
-            "type": "number"
-          },
-          "offset": {
-            "title": "number to be added to the pixel value to transform into the value",
-            "type": "number"
-          },
-          "spatial_resolution": {
-            "title": "Average spatial resolution (in meters) of the pixels in the band",
-            "type": "number"
-          },
-          "statistics": {
-            "title": "Statistics",
-            "type": "object",
-            "minProperties": 1,
-            "additionalProperties": false,
-            "properties": {
-              "mean": {
-                "title": "Mean value of all the pixels in the band",
-                "type": "number"
-              },
-              "minimum": {
-                "title": "Minimum value of all the pixels in the band",
-                "type": "number"
-              },
-              "maximum": {
-                "title": "Maximum value of all the pixels in the band",
-                "type": "number"
-              },
-              "stddev": {
-                "title": "Standard deviation value of all the pixels in the band",
-                "type": "number"
-              },
-              "valid_percent": {
-                "title": "Percentage of valid (not nodata) pixel",
-                "type": "number"
-              }
-            }
-          },
-          "histogram": {
-            "title": "Histogram",
-            "type": "object",
-            "additionalItems": false,
-            "required": [
-              "count",
-              "min",
-              "max",
-              "buckets"
-            ],
-            "additionalProperties": false,
-            "properties": {
-              "count": {
-                "title": "number of buckets",
-                "type": "number"
-              },
-              "min": {
-                "title": "Minimum value of the buckets",
-                "type": "number"
-              },
-              "max": {
-                "title": "Maximum value of the buckets",
-                "type": "number"
-              },
-              "buckets": {
-                "title": "distribution buckets",
-                "type": "array",
-                "minItems": 3,
-                "items": {
-                  "title": "number of pixels in the bucket",
-                  "type": "integer"
-                }
-              }
-            }
-          }
-        }
-      }
     }
   }
 }
+
+
+

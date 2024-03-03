@@ -88,25 +88,44 @@ The allowed values for `data_type` are:
 | stddev        | number | standard deviation value of the pixels in the band |
 | valid_percent | number | percentage of valid (not `nodata`) pixel           |
 
-### Use Scale and offset as radiometric calibration parameters
+### Scale and Offset Uses and Examples
 
-In remote sensing, many imagery raster corresponds to raw data without any radiometric processing.
-Each pixel is given in digital numbers (DN), i.e. native pixel values from the sensor acquisition.
-Those digital numbers quantify the energy recorded by the detector (optical or radar).
-The sensor radiometric calibration aims to turn back the DN value into a
-physical unit value (radiance, light power, backscatter).
-Hereafter, some examples of the usage of the `values` dictionary to perform radiometric correction.
+In remote sensing, most imagery raster corresponds to just unitless raw pixel values that may be converted
+into specific units given a scale and an offset. The raw pixel values are referred to as 
+Digital Numbers (DN). Using a Scale and Offset simply provide a more efficient
+way to store data with less bytes. In these cases the data provider will include scale and offset
+values for transforming the data into a physical measurement, such as radiance, power, altitude, or
+backscatter. Several examples are given below.
 
-#### Digital Numbers to Radiance (optical sensor)
+Users should be careful to always apply any provided scale and offset
 
-<!-- https://labo.obs-mip.fr/multitemp/radiometric-quantities-irradiance-radiance-reflectance/ -->
+#### DN to Reflectance
 
-A conventional way of deriving Top Of Atmosphere (TOA) Radiance from $\mathrm{DN}$ values using `scale` and `offset` in the following formula:
+A very common use case is to store reflectance values, which range from 0 - 1.0, as integers rather than
+utilizing the larger floating point data type. Data is stored in a 2-byte Integer and ranges from
+1 to 10,0000 by using a scale of 0.0001, resulting in a file half the size of one using 4 by te floats.
+
+```json
+"assets": {
+  "B4": {
+      "title": "TOA radiance band 4",
+      "bands": [{
+        "raster:nodata": 0,
+        "raster:scale": 0.0001,
+        "raster:offset": 0.0
+      }]
+  }
+}
+```
+
+#### Digital Numbers to Optical Radiance
+
+A conventional way of deriving Top Of Atmosphere (TOA) Radiance from $\mathrm{DN}$
+values using `scale` and `offset` in the following formula:
 
 $$L_\lambda=\mathrm{scale}\times\mathrm{DN}+\mathrm{offset}$$
 
-where $L_\lambda$ is TOA Radiance
-in $\mathrm{W}\!\cdot\!sr^{-1}\!\cdot\!m^{-3}$.
+where $L_\lambda$ is TOA Radiance in $\mathrm{W}\!\cdot\!sr^{-1}\!\cdot\!m^{-3}$.
 
 For example, the above value conversion is described in the values dictionary as
 
@@ -124,7 +143,7 @@ For example, the above value conversion is described in the values dictionary as
 }
 ```
 
-#### Radiance to TOA Reflectance (optical sensor)
+##### Radiance to TOA Optical Reflectance
 
 In order to convert the above TOA radiance to TOA reflectance, the following formula can be used:
 
@@ -133,14 +152,14 @@ $$R=\frac{pi \times L \times d \times d}{ESUN(b) \times cos(s)}$$
 where:
 
 - $L$ is the spectral radiance for the band (see previous section)
-- $d$ is the earth-sun distance (in astronomical units) and depends on the acquisition’s day and month ([Core STAC specification](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#properties-object))
+- $d$ is the earth-sun distance (in astronomical units) and depends on the acquisition’s day and month
 - $ESUN(b)$ is the mean TOA solar irradiance (or [solar illumination](https://github.com/stac-extensions/eo#solar_illumination))
   in $W/m^2/micrometers$
 - $s$ is the [solar zenith angle](https://github.com/stac-extensions/view#item-properties) in degrees.
 
 source: <https://www.orfeo-toolbox.org/CookBook/Applications/app_OpticalCalibration.html>
 
-#### Transform height measurement to water level
+#### Altitude to water level
 
 In remote sensing, radar altimeter instruments measures an absolute height from an absolute georeference (e.g. WGS 84 geoid).
 In hydrology, you prefer having the water level relative to the "0 limnimetric scale".

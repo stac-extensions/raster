@@ -101,14 +101,12 @@ Hereafter, some examples of the usage of the `values` dictionary to perform radi
 
 <!-- https://labo.obs-mip.fr/multitemp/radiometric-quantities-irradiance-radiance-reflectance/ -->
 
-A conventional way of deriving Top Of Atmosphere (TOA) Radiance
-in ![formula](https://render.githubusercontent.com/render/math?math=W.sr^{-1}.m^{-3})
-from DN values using `scale` and `offset` in the following formula:
+A conventional way of deriving Top Of Atmosphere (TOA) Radiance from $\mathrm{DN}$ values using `scale` and `offset` in the following formula:
 
-![formula](https://render.githubusercontent.com/render/math?math=\color{gray}L_\lambda%20=%20scale%20\times%20DN%20%2B%20offset)
+$$L_\lambda=\mathrm{scale}\times\mathrm{DN}+\mathrm{offset}$$
 
-where ![formula](https://render.githubusercontent.com/render/math?math=\color{gray}L_\lambda) is TOA Radiance
-in ![formula](https://render.githubusercontent.com/render/math?math=\color{gray}W.sr^{-1}.m^{-3}).
+where $L_\lambda$ is TOA Radiance
+in $\mathrm{W}\!\cdot\!sr^{-1}\!\cdot\!m^{-3}$.
 
 For example, the above value conversion is described in the values dictionary as
 
@@ -130,14 +128,15 @@ For example, the above value conversion is described in the values dictionary as
 
 In order to convert the above TOA radiance to TOA reflectance, the following formula can be used:
 
-![formula](https://render.githubusercontent.com/render/math?math=\color{gray}R=(pi*L*d*d)/(ESUN*cos(s)))
+$$R=\frac{pi \times L \times d \times d}{ESUN(b) \times cos(s)}$$
 
 where:
 
-- L is the spectral radiance for the band (see previous section)
-- d is the earth-sun distance (in astronomical units) and depends on the acquisition’s day and month ([Core STAC specification](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#properties-object))
-- ESUN(b) is the mean TOA solar irradiance (or [solar illumination](https://github.com/stac-extensions/eo#solar_illumination)) in W/m2/micrometers
-- s is the [solar zenith angle](https://github.com/stac-extensions/view#item-properties) in degrees.
+- $L$ is the spectral radiance for the band (see previous section)
+- $d$ is the earth-sun distance (in astronomical units) and depends on the acquisition’s day and month ([Core STAC specification](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#properties-object))
+- $ESUN(b)$ is the mean TOA solar irradiance (or [solar illumination](https://github.com/stac-extensions/eo#solar_illumination))
+  in $W/m^2/micrometers$
+- $s$ is the [solar zenith angle](https://github.com/stac-extensions/view#item-properties) in degrees.
 
 source: <https://www.orfeo-toolbox.org/CookBook/Applications/app_OpticalCalibration.html>
 

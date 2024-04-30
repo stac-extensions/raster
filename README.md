@@ -134,7 +134,8 @@ where:
 
 - $L$ is the spectral radiance for the band (see previous section)
 - $d$ is the earth-sun distance (in astronomical units) and depends on the acquisition’s day and month ([Core STAC specification](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#properties-object))
-- $ESUN(b)$ is the mean TOA solar irradiance (or [solar illumination](https://github.com/stac-extensions/eo#solar_illumination)) in $W/m^2/micrometers$
+- $ESUN(b)$ is the mean TOA solar irradiance (or [solar illumination](https://github.com/stac-extensions/eo#solar_illumination))
+  in $W/m^2/micrometers$
 - $s$ is the [solar zenith angle](https://github.com/stac-extensions/view#item-properties) in degrees.
 
 source: <https://www.orfeo-toolbox.org/CookBook/Applications/app_OpticalCalibration.html>

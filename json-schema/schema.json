@@ -79,6 +79,22 @@
       "properties": {
         "raster:bands": {
           "$ref": "#/definitions/bands"
+        },
+        "sparse": {
+          "title": "Sparse representation of the raster. If true, the asset is stored in a sparse format (GDAL support only).",
+          "type": "boolean"
+        },
+        "interleave": {
+          "title": "The interleaving of the raster. (ie: 'pixel', 'band').",
+          "type": "string",
+          "enum": [
+              "pixel",
+              "band"
+            ]
+        },
+        "compression": {
+          "title": "The compression used to store the raster. (ie: 'lzw', 'deflate', 'none').",
+          "type": "string"
         }
       },
       "patternProperties": {
@@ -163,6 +179,23 @@
           "spatial_resolution": {
             "title": "Average spatial resolution (in meters) of the pixels in the band",
             "type": "number"
+          },
+          "block_size": {
+            "type": "array",
+            "title": "Internal block shape of the file.",
+            "description": "A tuple (width/height), specifying the internal block shape of the raster band.",
+            "prefixItems": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "integer"
+              }
+            ]
+          },
+          "color_interpretation": {
+            "title": "The color interpretation of the band. (ie: 'red', 'green', 'blue', 'alpha', 'undefined').",
+            "type": "string"
           },
           "statistics": {
             "title": "Statistics",

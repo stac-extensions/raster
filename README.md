@@ -26,6 +26,9 @@ In many applications, it is interesting to have some metadata about the rasters 
 | Field Name   | Type                                         | Description                                                                                                                     |
 | ------------ | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | raster:bands | \[[Raster band Object](#raster-band-object)] | An array of available bands where each object is a \[[Band Object](#raster-band-object)]. If given, requires at least one band. |
+| raster:sparse | boolean | Sparse representation of the raster. If true, the asset is stored in a sparse format (GDAL support only). |
+| raster:interleave | string | The interleaving of the raster. (ie: 'pixel', 'band'). |
+| raster:compression | The compression used to store the raster. (ie: 'lzw', 'deflate', 'none'). |
 
 ## Raster Band Object
 
@@ -45,6 +48,8 @@ to specify information about the raster projection, especially `proj:shape` to s
 | scale              | number                                  | Multiplicator factor of the pixel value to transform into the value (i.e. translate digital number to reflectance).                                                               |
 | offset             | number                                  | Number to be added to the pixel value (after scaling) to transform into the value (i.e. translate digital number to reflectance).                                                 |
 | histogram          | [Histogram Object](#histogram-object)   | Histogram distribution information of the pixels values in the band.                                                                                                              |
+| block_size         | array[int]                              | A tuple (width/height), specifying the internal block shape of the raster band. |
+| color_interpretation | string                                | The color interpretation of the band. (ie: 'red', 'green', 'blue', 'alpha', 'undefined'). |
 
 `scale` and `offset` define parameters to compute another value. The following paragraphs describe some use cases.
 

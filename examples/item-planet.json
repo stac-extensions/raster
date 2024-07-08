@@ -20,12 +20,14 @@
         8966,
         4411
       ],
+      "data_type": "uint16",
+      "nodata": 0,
+      "raster:sampling": "area",
+      "raster:spatial_resolution": 3,
       "bands": [
         {
           "name": "band-1",
           "description": "Red TOA reflectance",
-          "data_type": "uint16",
-          "nodata": 0,
           "statistics": {
             "maximum": 32925,
             "mean": 8498.9400644319,
@@ -35,10 +37,8 @@
           },
           "eo:common_name": "red",
           "eo:center_wavelength": 0.63,
-          "raster:sampling": "area",
           "raster:scale": 0.01,
           "raster:offset": 0,
-          "raster:spatial_resolution": 3,
           "raster:histogram": {
             "count": 256,
             "min": 1901.288235294118,
@@ -306,8 +306,6 @@
         {
           "name": "band-2",
           "description": "Green TOA reflectance",
-          "data_type": "uint16",
-          "nodata": 0,
           "statistics": {
             "maximum": 22063,
             "mean": 7185.2123645206,
@@ -317,10 +315,8 @@
           },
           "eo:common_name": "green",
           "eo:center_wavelength": 0.545,
-          "raster:sampling": "area",
           "raster:scale": 0.0000196236732904,
           "raster:offset": 0,
-          "raster:spatial_resolution": 3,
           "raster:histogram": {
             "count": 256,
             "min": 3848.354901960784,
@@ -588,8 +584,6 @@
         {
           "name": "band-3",
           "description": "Blue TOA reflectance",
-          "data_type": "uint16",
-          "nodata": 0,
           "statistics": {
             "maximum": 29693,
             "mean": 5829.583942362,
@@ -599,10 +593,8 @@
           },
           "eo:common_name": "blue",
           "eo:center_wavelength": 0.485,
-          "raster:sampling": "area",
           "raster:scale": 0.0000218499248607,
           "raster:offset": 0,
-          "raster:spatial_resolution": 3,
           "raster:histogram": {
             "count": 256,
             "min": 1004.858823529412,
@@ -870,8 +862,6 @@
         {
           "name": "band-4",
           "description": "NIR TOA reflectance",
-          "data_type": "uint16",
-          "nodata": 0,
           "statistics": {
             "maximum": 31836,
             "mean": 6785.2511255265,
@@ -881,10 +871,8 @@
           },
           "eo:common_name": "nir",
           "eo:center_wavelength": 0.82,
-          "raster:sampling": "area",
           "raster:scale": 0.0000218499248607,
           "raster:offset": 0,
-          "raster:spatial_resolution": 3,
           "raster:histogram": {
             "count": 256,
             "min": 1625.880392156863,

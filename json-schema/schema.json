@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://stac-extensions.github.io/raster/v1.1.0/schema.json#",
-  "title": "raster Extension",
+  "title": "Raster Extension",
   "description": "STAC Raster Extension for STAC Items.",
   "type": "object",
   "required": [
@@ -17,7 +17,7 @@
   },
   "oneOf": [
     {
-      "$comment": "This is the schema for Items",
+      "$comment": "This is the schema for STAC Items.",
       "type": "object",
       "required": [
         "type",
@@ -42,7 +42,7 @@
         {
           "properties": {
             "properties": {
-              "$ref": "#/definitions/require_any"
+              "$ref": "#/definitions/require_any_or_bands"
             }
           }
         },
@@ -78,7 +78,7 @@
         {
           "properties": {
             "summaries": {
-              "$ref": "#/definitions/require_any"
+              "$ref": "#/definitions/require_any_or_bands"
             }
           }
         }
@@ -86,21 +86,24 @@
     }
   ],
   "definitions": {
-    "require_any": {
+    "require_any_or_bands": {
       "anyOf": [
-        {"required": ["raster:data_type"]},
-        {"required": ["raster:unit"]},
-        {"required": ["raster:bits_per_sample"]},
-        {"required": ["raster:sampling"]},
-        {"required": ["raster:nodata"]},
-        {"required": ["raster:scale"]},
-        {"required": ["raster:offset"]},
-        {"required": ["raster:spatial_resolution"]},
-        {"required": ["raster:statistics"]},
-        {"required": ["raster:histogram"]},
+        {
+          "$ref": "#/definitions/require_any"
+        },
         {
           "$ref": "#/definitions/require_in_bands"
         }
+      ]
+    },
+    "require_any": {
+      "anyOf": [
+        {"required": ["raster:bits_per_sample"]},
+        {"required": ["raster:sampling"]},
+        {"required": ["raster:scale"]},
+        {"required": ["raster:offset"]},
+        {"required": ["raster:spatial_resolution"]},
+        {"required": ["raster:histogram"]}
       ]
     },
     "require_in_bands": {
@@ -109,12 +112,9 @@
       ],
       "properties": {
         "bands": {
-          "not": {
-            "additionalProperties": {
-              "not": {
-                "$ref": "#/definitions/require_any"
-              }
-            }
+          "type": "array",
+          "contains": {
+            "$ref": "#/definitions/require_any"
           }
         }
       }
@@ -128,7 +128,7 @@
           "not": {
             "additionalProperties": {
               "not": {
-                "$ref": "#/definitions/require_any"
+                "$ref": "#/definitions/require_any_or_bands"
               }
             }
           }
@@ -144,7 +144,7 @@
           "not": {
             "additionalProperties": {
               "not": {
-                "$ref": "#/definitions/require_any"
+                "$ref": "#/definitions/require_any_or_bands"
               }
             }
           }
@@ -160,32 +160,6 @@
             "$ref": "#/definitions/fields"
           }
         },
-        "raster:data_type": {
-          "title": "Data type of the band",
-          "type": "string",
-          "enum": [
-            "int8",
-            "int16",
-            "int32",
-            "int64",
-            "uint8",
-            "uint16",
-            "uint32",
-            "uint64",
-            "float16",
-            "float32",
-            "float64",
-            "cint16",
-            "cint32",
-            "cfloat32",
-            "cfloat64",
-            "other"
-          ]
-        },
-        "raster:unit": {
-          "title": "Unit denomination of the pixel value",
-          "type": "string"
-        },
         "raster:bits_per_sample": {
           "title": "The actual number of bits used for this band",
           "type": "integer"
@@ -196,22 +170,6 @@
           "enum": [
             "area",
             "point"
-          ]
-        },
-        "raster:nodata": {
-          "title": "No data pixel value",
-          "oneOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "string",
-              "enum": [
-                "nan",
-                "inf",
-                "-inf"
-              ]
-            }
           ]
         },
         "raster:scale": {
@@ -225,34 +183,6 @@
         "raster:spatial_resolution": {
           "title": "Average spatial resolution (in meters) of the pixels in the band",
           "type": "number"
-        },
-        "raster:statistics": {
-          "title": "Statistics",
-          "type": "object",
-          "minProperties": 1,
-          "additionalProperties": false,
-          "properties": {
-            "mean": {
-              "title": "Mean value of all the pixels in the band",
-              "type": "number"
-            },
-            "minimum": {
-              "title": "Minimum value of all the pixels in the band",
-              "type": "number"
-            },
-            "maximum": {
-              "title": "Maximum value of all the pixels in the band",
-              "type": "number"
-            },
-            "stddev": {
-              "title": "Standard deviation value of all the pixels in the band",
-              "type": "number"
-            },
-            "valid_percent": {
-              "title": "Percentage of valid (not nodata) pixel",
-              "type": "number"
-            }
-          }
         },
         "raster:histogram": {
           "title": "Histogram",

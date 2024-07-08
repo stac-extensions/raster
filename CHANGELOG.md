@@ -1,4 +1,5 @@
 # Changelog
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
@@ -8,18 +9,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Add link `rel="gcps"` to Ground Control Points document
-- All raster fields can now be used in the new bands field in STAC 1.1
+- Add link relation type `gcps` for Ground Control Points documents
+- `raster:sampling`, `raster:bits_per_sample`, `raster:spatial_resolution`, `raster:scale`, `raster:offset` and `raster:histogram`
+  can be used in Assets and Item Properties
 
 ### Changed
 
 - Some clarifications and fixes in the README and examples [#41](https://github.com/stac-extensions/raster/pull/41)
-- `raster:bands` is now using the more general `bands` field from STAC 1.1 common metadata
-- All of the fields in the `raster:bands` object have been renamed to have a prefix of `raster:`
+- `raster:bands` is now using the more general `bands` construct from STAC common metadata
+- The following fields in the Band Object have been moved/renamed:
+  - `nodata`, `data_type`, `statistics` and `unit` were *not* renamed, but have been moved to STAC common metadata
+  - `sampling` has been renamed to `raster:sampling`
+  - `bits_per_sample` has been renamed to `raster:bits_per_sample`
+  - `spatial_resolution` has been renamed to `raster:spatial_resolution`
+  - `scale` has been renamed to `raster:scale`
+  - `offset` has been renamed to `raster:offset`
+  - `histogram` has been renamed to `raster:histogram`
 
 ### Removed
 
-- `raster:bands` - use `bands` in STAC core instead
+- `raster:bands` - use `bands` in instead
 
 ## [v1.1.0]
 

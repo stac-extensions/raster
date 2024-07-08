@@ -10,7 +10,7 @@
 This document explains the Raster Extension to the [SpatioTemporal Asset Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification.
 
 An item can describe assets that are rasters of one or multiple bands with some information common to them all (raster size, projection)
-and also specific to each of them (data type, unit, number of bits used, nodata).
+and also specific to each of them (number of bits used).
 A raster is often strongly linked with the georeferencing transform and coordinate system definition
 of all bands (using the [projection extension](https://github.com/radiantearth/stac-spec/tree/master/extensions/projection)).
 In many applications, it is interesting to have some metadata about the rasters in the asset (values statistics, value interpretation, transforms).
@@ -38,58 +38,14 @@ to specify information about the raster projection, especially `proj:shape` to s
 
 | Field Name         | Type                                    | Description                                                                                                                                                                       |
 | ------------------ | --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| raster:nodata             | number\|string                          | Pixel values used to identify pixels that are nodata in the band either by the pixel value as a number or `nan`, `inf` or `-inf` (all strings).                                   |
 | raster:sampling           | string                                  | One of `area` or `point`. Indicates whether a pixel value should be assumed to represent a sampling over the region of the pixel or a point sample at the center of the pixel.    |
-| raster:data_type          | string                                  | The data type of the pixels in the band. One of the [data types as described below](#data-types).                                                                                 |
 | raster:bits_per_sample    | number                                  | The actual number of bits used for this band. Normally only present when the number of bits is non-standard for the `datatype`, such as when a 1 bit TIFF is represented as byte. |
 | raster:spatial_resolution | number                                  | Average spatial resolution (in meters) of the pixels in the band.                                                                                                                 |
-| raster:statistics         | [Statistics Object](#statistics-object) | Statistics of all the pixels in the band.                                                                                                                                         |
-| raster:unit               | string                                  | Unit denomination of the pixel value.                                                                                                                                             |
 | raster:scale              | number                                  | Multiplicator factor of the pixel value to transform into the value (i.e. translate digital number to reflectance).                                                               |
 | raster:offset             | number                                  | Number to be added to the pixel value (after scaling) to transform into the value (i.e. translate digital number to reflectance).                                                 |
 | raster:histogram          | [Histogram Object](#histogram-object)   | Histogram distribution information of the pixels values in the band.                                                                                                              |
 
 `raster:scale` and `raster:offset` define parameters to compute another value. The following paragraphs describe some use cases.
-
-### Data Types
-
-The data type gives information about the values in the file.
-This can be used to indicate the (maximum) range of numerical values expected.
-For example `uint8` indicates that the numbers are in a range between 0 and 255,
-they can never be smaller or larger. This can help to pick the optimal numerical
-data type when reading the files to keep memory consumption low.
-Nevertheless, it doesn't necessarily mean that the expected values fill the whole range.
-For example, there can be use cases for `uint8` that just use the numbers 0 to 10 for example.
-Through other extensions it might be possible to specify an exact value range so
-that visualizations can be optimized.
-The allowed values for `data_type` are:
-
-- `int8`: 8-bit integer
-- `int16`: 16-bit integer
-- `int32`: 32-bit integer
-- `int64`: 64-bit integer
-- `uint8`: unsigned 8-bit integer (common for 8-bit RGB PNG's)
-- `uint16`: unsigned 16-bit integer
-- `uint32`: unsigned 32-bit integer
-- `uint64`: unsigned 64-bit integer
-- `float16`: 16-bit float
-- `float32`: 32-bit float
-- `float64`: 64-big float
-- `cint16`: 16-bit complex integer
-- `cint32`: 32-bit complex integer
-- `cfloat32`: 32-bit complex float
-- `cfloat64`: 64-bit complex float
-- `other`: Other data type than the ones listed above (e.g. boolean, string, higher precision numbers)
-
-### Statistics Object
-
-| Field Name    | Type   | Description                                        |
-| ------------- | ------ | -------------------------------------------------- |
-| mean          | number | mean value of all the pixels in the band           |
-| minimum       | number | minimum value of the pixels in the band            |
-| maximum       | number | maximum value of the pixels in the band            |
-| stddev        | number | standard deviation value of the pixels in the band |
-| valid_percent | number | percentage of valid (not `nodata`) pixel           |
 
 ### Use Scale and offset as radiometric calibration parameters
 
@@ -120,8 +76,8 @@ For example, the above value conversion is described in the values dictionary as
   "B4": {
       "title": "TOA radiance band 4",
       "bands": [{
-        "raster:nodata": 0,
-        "raster:unit": "W⋅sr−1⋅m−2",
+        "nodata": 0,
+        "unit": "W⋅sr−1⋅m−2",
         "raster:scale": 0.0145,
         "raster:offset": 3.48
       }]
@@ -158,7 +114,7 @@ In the following value definition example, 185 meters must be substracted from t
   "WaterLevel": {
       "title": "Water Level at station",
       "bands": [{
-        "raster:unit": "m",
+        "unit": "m",
         "raster:offset": -185
       }]
   }

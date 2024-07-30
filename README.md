@@ -103,7 +103,7 @@ Users should be careful to always apply any provided scale and offset
 
 A very common use case is to store reflectance values, which range from 0 - 1.0, as integers rather than
 utilizing the larger floating point data type. Data is stored in a 2-byte Integer and ranges from
-1 to 10,0000 by using a scale of 0.0001, resulting in a file half the size of one using 4 by te floats.
+1 to 10,0000 by using a scale of 0.0001, resulting in a file half the size of one using 4 byte floats.
 
 ```json
 "assets": {

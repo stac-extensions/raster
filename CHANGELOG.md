@@ -32,6 +32,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `raster:bands` - use `bands` in instead
 
+### Fixed
+
+- Improved and stricter JSON Schema
+
 ## [v1.1.0]
 
 ### Added

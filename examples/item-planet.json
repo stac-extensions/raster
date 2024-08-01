@@ -2,9 +2,9 @@
   "stac_extensions": [
     "https://stac-extensions.github.io/sat/v1.0.0/schema.json",
     "https://stac-extensions.github.io/view/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/projection/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
     "https://stac-extensions.github.io/eo/v2.0.0-beta.1/schema.json",
-    "https://stac-extensions.github.io/processing/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json",
     "https://stac-extensions.github.io/raster/v2.0.0-beta.1/schema.json"
   ],
   "stac_version": "1.0.0",
@@ -1210,7 +1210,7 @@
     "view:sun_azimuth": 94.82318,
     "view:incidence_angle": 0.1531593,
     "view:off_nadir": 0.1102388,
-    "proj:epsg": 32750,
+    "proj:code": "EPSG:32750",
     "processing:level": "L3B",
     "title": "Planetscope PS2 L3B 01/10/2018 01:54:33",
     "disaster:call_id": 857

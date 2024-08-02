@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v2.0.0-beta.1]
+
 ### Added
 
 - Add link relation type `gcps` for Ground Control Points documents
@@ -30,6 +32,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `raster:bands` - use `bands` in instead
 
+### Fixed
+
+- Improved and stricter JSON Schema
+
 ## [v1.1.0]
 
 ### Added
@@ -40,6 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release
 
-[Unreleased]: <https://github.com/stac-extensions/raster/compare/v1.1.0...HEAD>
+[Unreleased]: <https://github.com/stac-extensions/raster/compare/v2.0.0-beta.1...HEAD>
+[v2.0.0-beta.1]: <https://github.com/stac-extensions/tree/v2.0.0-beta.1>
 [v1.1.0]: <https://github.com/stac-extensions/tree/v1.1.0>
 [v1.0.0]: <https://github.com/stac-extensions/tree/v1.0.0>

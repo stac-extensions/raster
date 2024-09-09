@@ -1,7 +1,7 @@
 # Raster Extension Specification
 
 - **Title:** Raster
-- **Identifier:** <https://stac-extensions.github.io/raster/v2.0.0-beta.1/schema.json>
+- **Identifier:** <https://stac-extensions.github.io/raster/v2.0.0/schema.json>
 - **Field Name Prefix:** raster
 - **Scope:** Item, Collection
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Candidate

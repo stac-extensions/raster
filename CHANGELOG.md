@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v2.0.0]
+
+- No changes required, please see [v2.0.0-beta.1](#v200-beta1) for details.
+
 ## [v2.0.0-beta.1]
 
 ### Added
@@ -46,7 +50,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release
 
-[Unreleased]: <https://github.com/stac-extensions/raster/compare/v2.0.0-beta.1...HEAD>
+[Unreleased]: <https://github.com/stac-extensions/raster/compare/v2.0.0...HEAD>
+[v2.0.0]: <https://github.com/stac-extensions/raster/compare/v2.0.0-beta.1...v2.0.0>
 [v2.0.0-beta.1]: <https://github.com/stac-extensions/tree/v2.0.0-beta.1>
 [v1.1.0]: <https://github.com/stac-extensions/tree/v1.1.0>
 [v1.0.0]: <https://github.com/stac-extensions/tree/v1.0.0>

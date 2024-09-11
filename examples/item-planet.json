@@ -7,7 +7,7 @@
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json",
     "https://stac-extensions.github.io/raster/v2.0.0/schema.json"
   ],
-  "stac_version": "1.1.0-beta.1",
+  "stac_version": "1.1.0",
   "links": [],
   "assets": {
     "data": {

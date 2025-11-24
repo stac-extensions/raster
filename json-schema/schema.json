@@ -63,6 +63,9 @@
       "then": {
         "allOf": [
           {
+            "$ref": "#/definitions/validate_bands"
+          },
+          {
             "$ref": "#/definitions/validate_assets"
           },
           {
@@ -149,6 +152,9 @@
           }
         ],
         "anyOf": [
+          {
+            "$ref": "#/definitions/require_in_bands"
+          },
           {
             "$ref": "#/definitions/require_assets"
           },

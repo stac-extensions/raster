@@ -69,7 +69,7 @@ utilizing the larger floating point data type. Data is stored in a 2-byte Intege
   "B4": {
       "title": "TOA radiance band 4",
       "bands": [{
-        "raster:nodata": 0,
+        "nodata": 0,
         "raster:scale": 0.0001,
         "raster:offset": 0.0
       }]
